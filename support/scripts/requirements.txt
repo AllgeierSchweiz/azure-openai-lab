@@ -1,0 +1,30 @@
+####### example-requirements.txt #######
+
+###### Requirements without Version Specifiers ######
+
+numpy
+openai
+pandas
+python-dotenv
+seaborn
+streamlit
+
+#
+###### Requirements with Version Specifiers ######
+#   See https://www.python.org/dev/peps/pep-0440/#version-specifiers
+# numpy==1.26.1
+# openai==0.28.1
+# pandas==2.1.1
+# python-dotenv==1.0.0
+# seaborn==0.13.0
+# streamlit==1.27.2
+
+
+###### Refer to other requirements files ######
+# -r other-requirements.txt
+#
+
+
+###### A particular file ######
+# ./downloads/numpy-1.9.2-cp34-none-win32.whl
+# http://wxpython.org/Phoenix/snapshot-builds/wxPython_Phoenix-3.0.3.dev1820+49a8884-cp34-none-win_amd64.whl
