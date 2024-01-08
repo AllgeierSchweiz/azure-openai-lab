@@ -7,7 +7,7 @@
 # Create for: SDSC 2024
 # Date Created: 08.01.2024
 # Last Updated: 08.01.2024
-# Python Version: 3.10
+# Python Version: 3.10.4
 
 #General Sources:
 #https://platform.openai.com/docs/api-reference?lang=python
