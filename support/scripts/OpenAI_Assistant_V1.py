@@ -24,8 +24,7 @@
 #————————————————————
 
 # Download Python packages (run the below command in terminal if packages have not yet been installed)
-#pip install -r requirements.txt
-#pip install -r /support/scripts/requirements/requirements.txt
+#pip install -r C:\Python\openai-lab\support\requirements\requirements.txt
 
 # Import required libraries
 import os
