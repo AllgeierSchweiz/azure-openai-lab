@@ -17,6 +17,10 @@
 #Openai Uasage:
 #https://platform.openai.com/usage
 
+#Additionals:
+#Alphavantage
+#Open Interpreter
+
 #————————————————————
 
 # Download Python packages (run the below command in terminal if packages have not yet been installed)
