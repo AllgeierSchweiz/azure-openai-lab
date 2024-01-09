@@ -38,9 +38,10 @@ from openai import OpenAI
 import pandas as pd
 
 from dotenv import load_dotenv, find_dotenv
+from pathlib import Path
 
 # Load OpenAIKey
-load_dotenv(find_dotenv())
+load_dotenv(dotenv_path=Path("C:\Python\openai-lab\.venv\.env"))
 API_KEY = os.environ['OPENAI_API_KEY']
 
 # Initalise Large Language Model (LLM)
@@ -82,22 +83,22 @@ run = llm.beta.threads.runs.create(
 #Retrieve Messages & Check Run Status
 print("checking assistant status. ")
 while True:
-    run = client.beta.threads.runs.retrieve(thread_id=thread.id, run_id=run.id)
+    run = llm.beta.threads.runs.retrieve(thread_id=thread.id, run_id=run.id)
 
     if run.status == "completed":
         print("done!")
-        messages = client.beta.threads.messages.list(thread_id=thread.id)
+        messages = llm.beta.threads.messages.list(thread_id=thread.id)
 
         print("messages: ")
         for message in messages:
             assert message.content[0].type == "text"
             print({"role": message.role, "message": message.content[0].text.value})
 
-        client.beta.assistants.delete(assistant.id)
+        llm.beta.assistants.delete(assistant.id)
 
         break
     else:
-        print("in progress...")
-        time.sleep(5)
+        print(run.status)
+        time.sleep(15)
 
 print (messages)
