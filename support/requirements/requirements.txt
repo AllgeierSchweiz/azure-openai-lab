@@ -10,6 +10,8 @@ seaborn
 streamlit
 tiktoken
 scikit-learn
+openpyxl
+tiktoken
 
 #
 ###### Requirements with Version Specifiers ######
