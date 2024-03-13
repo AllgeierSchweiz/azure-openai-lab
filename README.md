@@ -19,14 +19,29 @@
 
 <!-- ABOUT THE PROJECT -->
 # A Hands-on Exploration of OpenAI API
-## XXX
+## Introduction to OpenAI API
 
-Add Text
+* Overview of the OpenAI API capabilities and features
+* Setting up API credentials
+* Create a vanilla implementation
 
 <!-- GETTING STARTED -->
-## XXX
+## Open AI Assistant
 
-Add Text
+* Generating insights from proprietary data through analyzing and summarizing structured data.
+* Data wrangling and machine learning application with Openai assistants.
+
+## Prompt Engineering
+
+* Prompt Engineering for output optimization.
+
+## Embeddings
+
+* Dealing with large volumes of data in machine learning applications.
+
+## Fine Tuning
+
+* Adjusting an LLM for use with proprietary data.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
