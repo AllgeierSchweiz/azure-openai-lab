@@ -32,14 +32,14 @@
 
 
 <!-- GETTING STARTED -->
-## Open AI Assistant
 
-* Generating insights from proprietary data through analyzing and summarizing structured data.
-* Data wrangling and machine learning application with Openai assistants.
+## Prompt Engineering (Zero Shot, One Shot and Few Shot Learning)
 
-## Prompt Engineering
+* Prompt Engineering for output optimization (Simple / Complex)
+  
+## Azure Open AI Assistant
 
-* Prompt Engineering for output optimization.
+* Use Code Interpreter to manipulate structured data (Data wrangling steps)
 
 ## RAG (Embeddings/Vector Database)
 
