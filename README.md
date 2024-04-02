@@ -30,6 +30,7 @@
 4. Based on nutritional values, sum up and create caloric summary [carbs, fats, protein, etc] (Code interpreter)
 5. Create Fine-tuned model to output specifically crafted recipates (Master Chef).
 
+https://portal.azure.com/#@algdev.ch/resource/subscriptions/fade7a40-9037-4aeb-82c9-e70f8b49217a/resourceGroups/rgopenaisweden/providers/Microsoft.CognitiveServices/accounts/mssp-openai-sweden/overview
 
 <!-- GETTING STARTED -->
 
