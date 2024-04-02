@@ -41,9 +41,10 @@
 
 * Prompt Engineering for output optimization.
 
-## Embeddings
+## RAG (Embeddings/Vector Database)
 
-* Dealing with large volumes of data in machine learning applications.
+* Use RAG to augment LLM queries with additional information contained in OpenFoodFacts.
+* Based off of OpenFoodFacts table, create embeddings and feed them into a Vector Database (ChromaDB). 
 
 ## Fine Tuning
 
