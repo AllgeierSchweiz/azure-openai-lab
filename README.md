@@ -18,12 +18,18 @@
 
 
 <!-- ABOUT THE PROJECT -->
-# A Hands-on Exploration of OpenAI API
-## Introduction to OpenAI API
+# A Hands-on Exploration of Azure OpenAI API
+## Introduction
 
 * Overview of the OpenAI API capabilities and features
 * Setting up API credentials
-* Create a vanilla implementation
+
+1. Data Science pre-processing - Clean OpenFoodFacts
+2. GPT4 give me a recipe based on a list of ingridents (simple prompt engineering - answer)
+3. Take recipe give ingredients look up via RAG to find nutritional values
+4. Assistant here are the nutritional values, add them up to create an overview of calories (carbs, fats, protein, etc)
+5. Fine-tune create Master Chef.
+
 
 <!-- GETTING STARTED -->
 ## Open AI Assistant
