@@ -24,11 +24,11 @@
 * Overview of the OpenAI API capabilities and features
 * Setting up API credentials
 
-1. Data Science pre-processing - Clean OpenFoodFacts
-2. GPT4 give me a recipe based on a list of ingridents (simple prompt engineering - answer)
-3. Take recipe give ingredients look up via RAG to find nutritional values
-4. Assistant here are the nutritional values, add them up to create an overview of calories (carbs, fats, protein, etc)
-5. Fine-tune create Master Chef.
+1. Data Science pre-processing with Assistant - Clean OpenFoodFacts (Code interpreter)
+2. GPT4 give me a recipe based on a list of ingredients (Prompt Engineering)
+3. Given recipe, list ingredients and look up via RAG nutritional values (Data Enrichment)
+4. Based on nutritional values, sum up and create caloric summary [carbs, fats, protein, etc] (Code interpreter)
+5. Create Fine-tuned model to output specifically crafted recipates (Master Chef).
 
 
 <!-- GETTING STARTED -->
