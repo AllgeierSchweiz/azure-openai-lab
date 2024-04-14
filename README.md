@@ -36,15 +36,17 @@ https://portal.azure.com/#@algdev.ch/resource/subscriptions/fade7a40-9037-4aeb-8
 
 <!-- GETTING STARTED -->
 
-## Prompt Engineering (Zero Shot, One Shot and Few Shot Learning)
-
-* Prompt Engineering for output optimization (Simple / Complex)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-  
 ## Azure Open AI Assistant
 
 * Use Code Interpreter to manipulate structured data (Data wrangling steps)
+
+**azure-openai-assistant-transformations-v1.ipynb**
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Prompt Engineering (Zero Shot, One Shot and Few Shot Learning)
+
+* Prompt Engineering for output optimization (Simple / Complex)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -53,11 +55,15 @@ https://portal.azure.com/#@algdev.ch/resource/subscriptions/fade7a40-9037-4aeb-8
 * Use RAG to augment LLM queries with additional information contained in OpenFoodFacts.
 * Based off of OpenFoodFacts table, create embeddings and feed them into a Vector Database (ChromaDB).
 
+**azure-openai-rags-v1.ipynb**
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Fine Tuning
 
 * Adjusting an LLM for use with proprietary data.
+
+**azure-openai-fine-tuning-v1.ipynb**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
