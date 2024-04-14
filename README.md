@@ -32,20 +32,28 @@
 
 https://portal.azure.com/#@algdev.ch/resource/subscriptions/fade7a40-9037-4aeb-82c9-e70f8b49217a/resourceGroups/rgopenaisweden/providers/Microsoft.CognitiveServices/accounts/mssp-openai-sweden/overview
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 <!-- GETTING STARTED -->
 
 ## Prompt Engineering (Zero Shot, One Shot and Few Shot Learning)
 
 * Prompt Engineering for output optimization (Simple / Complex)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
   
 ## Azure Open AI Assistant
 
 * Use Code Interpreter to manipulate structured data (Data wrangling steps)
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ## RAG (Embeddings/Vector Database)
 
 * Use RAG to augment LLM queries with additional information contained in OpenFoodFacts.
-* Based off of OpenFoodFacts table, create embeddings and feed them into a Vector Database (ChromaDB). 
+* Based off of OpenFoodFacts table, create embeddings and feed them into a Vector Database (ChromaDB).
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Fine Tuning
 
