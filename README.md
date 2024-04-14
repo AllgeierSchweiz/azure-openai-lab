@@ -36,7 +36,7 @@ https://portal.azure.com/#@algdev.ch/resource/subscriptions/fade7a40-9037-4aeb-8
 
 <!-- GETTING STARTED -->
 
-## Azure Open AI Assistant
+## Azure Openai Assistant
 
 * Use Code Interpreter to manipulate structured data (Data wrangling steps)
 
