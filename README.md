@@ -54,7 +54,14 @@ https://portal.azure.com/#@algdev.ch/resource/subscriptions/fade7a40-9037-4aeb-8
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Prompt Engineering (Zero Shot, One Shot and Few Shot Learning)
+## Prompt Engineering 
+
+#### Format of instructions
+ A specific technique for formatting instructions is to split the instructions at the beginning or end of the prompt, and have the user content contained within --- or ### blocks. These tags allow the model to more clearly differentiate between instructions and content. For example:
+
+#### Zero Shot
+#### One Shot
+#### Few Shot Learning)
 
 * Prompt Engineering for output optimization (Simple / Complex)
 
