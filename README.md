@@ -56,7 +56,7 @@ https://portal.azure.com/#@algdev.ch/resource/subscriptions/fade7a40-9037-4aeb-8
 
 ## Prompt Engineering 
 
-#### Format of instructions
+#### Format
  A specific technique for formatting instructions is to split the instructions at the beginning or end of the prompt, and have the user content contained within --- or ### blocks. These tags allow the model to more clearly differentiate between instructions and content. For example:
 
  ```sql
@@ -65,6 +65,8 @@ Create a flavourful recipe using the following ingredients:
 Beef, Butter, Mushrooms, Onions, Cream
 ---
 ```
+#### Grounding
+Grounding content allows the model to provide reliable answers by providing content for the model to draw answer from. Grounding content could be an essay or article that you then ask questions about, a company FAQ document, or information that is more recent than the data the model was trained on. If you need more reliable and current responses, or you need to reference unpublished or specific information, grounding content is highly recommended.
 
 #### Zero Shot
 #### One Shot
