@@ -69,8 +69,11 @@ Beef, Butter, Mushrooms, Onions, Cream
 Grounding content allows the model to provide reliable answers by providing content for the model to draw answer from. Grounding content could be an essay or article that you then ask questions about, a company FAQ document, or information that is more recent than the data the model was trained on. If you need more reliable and current responses, or you need to reference unpublished or specific information, grounding content is highly recommended.
 
 #### Zero Shot
+
 #### One Shot
+
 #### Few Shot Learning
+Using a user defined example conversation is what is called few shot learning, which provides the model examples of how it should respond to a given query. These examples serve to train the model how to respond.
 
 * Prompt Engineering for output optimization (Simple / Complex)
 
