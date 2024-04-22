@@ -22,6 +22,16 @@
 ## Introduction
 
 * Overview of the OpenAI API capabilities and features
+
+This code snippet configures the OpenAI API key and endpoint for the Azure platform. It depends on the `os` module to entry the values of three surroundings variables: `AZURE_OPEN_KEY`, `AZURE_END_POINT`, and `DEPLOYMENT_NAME`. These variables are essential in authenticating and establishing a reference to the OpenAI API.
+
+The `openai.api_key` variable is assigned the worth of the `AZURE_OPEN_KEY` surroundings variable, serving as the key key for authenticating API requests.
+The `openai.api_base` variable takes its worth from the `AZURE_END_POINT` surroundings variable, which designates the endpoint URL for the OpenAI API.
+The `openai.api_type` variable is explicitly set to “azure”, signaling the utilization of the OpenAI API throughout the Azure platform.
+The `openai.api_version` variable is configured with the worth “2023–07–01-preview”, indicating the particular model of the OpenAI API in use.
+Moreover, the `deployment_name` variable obtains its worth from the `DEPLOYMENT_NAME` surroundings variable. This variable assumes significance because it specifies the identify of the deployment utilized for the OpenAI API. This identify performs a task in connecting to the exact deployment occasion of the API that’s operational.
+
+
 * Setting up API credentials
 
 1. Data Science pre-processing with Assistant - Clean OpenFoodFacts (Code interpreter)
