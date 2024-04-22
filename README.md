@@ -59,9 +59,16 @@ https://portal.azure.com/#@algdev.ch/resource/subscriptions/fade7a40-9037-4aeb-8
 #### Format of instructions
  A specific technique for formatting instructions is to split the instructions at the beginning or end of the prompt, and have the user content contained within --- or ### blocks. These tags allow the model to more clearly differentiate between instructions and content. For example:
 
+ ```sql
+Create a flavourful recipe using the following ingredients:
+---
+Beef, Butter, Mushrooms, Onions, Cream
+---
+```
+
 #### Zero Shot
 #### One Shot
-#### Few Shot Learning)
+#### Few Shot Learning
 
 * Prompt Engineering for output optimization (Simple / Complex)
 
