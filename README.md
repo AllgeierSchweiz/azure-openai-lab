@@ -34,11 +34,11 @@ Moreover, the `deployment_name` variable obtains its worth from the `DEPLOYMENT_
 
 * Setting up API credentials
 
-1. Data Science pre-processing with Assistant - Clean OpenFoodFacts (Code interpreter)
-2. GPT4 give me a recipe based on a list of ingredients (Prompt Engineering)
-3. Given recipe, list ingredients and look up via RAG nutritional values (Data Enrichment)
-4. Based on nutritional values, sum up and create caloric summary [carbs, fats, protein, etc] (Code interpreter)
-5. Create Fine-tuned model to output specifically crafted recipates (Master Chef).
+0. Data Science pre-processing with Assistant - Clean Recipes XLSX (Code interpreter) [Currently not working due to data type issue - Azure Openai File Upload Only accepts JSONL)
+1. Give me a recipe based on a list of ingredients (Zero-Shot Learning & Few-Shot Learning)
+2. Give me a specific recipe based on a list of ingredients and preferences (RAG & Few-Shot Learning)
+3. Given recipe, list ingredients and look up nutritional values and create caloric summary (RAG & Code interpreter)
+4. Give me a specific recipe based on a list of ingredients and preferences (Fine-Tuning).
 
 https://portal.azure.com/#@algdev.ch/resource/subscriptions/fade7a40-9037-4aeb-82c9-e70f8b49217a/resourceGroups/rgopenaisweden/providers/Microsoft.CognitiveServices/accounts/mssp-openai-sweden/overview
 
