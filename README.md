@@ -34,7 +34,7 @@ Moreover, the `deployment_name` variable obtains its worth from the `DEPLOYMENT_
 
 * Setting up API credentials
 
-0. Data Science pre-processing with Assistant - Clean Recipes XLSX (Code interpreter) [Currently not working due to data type issue - Azure Openai File Upload Only accepts JSONL)
+0. Data pre-processing with Assistant - create Fine-tune Dataset for step 4 (Code interpreter) [Currently problematic, openai=1.12 seems to be stable. Assistant not creating dataset - unclear why)
 1. Give me a recipe based on a list of ingredients (Zero-Shot Learning & Few-Shot Learning)
 2. Give me a specific recipe based on a list of ingredients and preferences (RAG & Few-Shot Learning)
 3. Given recipe, list ingredients and look up nutritional values and create caloric summary (RAG & Code interpreter)
