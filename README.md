@@ -24,6 +24,11 @@
 
 ## Introduction
 
+Models:
+**gpt-4-1106-preview** for the Azure Openai Assistant
+**gpt-35-turbo** for the Azure Openai Chat Completion
+**text-embedding-ada-002** for the Azure Openai Embeddings for RAG
+
 0. Data pre-processing with Assistant - create Fine-tune Dataset for step 3 (Code interpreter) [Currently problematic, openai=1.12 seems to be stable. Assistant not creating dataset - unclear why)
 1. Give me a recipe based on a list of ingredients (Zero-Shot Learning & Few-Shot Learning)
 2. Give me a specific [vegan] recipe based on a list of ingredients and preferences (RAG & Few-Shot Learning)
