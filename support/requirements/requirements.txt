@@ -17,7 +17,8 @@ openpyxl
 tiktoken
 chromadb
 langchain
-dotenv
+langchain-openai
+python-dotenv
 
 #
 ###### Requirements with Version Specifiers ######
