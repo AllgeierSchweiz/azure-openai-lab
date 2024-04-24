@@ -19,6 +19,9 @@
 
 <!-- ABOUT THE PROJECT -->
 # A Hands-on Exploration of Azure OpenAI API
+
+![Azure OpenAI API](images/SDSC2024.png)
+
 ## Introduction
 
 * Overview of the OpenAI API capabilities and features
