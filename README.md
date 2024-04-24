@@ -24,7 +24,25 @@
 
 ## Introduction
 
-* Overview of the OpenAI API capabilities and features
+Models:
+**gpt-4-1106-preview** for the Azure Openai Assistant
+**gpt-35-turbo** for the Azure Openai Chat Completion
+**text-embedding-ada-002** for the Azure Openai Embeddings for RAG
+
+0. Data pre-processing with Assistant - create Fine-tune Dataset for step 3 (Code interpreter) [Currently problematic, openai=1.12 seems to be stable. Assistant not creating dataset - unclear why)
+1. Give me a recipe based on a list of ingredients (Zero-Shot Learning & Few-Shot Learning)
+2. Give me a specific [vegan] recipe based on a list of ingredients and preferences (RAG & Few-Shot Learning)
+3. Give me a specific [vegan] recipe based on a list of ingredients and preferences (Fine-Tuning).
+4. Give me a specific [vegan] recipe based on a list of ingredients and preferences (RAG & Few-Shot Learning & Fine-Tuning)
+5. Given recipe, list ingredients and look up nutritional values and create caloric summary (RAG & Code interpreter)
+
+Troubleshooting:
+
+- Use openai=1.12. Newest version is problematic. Especially with Assistant and Fine-Tuning.
+- Embedding with Proxy API does **not** work. We'll need to fall back on the original Endpoint and API Key.
+- Azure Openai Assistant not creating output file from transformation. Unclear why.
+
+### Overview of the OpenAI API capabilities and features
 
 This code snippet configures the OpenAI API key and endpoint for the Azure platform. It depends on the `os` module to entry the values of three surroundings variables: `AZURE_OPEN_KEY`, `AZURE_END_POINT`, and `DEPLOYMENT_NAME`. These variables are essential in authenticating and establishing a reference to the OpenAI API.
 
@@ -35,16 +53,11 @@ The `openai.api_version` variable is configured with the worth “2023–07–01
 Moreover, the `deployment_name` variable obtains its worth from the `DEPLOYMENT_NAME` surroundings variable. This variable assumes significance because it specifies the identify of the deployment utilized for the OpenAI API. This identify performs a task in connecting to the exact deployment occasion of the API that’s operational.
 
 
-* Setting up API credentials
+### Setting up API credentials
 
-0. Data pre-processing with Assistant - create Fine-tune Dataset for step 3 (Code interpreter) [Currently problematic, openai=1.12 seems to be stable. Assistant not creating dataset - unclear why)
-1. Give me a recipe based on a list of ingredients (Zero-Shot Learning & Few-Shot Learning)
-2. Give me a specific [vegan] recipe based on a list of ingredients and preferences (RAG & Few-Shot Learning)
-3. Give me a specific [vegan] recipe based on a list of ingredients and preferences (Fine-Tuning).
-4. Give me a specific [vegan] recipe based on a list of ingredients and preferences (RAG & Few-Shot Learning & Fine-Tuning)
-5. Given recipe, list ingredients and look up nutritional values and create caloric summary (RAG & Code interpreter)
+xyz
 
-* Data Preparation
+###  Data Preparation
    
 - **0-data-cleansing-csv-jsonl-v1.ipynb**
 
@@ -135,6 +148,7 @@ Nicolas Rehder - nrehder@allgeier.ch
 The following documentation was used to source the information contained in this workshop.
 
 * [How to Fine-Tune in Azure](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/fine-tuning?tabs=turbo%2Cpython&pivots=programming-language-python)
+* [Azure Openai API Versions](https://learn.microsoft.com/en-us/azure/ai-services/openai/api-version-deprecation#latest-preview-api-release)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
