@@ -24,19 +24,6 @@
 
 ## Introduction
 
-* Overview of the OpenAI API capabilities and features
-
-This code snippet configures the OpenAI API key and endpoint for the Azure platform. It depends on the `os` module to entry the values of three surroundings variables: `AZURE_OPEN_KEY`, `AZURE_END_POINT`, and `DEPLOYMENT_NAME`. These variables are essential in authenticating and establishing a reference to the OpenAI API.
-
-The `openai.api_key` variable is assigned the worth of the `AZURE_OPEN_KEY` surroundings variable, serving as the key key for authenticating API requests.
-The `openai.api_base` variable takes its worth from the `AZURE_END_POINT` surroundings variable, which designates the endpoint URL for the OpenAI API.
-The `openai.api_type` variable is explicitly set to “azure”, signaling the utilization of the OpenAI API throughout the Azure platform.
-The `openai.api_version` variable is configured with the worth “2023–07–01-preview”, indicating the particular model of the OpenAI API in use.
-Moreover, the `deployment_name` variable obtains its worth from the `DEPLOYMENT_NAME` surroundings variable. This variable assumes significance because it specifies the identify of the deployment utilized for the OpenAI API. This identify performs a task in connecting to the exact deployment occasion of the API that’s operational.
-
-
-* Setting up API credentials
-
 0. Data pre-processing with Assistant - create Fine-tune Dataset for step 3 (Code interpreter) [Currently problematic, openai=1.12 seems to be stable. Assistant not creating dataset - unclear why)
 1. Give me a recipe based on a list of ingredients (Zero-Shot Learning & Few-Shot Learning)
 2. Give me a specific [vegan] recipe based on a list of ingredients and preferences (RAG & Few-Shot Learning)
@@ -49,7 +36,22 @@ Troubleshooting:
 - Use openai=1.12. Newest version is problematic. Especially with Assistant and Fine-Tuning.
 - Embedding with Proxy API does **not** work. We'll need to fall back on the original Endpoint and API Key.
 
-* Data Preparation
+### Overview of the OpenAI API capabilities and features
+
+This code snippet configures the OpenAI API key and endpoint for the Azure platform. It depends on the `os` module to entry the values of three surroundings variables: `AZURE_OPEN_KEY`, `AZURE_END_POINT`, and `DEPLOYMENT_NAME`. These variables are essential in authenticating and establishing a reference to the OpenAI API.
+
+The `openai.api_key` variable is assigned the worth of the `AZURE_OPEN_KEY` surroundings variable, serving as the key key for authenticating API requests.
+The `openai.api_base` variable takes its worth from the `AZURE_END_POINT` surroundings variable, which designates the endpoint URL for the OpenAI API.
+The `openai.api_type` variable is explicitly set to “azure”, signaling the utilization of the OpenAI API throughout the Azure platform.
+The `openai.api_version` variable is configured with the worth “2023–07–01-preview”, indicating the particular model of the OpenAI API in use.
+Moreover, the `deployment_name` variable obtains its worth from the `DEPLOYMENT_NAME` surroundings variable. This variable assumes significance because it specifies the identify of the deployment utilized for the OpenAI API. This identify performs a task in connecting to the exact deployment occasion of the API that’s operational.
+
+
+### Setting up API credentials
+
+xyz
+
+###  Data Preparation
    
 - **0-data-cleansing-csv-jsonl-v1.ipynb**
 
