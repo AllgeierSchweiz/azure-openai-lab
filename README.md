@@ -91,8 +91,9 @@ Using a user defined example conversation is what is called few shot learning, w
 
 - **2-azure-openai-rag-ingredients-recipes-v2.ipynb**
 
-* Use RAG to augment LLM queries with additional information contained in Recipes csv.
+* Use RAG to augment LLM queries with additional information contained in Recipes csv using LangChain.
 * Based off of recipes table, create embeddings and feed them into a Vector Database (ChromaDB).
+* Send query using traditional gpt3 model and later on to fine-tuned model.
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
