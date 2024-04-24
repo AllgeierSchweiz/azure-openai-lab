@@ -43,7 +43,7 @@ Moreover, the `deployment_name` variable obtains its worth from the `DEPLOYMENT_
 
 * Data Preparation
    
-**0-data-cleansing-csv-jsonl-v1.ipynb**
+- **0-data-cleansing-csv-jsonl-v1.ipynb**
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -62,7 +62,7 @@ Moreover, the `deployment_name` variable obtains its worth from the `DEPLOYMENT_
 
 ## Prompt Engineering 
 
-**1-azure-openai-simple-ingredients-recipes-v1.ipynb**
+- **1-azure-openai-simple-ingredients-recipes-v1.ipynb**
 
 #### Format
  A specific technique for formatting instructions is to split the instructions at the beginning or end of the prompt, and have the user content contained within --- or ### blocks. These tags allow the model to more clearly differentiate between instructions and content. For example:
@@ -89,7 +89,7 @@ Using a user defined example conversation is what is called few shot learning, w
 
 ## RAG (Embeddings/Vector Database)
 
-**2-azure-openai-rag-ingredients-recipes-v2.ipynb**
+- **2-azure-openai-rag-ingredients-recipes-v2.ipynb**
 
 * Use RAG to augment LLM queries with additional information contained in Recipes csv.
 * Based off of recipes table, create embeddings and feed them into a Vector Database (ChromaDB).
@@ -99,7 +99,7 @@ Using a user defined example conversation is what is called few shot learning, w
 
 ## Fine Tuning
 
-**3-azure-openai-fine-tuning-ingredients-recipes-v1.ipynb**
+- **3-azure-openai-fine-tuning-ingredients-recipes-v1.ipynb**
 
 * Adjusting an LLM for use with proprietary data.
 
