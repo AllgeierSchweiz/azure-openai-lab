@@ -2,6 +2,9 @@
 
 ###### Requirements without Version Specifiers ######
 
+#pip install -r C:\Python\azure-openai-lab\support\requirements\requirements.txt
+#py -m pip install <package>
+
 numpy
 openai==1.12
 pandas
@@ -14,6 +17,7 @@ openpyxl
 tiktoken
 chromadb
 langchain
+dotenv
 
 #
 ###### Requirements with Version Specifiers ######
