@@ -40,6 +40,7 @@ Troubleshooting:
 
 - Use openai=1.12. Newest version is problematic. Especially with Assistant and Fine-Tuning.
 - Embedding with Proxy API does **not** work. We'll need to fall back on the original Endpoint and API Key.
+- Azure Openai Assistant not creating output file from transformation. Unclear why.
 
 ### Overview of the OpenAI API capabilities and features
 
