@@ -3,7 +3,7 @@
 ###### Requirements without Version Specifiers ######
 
 numpy
-openai
+openai==1.12
 pandas
 python-dotenv
 seaborn
@@ -12,6 +12,8 @@ tiktoken
 scikit-learn
 openpyxl
 tiktoken
+chromadb
+langchain
 
 #
 ###### Requirements with Version Specifiers ######
