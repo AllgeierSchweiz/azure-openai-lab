@@ -40,9 +40,11 @@ Moreover, the `deployment_name` variable obtains its worth from the `DEPLOYMENT_
 3. Give me a specific [vegan] recipe based on a list of ingredients and preferences (Fine-Tuning).
 4. Give me a specific [vegan] recipe based on a list of ingredients and preferences (RAG & Few-Shot Learning & Fine-Tuning)
 5. Given recipe, list ingredients and look up nutritional values and create caloric summary (RAG & Code interpreter)
-   
 
-https://portal.azure.com/#@algdev.ch/resource/subscriptions/fade7a40-9037-4aeb-82c9-e70f8b49217a/resourceGroups/rgopenaisweden/providers/Microsoft.CognitiveServices/accounts/mssp-openai-sweden/overview
+* Data Preparation
+   
+**0-data-cleansing-csv-jsonl-v1.ipynb**
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -50,13 +52,17 @@ https://portal.azure.com/#@algdev.ch/resource/subscriptions/fade7a40-9037-4aeb-8
 
 ## Azure Openai Assistant
 
+**0-azure-openai-assistant-csv-jsonl-v1.ipynb**
+**4-azure-openai-assistant-ingredients-recipes-v1.ipynb**
+
 * Use Code Interpreter to manipulate structured data (Data wrangling steps)
 
-**azure-openai-assistant-transformations-v1.ipynb**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Prompt Engineering 
+
+**1-azure-openai-simple-ingredients-recipes-v1.ipynb**
 
 #### Format
  A specific technique for formatting instructions is to split the instructions at the beginning or end of the prompt, and have the user content contained within --- or ### blocks. These tags allow the model to more clearly differentiate between instructions and content. For example:
@@ -83,18 +89,19 @@ Using a user defined example conversation is what is called few shot learning, w
 
 ## RAG (Embeddings/Vector Database)
 
-* Use RAG to augment LLM queries with additional information contained in OpenFoodFacts.
-* Based off of OpenFoodFacts table, create embeddings and feed them into a Vector Database (ChromaDB).
+**2-azure-openai-rag-ingredients-recipes-v2.ipynb**
 
-**azure-openai-rags-v1.ipynb**
+* Use RAG to augment LLM queries with additional information contained in Recipes csv.
+* Based off of recipes table, create embeddings and feed them into a Vector Database (ChromaDB).
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Fine Tuning
 
-* Adjusting an LLM for use with proprietary data.
+**3-azure-openai-fine-tuning-ingredients-recipes-v1.ipynb**
 
-**azure-openai-fine-tuning-v1.ipynb**
+* Adjusting an LLM for use with proprietary data.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
