@@ -34,11 +34,13 @@ Moreover, the `deployment_name` variable obtains its worth from the `DEPLOYMENT_
 
 * Setting up API credentials
 
-0. Data pre-processing with Assistant - create Fine-tune Dataset for step 4 (Code interpreter) [Currently problematic, openai=1.12 seems to be stable. Assistant not creating dataset - unclear why)
+0. Data pre-processing with Assistant - create Fine-tune Dataset for step 3 (Code interpreter) [Currently problematic, openai=1.12 seems to be stable. Assistant not creating dataset - unclear why)
 1. Give me a recipe based on a list of ingredients (Zero-Shot Learning & Few-Shot Learning)
-2. Give me a specific recipe based on a list of ingredients and preferences (RAG & Few-Shot Learning)
-3. Given recipe, list ingredients and look up nutritional values and create caloric summary (RAG & Code interpreter)
-4. Give me a specific recipe based on a list of ingredients and preferences (Fine-Tuning).
+2. Give me a specific [vegan] recipe based on a list of ingredients and preferences (RAG & Few-Shot Learning)
+3. Give me a specific [vegan] recipe based on a list of ingredients and preferences (Fine-Tuning).
+4. Give me a specific [vegan] recipe based on a list of ingredients and preferences (RAG & Few-Shot Learning & Fine-Tuning)
+5. Given recipe, list ingredients and look up nutritional values and create caloric summary (RAG & Code interpreter)
+   
 
 https://portal.azure.com/#@algdev.ch/resource/subscriptions/fade7a40-9037-4aeb-82c9-e70f8b49217a/resourceGroups/rgopenaisweden/providers/Microsoft.CognitiveServices/accounts/mssp-openai-sweden/overview
 
