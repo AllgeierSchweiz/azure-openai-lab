@@ -52,8 +52,8 @@ Moreover, the `deployment_name` variable obtains its worth from the `DEPLOYMENT_
 
 ## Azure Openai Assistant
 
-**0-azure-openai-assistant-csv-jsonl-v1.ipynb**
-**4-azure-openai-assistant-ingredients-recipes-v1.ipynb**
+- **0-azure-openai-assistant-csv-jsonl-v1.ipynb**
+- **4-azure-openai-assistant-ingredients-recipes-v1.ipynb**
 
 * Use Code Interpreter to manipulate structured data (Data wrangling steps)
 
