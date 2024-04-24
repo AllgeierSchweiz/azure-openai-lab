@@ -44,6 +44,11 @@ Moreover, the `deployment_name` variable obtains its worth from the `DEPLOYMENT_
 4. Give me a specific [vegan] recipe based on a list of ingredients and preferences (RAG & Few-Shot Learning & Fine-Tuning)
 5. Given recipe, list ingredients and look up nutritional values and create caloric summary (RAG & Code interpreter)
 
+Troubleshooting:
+
+Use openai=1.12. Newest version is problematic. Especially with Assistant and Fine-Tuning.
+Embedding with Proxy API does **not** work. We'll need to fall back on the original Endpoint and API Key.
+
 * Data Preparation
    
 - **0-data-cleansing-csv-jsonl-v1.ipynb**
