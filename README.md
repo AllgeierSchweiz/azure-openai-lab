@@ -148,6 +148,7 @@ Nicolas Rehder - nrehder@allgeier.ch
 The following documentation was used to source the information contained in this workshop.
 
 * [How to Fine-Tune in Azure](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/fine-tuning?tabs=turbo%2Cpython&pivots=programming-language-python)
+* [Azure Openai API Versions](https://learn.microsoft.com/en-us/azure/ai-services/openai/api-version-deprecation#latest-preview-api-release)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
