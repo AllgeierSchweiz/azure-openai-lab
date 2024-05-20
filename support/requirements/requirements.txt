@@ -15,8 +15,8 @@ tiktoken
 scikit-learn
 openpyxl
 tiktoken
-chromadb==0.4.4
-langchain==0.1.9
+chromadb
+langchain
 langchain-openai
 python-dotenv
 pysqlite3-binary
