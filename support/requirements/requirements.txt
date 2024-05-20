@@ -15,10 +15,11 @@ tiktoken
 scikit-learn
 openpyxl
 tiktoken
-chromadb
-langchain
+chromadb==0.4.4
+langchain==0.1.9
 langchain-openai
 python-dotenv
+pysqlite3-binary
 
 #
 ###### Requirements with Version Specifiers ######
