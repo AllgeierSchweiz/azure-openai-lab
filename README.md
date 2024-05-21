@@ -22,7 +22,9 @@
 
 ![Azure OpenAI API](images/SDSC2024.png)
 
-## Introduction
+<!-- GETTING STARTED -->
+
+### 1. Introduction
 
 This is part one of a five-part series developed by the Data Analytics Team at [Allgeier Schweiz](https://www.allgeier.ch/it-services/data-analytics/). The original implementation was part of a workshop for the [Swiss Data Science Conference](https://sds2024.ch/) of 2024.
 
@@ -36,119 +38,148 @@ The following series showcases how to use the Azure OpenAI Service in Python by 
 -   **Part 4** will show the readers how to implement a retrieval strategy such as Retrieval-Augmented Generation (RAG) using the Azure OpenAI API together with LangChain and ChromaDB as the vector database.
 -   **Part 5** will show the readers how to use fine-tuned model using the Azure OpenAI API and explore the implementation of RAG together with a fine-tuned model.
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+----------
+
+### 2. Workshop Use Case
+
+The use case of this series revolves around the [Food Fighters](https://github.com/AllgeierSchweiz/aihackers) concept created for [The Microsoft Fabric Global AI Hack](https://github.com/microsoft/Hack-Together-Fabric-AI) of 2024.
+
+The solution aims to combat food waste by empowering users to effortlessly manage their food inventory, track food expiration dates, and receive personalized recipe suggestions via email, all with a simple product scan.
+
+Unfortunately, we don’t have time to build the entire architecture of this solution, for this reason, we will focus on creating the personalized recipe suggestions aspect using the Azure OpenAI Service.
+
+
+#### 2.1 Objectives
+
+1.  We want the language model to create recipes from a list of ingredients we pass as the model input.
+2.  To improve the recipes created by the model we will implement model enhancement techniques such as prompt engineering with zero-shot, one-shot and few-shot learning.
+3.  To further improve the recipes created by the model, specifically creating vegan recipes in JSON format, we will implement an retrieval strategy called Retrieval Augmented Generation (RAG) using a CSV file of vegan recipes as our data foundation.
+4.  To further improve the recipes created by the model we will implement an enhancement technique called Fine-Tuning to re-train the base language model using a CSV file of vegan recipes as our training data. Furthermore, we will explore the implementation of RAG together with a fine-tuned model.
+5.  Before implementing the enhancement techniques listed in steps 3 and 4, we need to perform data preparation steps on the CSV file with vegan recipes. To achieve this, we will use the Azure OpenAI Assistant API with the code interpreter functionality. This will allow us to conduct data-wrangling steps on the data based on our natural language inputs.
+6.  
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+----------
+
+### 3. What is the Azure OpenAI Service?
+
+The Azure OpenAI Service offers access to various large language models (LLMs), including GPT-4, GPT-4 Turbo with Vision, GPT-3.5-Turbo, and Embeddings model series. These are the same language models made available by [OpenAI](https://platform.openai.com/docs/models).
+
+These models allow us to create written and image-based content, summarize information, do semantic searches, and natural language to code translations.
+
+Users can utilize the Azure OpenAI Service through REST APIs, Python SDK, or the web-based interface provided in the Azure OpenAI Studio.
+
+In our case, we will use the language models **GPT-4, GPT-3.5-Turbo,** and **Embeddings**. Each one will be called using the Azure OpenAI API.
+
+#### 3.1 Azure OpenAI models being used
+
+-   **GPT-4 (**_Version 0125-preview)_: This model is used to create our assistant for code interpretation. The GPT-4 series is a set of models that improve on the GPT-3.5 and can understand and generate natural language and code. The current version replaces the _Version 1106-Preview_ and offers better code generation performance, reduces cases where the model doesn’t complete a task as well as [additional enhancements](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#gpt-4-and-gpt-4-turbo-models).
+-   **GPT-3.5-Turbo** _(Version 0125, Version 1106 and Version 0613):_ This model is used to create recipes based on a list of ingredients as our input prompt. GPT-3.5 models can understand and generate natural language or code. The most capable and cost-effective model in the GPT-3.5 family is the GPT-3.5 Turbo. The latest _0125_ version replaces the _1106_ and offers higher accuracy at responding in requested formats and general bug fixes. For Fine-Tuning, we will use version _0613_.
+-   **Embeddings** _(text-embedding-ada-002):_ This model is used to create an embedding of our recipe data which will be used to enhance our model output using Retrieval-Augmented Generation (RAG). An embedding is a compact, organized way to represent text information in numerical format using vectors. It’s especially useful for machine learning applications because it captures and transforms the essential meaning of a text in a format the algorithm can understand.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+----------
+
+### 4. Enhancement Techniques
+
+In this workshop we will showcase three key techniques for improving the language model’s output: prompt engineering, retrieval-augmented generation (RAG), and Fine-tuning.
+
+  
+
+![](https://cdn-images-1.medium.com/max/800/0*Q4tzzQAbnp249jQX.jpg)
+
+[Approaches to AI: When to Use Prompt Engineering, Embeddings, or Fine-tuning | Entry Point AI](https://www.entrypointai.com/blog/approaches-to-ai-prompt-engineering-embeddings-or-fine-tuning/)
+
+#### 4.1 Prompt Engineering
+
+The model’s used in this workshop are prompt-based. With prompt-based models, the user interacts with the model by entering a text prompt i.e. text input, to which the model responds with a text completion. This completion is the model’s continuation of the input text i.e. text output.
+
+Prompt engineering involves crafting a structurally optimized text prompt to guide and influence the model’s output. It aims to achieve the desired contextual and formatted response that aligns with the user’s model output expectations while minimizing the inherent biases of the underlying language model.
+
+Depending on the objective, prompt engineering can serve as an alternative approach to more complex techniques like **Retrieval Augmented Generation (RAG)**  or  **Fine-Tuning**  by  providing the model with an example of the desired model output. This is where concepts like **one-shot** and  **few-shot learning** become relevant. We will learn more about these concepts in Part 3.
+
+#### 4.2 Retrieval Augmented Generation
+
+Retrieval Augmented Generation (RAG) is a retrieval strategy aimed at enhancing language models by providing them with supplementary information, a process also known as grounding. Rather than solely depending on the model’s existing knowledge, we can add proprietary data into the model prompt to guide it to a more precise and domain-specific response. It’s important to note that the model is **not** re-trained on the new data. The new data is only used as an additional prompt input, acting similarly to a one-shot learning.
+
+In this workshop, we’ll be working with a new dataset — a CSV file filled with details about vegan recipes. By incorporating this particular dataset, our model should more accurately produce vegan recipes. We will learn more about these concepts in Part 4.
+
+#### 4.3 Fine-Tuning
+
+Fine-tuning is a technique used to re-train a pre-trained model using a new foundation of information i.e. training data, to suit a specific task.
+
+Large Language Models (LLMs) possess extensive knowledge of diverse topics drawn from different data sources up until April 2023. This enables the model to address a wide array of problems, however, not every business requires a model capable of addressing an extensive range of topics simultaneously. Fine-tuning allows us to counteract this state, allowing the language model to become sharper in a specific knowledge domain.
+
+In this workshop, we’ll be working with a new dataset — a CSV file filled with details about vegan recipes. By re-training the model with this dataset, our model will be able to generate recipes that are finely tailored to the provided prompt input. We will learn more about these concepts in Part 5
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+----------
+
+### 5. Azure OpenAI vs. OpenAI
+
+Azure OpenAI combines the security features of Microsoft Azure with the various language models developed by OpenAI. This means customers can benefit from Azure’s reliability and safety measures while using OpenAI’s technology.
+
+Azure OpenAI provides features like data encryption, access control, private networking, availability in different regions, and tools for responsible AI content filtering. In summary, it adds an extra layer of Governance and Security.
+
+Additionally, Azure OpenAI collaborates closely with OpenAI to develop the REST APIs. This partnership guarantees compatibility between the services and makes it easy for customers to switch between them with minimal hassle.
+
+OpenAI is ideal for experimenting and exploring new functionalities.  
+However, when it comes to professional applications, security, and compliance, choose Azure OpenAI.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+----------
+
+<!-- CONTACT -->
+### 6.Questions, Feedback, Support?
+
+each out to us! We are happy to answer any questions you might have or use your feedback to optimize this series!
+
+Nicolas Rehder - nrehder@allgeier.ch
+Alex Dean - adean@allgeier.ch
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+----------
+
+<!-- FILES -->
+### 7. Documentation, Data & Support Files
+
+Download and unzip the file on your local computer.
+
+Have fun!
+
 Troubleshooting:
 
 - Use openai=1.12. Newest version is problematic. Especially with Assistant and Fine-Tuning.
 - Embedding with Proxy API does **not** work. We'll need to fall back on the original Endpoint and API Key.
 - Azure Openai Assistant not creating output file from transformation. Unclear why.
 
-### Overview of the OpenAI API capabilities and features
-
-This code snippet configures the OpenAI API key and endpoint for the Azure platform. It depends on the `os` module to entry the values of three surroundings variables: `AZURE_OPEN_KEY`, `AZURE_END_POINT`, and `DEPLOYMENT_NAME`. These variables are essential in authenticating and establishing a reference to the OpenAI API.
-
-The `openai.api_key` variable is assigned the worth of the `AZURE_OPEN_KEY` surroundings variable, serving as the key key for authenticating API requests.
-The `openai.api_base` variable takes its worth from the `AZURE_END_POINT` surroundings variable, which designates the endpoint URL for the OpenAI API.
-The `openai.api_type` variable is explicitly set to “azure”, signaling the utilization of the OpenAI API throughout the Azure platform.
-The `openai.api_version` variable is configured with the worth “2023–07–01-preview”, indicating the particular model of the OpenAI API in use.
-Moreover, the `deployment_name` variable obtains its worth from the `DEPLOYMENT_NAME` surroundings variable. This variable assumes significance because it specifies the identify of the deployment utilized for the OpenAI API. This identify performs a task in connecting to the exact deployment occasion of the API that’s operational.
-
-
-### Setting up API credentials
-
-xyz
-
-###  Data Preparation
-   
-- **0-data-cleansing-csv-jsonl-v1.ipynb**
-
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- GETTING STARTED -->
-
-## Azure Openai Assistant
-
-- **0-azure-openai-assistant-csv-jsonl-v1.ipynb**
-- **4-azure-openai-assistant-ingredients-recipes-v1.ipynb**
-
-* Use Code Interpreter to manipulate structured data (Data wrangling steps)
-
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-## Prompt Engineering 
-
-- **1-azure-openai-simple-ingredients-recipes-v1.ipynb**
-
-#### Format
- A specific technique for formatting instructions is to split the instructions at the beginning or end of the prompt, and have the user content contained within --- or ### blocks. These tags allow the model to more clearly differentiate between instructions and content. For example:
-
- ```sql
-Create a flavourful recipe using the following ingredients:
----
-Beef, Butter, Mushrooms, Onions, Cream
----
-```
-#### Grounding
-Grounding content allows the model to provide reliable answers by providing content for the model to draw answer from. Grounding content could be an essay or article that you then ask questions about, a company FAQ document, or information that is more recent than the data the model was trained on. If you need more reliable and current responses, or you need to reference unpublished or specific information, grounding content is highly recommended.
-
-#### Zero Shot
-
-#### One Shot
-
-#### Few Shot Learning
-Using a user defined example conversation is what is called few shot learning, which provides the model examples of how it should respond to a given query. These examples serve to train the model how to respond.
-
-* Prompt Engineering for output optimization (Simple / Complex)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-## RAG (Embeddings/Vector Database)
-
-- **2-azure-openai-rag-ingredients-recipes-v2.ipynb**
-
-* Use RAG to augment LLM queries with additional information contained in Recipes csv using LangChain.
-* Based off of recipes table, create embeddings and feed them into a Vector Database (ChromaDB).
-* Send query using traditional gpt3 model and later on to fine-tuned model.
-
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-## Fine Tuning
-
-- **3-azure-openai-fine-tuning-ingredients-recipes-v1.ipynb**
-
-* Adjusting an LLM for use with proprietary data.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- FILES -->
-## Documentation, Data & Support Files
-
-Download and unzip the file on your local computer.
-
-Have fun!
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-<!-- CONTACT -->
-## Contact
-
-If there are any questions, feel free to reach out!
-
-Nicolas Rehder - nrehder@allgeier.ch
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
+----------
 
 <!-- REFERENCES -->
-## References
+### 8.References
 
 The following documentation was used to source the information contained in this workshop.
 
-* [How to Fine-Tune in Azure](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/fine-tuning?tabs=turbo%2Cpython&pivots=programming-language-python)
-* [Azure Openai API Versions](https://learn.microsoft.com/en-us/azure/ai-services/openai/api-version-deprecation#latest-preview-api-release)
+[1] [What is Azure OpenAI Service? — Azure AI services | Microsoft Learn](https://learn.microsoft.com/en-us/azure/ai-services/openai/overview)
+
+[2] [Azure OpenAI Service — Features Overview and Key Concepts — Microsoft Community Hub](https://techcommunity.microsoft.com/t5/ai-azure-ai-services/azure-openai-service-features-overview-and-key-concepts/m-p/4055150)
+
+[3] [Azure OpenAI Service models — Azure OpenAI | Microsoft Learn](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models)
+
+[4] [Azure OpenAI Service deprecated models — Azure OpenAI | Microsoft Learn](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/legacy-models)
+
+[5] [Posten | Feed | LinkedIn](https://www.linkedin.com/feed/update/urn:li:activity:7165623330794938369/?updateEntityUrn=urn%3Ali%3Afs_updateV2%3A%28urn%3Ali%3Aactivity%3A7165623330794938369%2CFEED_DETAIL%2CEMPTY%2CDEFAULT%2Cfalse%29)
+
+[6] [Fine-Tuning LLMs: Your Blueprint for Informed AI Choices! (substack.com)](https://snigdhasharma.substack.com/p/fine-tuning-llms-your-blueprint-for?r=1v8hnm&trk=public_post_comment-text)
+
+[7] [Prompt Engineering Complete Guide | by Fareed Khan | Medium](https://medium.com/@fareedkhandev/prompt-engineering-complete-guide-2968776f0431)
+
+[8] [Azure OpenAI Service — Azure OpenAI | Microsoft Learn](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/prompt-engineering)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
