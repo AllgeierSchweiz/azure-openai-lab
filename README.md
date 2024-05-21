@@ -140,8 +140,8 @@ However, when it comes to professional applications, security, and compliance, c
 
 Reach out to us! We are happy to answer any questions you might have or use your feedback to optimize this series!
 
-Nicolas Rehder - nrehder@allgeier.ch
-Alex Dean - adean@allgeier.ch
+- Nicolas Rehder - nrehder@allgeier.ch
+- Alex Dean - adean@allgeier.ch
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
