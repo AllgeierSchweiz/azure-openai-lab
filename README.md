@@ -138,7 +138,7 @@ However, when it comes to professional applications, security, and compliance, c
 <!-- CONTACT -->
 ### 6.Questions, Feedback, Support?
 
-each out to us! We are happy to answer any questions you might have or use your feedback to optimize this series!
+Reach out to us! We are happy to answer any questions you might have or use your feedback to optimize this series!
 
 Nicolas Rehder - nrehder@allgeier.ch
 Alex Dean - adean@allgeier.ch
