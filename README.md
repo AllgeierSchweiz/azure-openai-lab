@@ -24,17 +24,17 @@
 
 ## Introduction
 
-Models:
-**gpt-4-1106-preview** for the Azure Openai Assistant
-**gpt-35-turbo** for the Azure Openai Chat Completion
-**text-embedding-ada-002** for the Azure Openai Embeddings for RAG
+This is part one of a five-part series developed by the Data Analytics Team at [Allgeier Schweiz](https://www.allgeier.ch/it-services/data-analytics/). The original implementation was part of a workshop for the [Swiss Data Science Conference](https://sds2024.ch/) of 2024.
 
-0. Data pre-processing with Assistant - create Fine-tune Dataset for step 3 (Assistant Code interpreter) [Currently problematic, openai=1.12 seems to be stable. Assistant not creating dataset - unclear why)
-1. Give me a recipe based on a list of ingredients (Zero-Shot Learning & Few-Shot Learning)
-2. Give me a specific [vegan] recipe based on a list of ingredients and preferences (RAG & Few-Shot Learning)
-3. Give me a specific [vegan] recipe based on a list of ingredients and preferences (Fine-Tuning).
-4. Give me a specific [vegan] recipe based on a list of ingredients and preferences (RAG & Few-Shot Learning & Fine-Tuning)
-5. Given recipe, list ingredients and look up nutritional values and create caloric summary (Assistant Code interpreter)
+You can also find the series in the Allgeier Schweiz [GitHub repository](https://github.com/AllgeierSchweiz/azure-openai-lab).
+
+The following series showcases how to use the Azure OpenAI Service in Python by calling the Azure OpenAI REST API.
+
+-   **Part 1** provides the readers with an overview of the workshop use case, what Azure OpenAI Service is, the language models used, the different techniques to enhance these models and the differences between Azure OpenAI and OpenAI.
+-   **Part 2** will show the readers the preparations required to start using the Azure OpenAI API in Python using GitHub Codespaces.
+-   **Part 3** will show the readers how to start using the Azure OpenAI API. Model enhancement techniques such as prompt engineering, zero-shot, one-shot, and few-shot learning will be implemented.
+-   **Part 4** will show the readers how to implement a retrieval strategy such as Retrieval-Augmented Generation (RAG) using the Azure OpenAI API together with LangChain and ChromaDB as the vector database.
+-   **Part 5** will show the readers how to use fine-tuned model using the Azure OpenAI API and explore the implementation of RAG together with a fine-tuned model.
 
 Troubleshooting:
 
