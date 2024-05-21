@@ -135,7 +135,7 @@ However, when it comes to professional applications, security, and compliance, c
 ----------
 
 <!-- CONTACT -->
-### 6.Questions, Feedback, Support?
+### 6. Questions, Feedback, Support?
 
 Reach out to us! We are happy to answer any questions you might have or use your feedback to optimize this series!
 
