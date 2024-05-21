@@ -39,6 +39,7 @@ The following series showcases how to use the Azure OpenAI Service in Python by 
 -   **Part 5** will show the readers how to use fine-tuned model using the Azure OpenAI API and explore the implementation of RAG together with a fine-tuned model.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ----------
 
 ### 2. Workshop Use Case
@@ -60,6 +61,7 @@ Unfortunately, we don’t have time to build the entire architecture of this sol
 6.  
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ----------
 
 ### 3. What is the Azure OpenAI Service?
@@ -79,6 +81,7 @@ In our case, we will use the language models **GPT-4, GPT-3.5-Turbo,** and **Emb
 -   **Embeddings** _(text-embedding-ada-002):_ This model is used to create an embedding of our recipe data which will be used to enhance our model output using Retrieval-Augmented Generation (RAG). An embedding is a compact, organized way to represent text information in numerical format using vectors. It’s especially useful for machine learning applications because it captures and transforms the essential meaning of a text in a format the algorithm can understand.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ----------
 
 ### 4. Enhancement Techniques
@@ -114,6 +117,7 @@ Large Language Models (LLMs) possess extensive knowledge of diverse topics drawn
 In this workshop, we’ll be working with a new dataset — a CSV file filled with details about vegan recipes. By re-training the model with this dataset, our model will be able to generate recipes that are finely tailored to the provided prompt input. We will learn more about these concepts in Part 5
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ----------
 
 ### 5. Azure OpenAI vs. OpenAI
