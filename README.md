@@ -18,7 +18,7 @@
 
 
 <!-- ABOUT THE PROJECT -->
-# A Hands-on Exploration of Azure OpenAI API
+# A Hands-on Exploration of the Azure OpenAI API
 
 ![Azure OpenAI API](images/SDSC2024.png)
 
