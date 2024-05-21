@@ -154,7 +154,7 @@ Download and unzip the file on your local computer.
 
 Have fun!
 
-Troubleshooting:
+#### 7.1 Troubleshooting
 
 - Use openai=1.12. Newest version is problematic. Especially with Assistant and Fine-Tuning.
 - Embedding with Proxy API does **not** work. We'll need to fall back on the original Endpoint and API Key.
