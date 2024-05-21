@@ -121,14 +121,13 @@ In this workshop, we’ll be working with a new dataset — a CSV file fille
 
 ### 5. Azure OpenAI vs. OpenAI
 
-Azure OpenAI combines the security features of Microsoft Azure with the various language models developed by OpenAI. This means customers can benefit from Azure’s reliability and safety measures while using OpenAI’s technology.
-
-Azure OpenAI provides features like data encryption, access control, private networking, availability in different regions, and tools for responsible AI content filtering. In summary, it adds an extra layer of Governance and Security.
+Azure OpenAI combines the security features of Microsoft Azure with the various language models developed by OpenAI. This means customers can benefit from Azure’s reliability and safety measures while using OpenAI’s technology. OpenAI is ideal for experimenting and exploring new functionalities. However, when it comes to professional applications, security, and compliance, choose Azure OpenAI.
 
 Additionally, Azure OpenAI collaborates closely with OpenAI to develop the REST APIs. This partnership guarantees compatibility between the services and makes it easy for customers to switch between them with minimal hassle.
 
-OpenAI is ideal for experimenting and exploring new functionalities.  
-However, when it comes to professional applications, security, and compliance, choose Azure OpenAI.
+#### 5.1 Governance & Security
+
+Azure OpenAI provides features like data encryption, access control, private networking, availability in different regions, and tools for responsible AI content filtering. In summary, it adds an extra layer of protection to your workload.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
