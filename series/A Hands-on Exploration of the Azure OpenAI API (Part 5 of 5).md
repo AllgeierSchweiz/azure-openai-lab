@@ -556,8 +556,10 @@ We are now ready to reload the vector database.
 
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
+```sql
 # Re-load an existing vector database from a local path  
 vectordb = Chroma(persist_directory=r"/workspaces/azure-openai-lab/data/chromadb", embedding_function=openai_ef)
+```
 
 <br/><br/>
 
