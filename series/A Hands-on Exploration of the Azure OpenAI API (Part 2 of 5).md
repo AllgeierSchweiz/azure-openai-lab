@@ -17,11 +17,11 @@ The following prerequisites must be met to successfully start this series:
 
 ----------
 
+<br/><br/>
+
 ### 2. Files & Data
 
 All relevant files are in the Allgeier Schweiz [GitHub repository](https://github.com/AllgeierSchweiz/azure-openai-lab).
-
-<br/><br/>
 
 #### 2.1 Notebooks
 
@@ -33,8 +33,6 @@ The workshop has 6 Jupyter Notebooks we will work through:
 4.  _P5-azure-openai-assistant-fine-tuning-data-preprocessing.ipynb_
 5.  _P5-azure-openai-fine-tuning.ipynb_
 6.  _P5-azure-openai-rag-with-fine-tuning.ipynb_
-
-<br/><br/>
 
 #### 2.2 Files
 
@@ -51,6 +49,8 @@ The CSV file **recipes.csv**  consists of 200K recipes covering 18 years of user
 
 ----------
 
+<br/><br/>
+
 ### 3. Azure Resources
 
 To use Azure OpenAI models you must first request access to the Azure OpenAI Service using the [Microsoft registration form](https://customervoice.microsoft.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR7en2Ais5pxKtso_Pz4b1_xUNTZBNzRKNlVQSFhZMU9aV09EVzYxWFdORCQlQCN0PWcu).
@@ -61,9 +61,9 @@ The Azure OpenAI Service sits in an Azure Resource Group within an Azure Subscri
 
 To access the Azure OpenAI REST API in Python an API Key and an API Endpoint URL are required. This information will be used in the GitHub Codespaces environment.
 
-<br/><br/>
-
 ----------
+
+<br/><br/>
 
 ### 4. GitHub Codespaces
 
@@ -241,6 +241,8 @@ Perfect! You have now finalized the required preparations to start running the J
 
 ----------
 
+<br/><br/>
+
 ### 5. Questions, Feedback, Support?
 
 Reach out to us! We are happy to answer any questions you might have or use your feedback to optimize this series!
@@ -248,6 +250,9 @@ Reach out to us! We are happy to answer any questions you might have or use your
 <br/><br/>
 
 ----------
+
+<br/><br/>
+
 
 ### 6. References
 
