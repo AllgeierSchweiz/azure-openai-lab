@@ -212,7 +212,7 @@ sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
 ![](https://cdn-images-1.medium.com/max/800/1*W6HkQTxIVM0QFvxiwmyuLA.png)
 
--   Once you have made the changes close the *\_init\_.py** file. All changes are automatically saved. Not to worry!
+-   Once you have made the changes close the **\_init\_.py** file. All changes are automatically saved. Not to worry!
 
 ![](https://cdn-images-1.medium.com/max/800/1*QsMvkmRyEEvlmajyOGcUnA.png)
 
