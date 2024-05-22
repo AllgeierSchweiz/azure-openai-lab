@@ -161,12 +161,14 @@ We will save these credentials in a `.env` file within our Python environment.
 
 -   Copy the code below and paste it into your newly created `.env` file.
 
-# Azure Tenant: Azure Pass  
-# Resource Group name: rg-sdsc2024-x  
-# Azure OpenAI Resource name: oai-sdsc2024-x  
-  
-AZURE_OPENAI_KEY = ""  
+```sql
+# Azure Tenant: Azure Pass
+# Resource Group name: rg-sdsc2024-x
+# Azure OpenAI Resource name: oai-sdsc2024-x
+
+AZURE_OPENAI_KEY = ""
 AZURE_OPENAI_ENDPOINT = ""
+```
 
 -   Change the entries of **AZURE_OPENAI_KEY** and **AZURE_OPENAI_ENDPOINT** to match the credentials supplied to you.
 
