@@ -68,7 +68,6 @@ To run the Python Notebooks we will use GitHub Codespaces. This convenient web-b
 
 ![](https://cdn-images-1.medium.com/max/800/1*XZjdWF14xVu6mUrGLo_YLw.png)
 
-  
 
 -   Once selected, a new browser tab will appear, and the codespace environment with all our required files will be prepared.
 
@@ -95,13 +94,12 @@ To work with Python and Jupyter Notebooks, we need to install their respective e
 
 ![](https://cdn-images-1.medium.com/max/800/1*kCtzqjBrC1x2lubMP5Sl8A.png)
 
-**_NOTE: The installation may take 1–2 minutes. Please be patient._**
 
 -   Once the Python extension installation is complete, go back to the search bar and input **Jupyter. S**elect the **install** button of the first entry.
 
 ![](https://cdn-images-1.medium.com/max/800/1*Uxs172Dq0D2a7SlNX_rhzA.png)
 
--     
+**_NOTE: Please be patient, the installation may take 1–2 minutes._**
     
 
 #### 4.3 Creating a Python Kernel Source
