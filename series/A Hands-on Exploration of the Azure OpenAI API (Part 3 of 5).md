@@ -392,6 +392,7 @@ print(response.choices[0].message.content + "\n")
 Congratulations! You have completed Part 3 of this workshop. We have learned how to initialize the Azure OpenAI client to use the Azure OpenAI API with Python, and have implemented zero-shot, one-shot, and few-shot learning techniques, including advanced prompting, to optimize our model output. We will continue with Part 4 of the workshop.
 
 <br/><br/>
+
 ----------
 
 ### 2. Questions, Feedback, Support?
