@@ -13,11 +13,7 @@ The following prerequisites must be met to successfully start this series:
 -   You have Microsoft Edge or any other reliable web browser installed.
 -   You must have a GitHub account (we will use Codespaces to run our Notebooks). If you do not have one, register yourself on [GitHub](https://github.com/).
 
-<br/><br/>
-
 ----------
-
-<br/><br/>
 
 ### 2. Files & Data
 
@@ -45,11 +41,7 @@ The CSV file **recipes.csv**  consists of 200K recipes covering 18 years of user
 3.  _recipes-training-set.jsonl (Backup)_
 4.  _recipes-validation-set.jsonl (Backup)_
 
-<br/><br/>
-
 ----------
-
-<br/><br/>
 
 ### 3. Azure Resources
 
@@ -62,8 +54,6 @@ The Azure OpenAI Service sits in an Azure Resource Group within an Azure Subscri
 To access the Azure OpenAI REST API in Python an API Key and an API Endpoint URL are required. This information will be used in the GitHub Codespaces environment.
 
 ----------
-
-<br/><br/>
 
 ### 4. GitHub Codespaces
 
@@ -237,22 +227,13 @@ sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
 Perfect! You have now finalized the required preparations to start running the Jupyter notebooks in Codespace. Lets get our hands dirty! We will continue with Part 3 of the workshop.
 
-<br/><br/>
-
 ----------
-
-<br/><br/>
 
 ### 5. Questions, Feedback, Support?
 
 Reach out to us! We are happy to answer any questions you might have or use your feedback to optimize this series!
 
-<br/><br/>
-
 ----------
-
-<br/><br/>
-
 
 ### 6. References
 
