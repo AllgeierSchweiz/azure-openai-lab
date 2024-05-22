@@ -76,9 +76,15 @@ To run the Python Notebooks we will use GitHub Codespaces. This convenient web-b
 
 You should see the following codespace environment once the setup has been finalized:
 
-![](https://cdn-images-1.medium.com/max/800/1*G6GtqmB-Wi-1S6Joa0NDuQ.png)
+![](https://cdn-images-1.medium.com/max/800/1*1NkqN9xwPGXrzy2japFvgQ.png)
 
-Explain GUI
+The Codespace user interface is identical to the layout in Visual Studio Code. The user interface is divided into five main areas:
+
+-   **Activity Bar **— Located on the far left-hand side. This slim panel lets you switch between views. In our case, the most important views are the Explorer and Extensions.
+-   **Primary Side Bar **— Located to the left, next to the Activity Bar. This Panel contains information, files and folders of the selected view.
+-   **Editor **— The main area to edit your files. Located in the middle and may be comprised of different tabs. You can open as many editors as you like side by side vertically and horizontally.
+-   **Panel** — An additional space for views below the editor region. By default, it contains output, debug information, errors and warnings, and an integrated terminal.
+-   **Status Bar** — Located at the bottom spanning the entire screen horizontally. This slim panel contains information about the opened project and the files you edit.
 
 #### 4.2 Installing Visual Studio Code Extensions
 
