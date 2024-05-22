@@ -399,8 +399,6 @@ Congratulations! You have completed Part 3 of this workshop. We have learned how
 
 Reach out to us! We are happy to answer any questions you might have or use your feedback to optimize this series!
 
-<br/><br/>
-
 ----------
 
 ### 3. References
