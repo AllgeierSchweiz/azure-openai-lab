@@ -21,6 +21,7 @@ In this Notebook, we will call the Azure OpenAI API using the Chat Completion AP
 {"role": "assistant", "content": "Example answer goes here."},  
 {"role": "user", "content": "First question/message for the model to respond to."}
 ```
+<br/><br/>
 
 #### 1.1 Open the Notebook
 
@@ -28,6 +29,8 @@ In this Notebook, we will call the Azure OpenAI API using the Chat Completion AP
 -   Open the Notebook **P3-azure-openai-prompt-engineering.ipynb**.
 
 ![](https://cdn-images-1.medium.com/max/800/1*xz0by11chN-zudVuEtj_BA.png)
+
+<br/><br/>
 
 #### 1.2 Running the Code
 
