@@ -140,7 +140,7 @@ Once the environment creation starts, you will receive a message on the bottom r
 
 ![](https://cdn-images-1.medium.com/max/800/1*rNeNSG1x6DsJD1seNINwIg.png)
 
-**_NOTE:_** `**_Venv_**`**_creates a lightweight virtual environment on top of an existing Python installation. This allows us to install Python packages that are isolated from the packages in the base environment. In this manner, we can work with different environments, each with its own independent Python version and set of packages._**
+**_NOTE:_** `Venv`**_creates a lightweight virtual environment on top of an existing Python installation. This allows us to install Python packages that are isolated from the packages in the base environment. In this manner, we can work with different environments, each with its own independent Python version and set of packages._**
 
 #### 4.4 Setting up Azure OpenAI API credentials
 
@@ -148,7 +148,7 @@ To work with the Azure OpenAI API we need to configure the codespace environment
 
 We will save these credentials in a `.env` file within our Python environment.
 
-**_NOTE: A_** `**_.env_**` **_file is a text file containing values of all the environment variables required for our notebooks. This file is included with your project locally but not saved to source control so that you aren't putting potentially sensitive information at risk._**
+**_NOTE: A_** `.env` **_file is a text file containing values of all the environment variables required for our notebooks. This file is included with your project locally but not saved to source control so that you aren't putting potentially sensitive information at risk._**
 
 -   On the left of the codespace environment, select the **Explorer** icon.
 -   Right-click on the **.venv** tab and select **New File**.
@@ -196,11 +196,11 @@ We need to implement a workaround to fix this issue.
 
 ![](https://cdn-images-1.medium.com/max/800/1*VH5gkNvFyc79jx3F1wK33Q.png)
 
--   Within the **_init_.py** file go to line 67 and comment out lines **68 to 85** by highlighting the rows and selecting the keyboard combination **CTRL+K+C**. The area should become green with “#” symbols in front of each code line.
+-   Within the **\_init\_.py** file go to line 67 and comment out lines **68 to 85** by highlighting the rows and selecting the keyboard combination **CTRL+K+C**. The area should become green with “#” symbols in front of each code line.
 
 ![](https://cdn-images-1.medium.com/max/800/1*J3KmFvgYOSM4pNxxLDVdBw.png)
 
--   Copy and paste the code below into the **_init_.py** file on line 68. Make sure to indent the code by highlighting it and clicking the tab button on your keyboard.
+-   Copy and paste the code below into the **\_init\_.py** file on line 68. Make sure to indent the code by highlighting it and clicking the tab button on your keyboard.
 
 ```sql
 __import__('pysqlite3')  
@@ -210,7 +210,7 @@ sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
 ![](https://cdn-images-1.medium.com/max/800/1*W6HkQTxIVM0QFvxiwmyuLA.png)
 
--   Once you have made the changes close the **_init_.py** file. All changes are automatically saved. Not to worry!
+-   Once you have made the changes close the *\_init\_.py** file. All changes are automatically saved. Not to worry!
 
 ![](https://cdn-images-1.medium.com/max/800/1*QsMvkmRyEEvlmajyOGcUnA.png)
 
