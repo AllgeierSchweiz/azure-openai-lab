@@ -13,11 +13,15 @@ The following prerequisites must be met to successfully start this series:
 -   You have Microsoft Edge or any other reliable web browser installed.
 -   You must have a GitHub account (we will use Codespaces to run our Notebooks). If you do not have one, register yourself on [GitHub](https://github.com/).
 
+<br/><br/>
+
 ----------
 
 ### 2. Files & Data
 
 All relevant files are in the Allgeier Schweiz [GitHub repository](https://github.com/AllgeierSchweiz/azure-openai-lab).
+
+<br/><br/>
 
 #### 2.1 Notebooks
 
@@ -30,6 +34,8 @@ The workshop has 6 Jupyter Notebooks we will work through:
 5.  _P5-azure-openai-fine-tuning.ipynb_
 6.  _P5-azure-openai-rag-with-fine-tuning.ipynb_
 
+<br/><br/>
+
 #### 2.2 Files
 
 The workshop has 4 prepared files. Only the **recipes.csv** _w_ill be actively used throughout this series. The other 3 files are backups.
@@ -40,6 +46,8 @@ The CSV file **recipes.csv**  consists of 200K recipes covering 18 years of user
 2.  _recipes-preprocessed.csv (Backup)_
 3.  _recipes-training-set.jsonl (Backup)_
 4.  _recipes-validation-set.jsonl (Backup)_
+
+<br/><br/>
 
 ----------
 
@@ -53,6 +61,8 @@ The Azure OpenAI Service sits in an Azure Resource Group within an Azure Subscri
 
 To access the Azure OpenAI REST API in Python an API Key and an API Endpoint URL are required. This information will be used in the GitHub Codespaces environment.
 
+<br/><br/>
+
 ----------
 
 ### 4. GitHub Codespaces
@@ -60,6 +70,8 @@ To access the Azure OpenAI REST API in Python an API Key and an API Endpoint URL
 To run the Python Notebooks we will use GitHub Codespaces. This convenient web-based environment mimics Visual Studio Code directly in your web browser. The environment offers users 60 hours a month of free computing and 15GB of free storage. This is more than enough to get us through the workshop!
 
 **_NOTE: Make sure you have logged into GitHub using your GitHub account. Should you not have one, please_** [**_register_**](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiznL-AgpeGAxX8gf0HHf-mA7UQFnoECAYQAQ&url=https%3A%2F%2Fgithub.com%2Fjoin&usg=AOvVaw0H9TK-nu7JfXaoNeNMgJEk&opi=89978449) **_yourself before proceeding._**
+
+<br/><br/>
 
 #### 4.1 Starting GitHub Codespaces
 
@@ -85,6 +97,8 @@ The Codespace user interface is identical to the layout in Visual Studio Code. T
 -   **Panel**: An additional space for views below the editor region. By default, it contains output, debug information, errors and warnings, and an integrated terminal.
 -   **Status Bar**: Located at the bottom spanning the entire screen horizontally. This slim panel contains information about the opened project and the files you edit.
 
+<br/><br/>
+
 #### 4.2 Installing Visual Studio Code Extensions
 
 To work with Python and Jupyter Notebooks, we need to install their respective extensions in codespace.
@@ -101,6 +115,7 @@ To work with Python and Jupyter Notebooks, we need to install their respective e
 
 **_NOTE: Please be patient, the installation may take 1–2 minutes._**
     
+<br/><br/>
 
 #### 4.3 Creating a Python Kernel Source
 
@@ -144,6 +159,8 @@ Once the environment creation starts, you will receive a message on the bottom r
 
 **_NOTE:_** `Venv`**_creates a lightweight virtual environment on top of an existing Python installation. This allows us to install Python packages that are isolated from the packages in the base environment. In this manner, we can work with different environments, each with its own independent Python version and set of packages._**
 
+<br/><br/>
+
 #### 4.4 Setting up Azure OpenAI API credentials
 
 To work with the Azure OpenAI API we need to configure the codespace environment to use the **Azure OpenAI API Key** and **Azure OpenAI Endpoint URL**. These credentials can be found in the Azure OpenAI Service overview within the Azure Portal. We have provided these credentials on the paper in front of you.
@@ -175,6 +192,8 @@ AZURE_OPENAI_ENDPOINT = ""
 -   Change the entries of **AZURE_OPENAI_KEY** and **AZURE_OPENAI_ENDPOINT** to match the credentials supplied to you.
 
 ![](https://cdn-images-1.medium.com/max/800/1*P9hRF15NkZOhPu0v-HHnqg.png)
+
+<br/><br/>
 
 #### 4.5 ChromaDB troubleshooting
 
@@ -218,11 +237,15 @@ sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
 Perfect! You have now finalized the required preparations to start running the Jupyter notebooks in Codespace. Lets get our hands dirty! We will continue with Part 3 of the workshop.
 
+<br/><br/>
+
 ----------
 
 ### 5. Questions, Feedback, Support?
 
 Reach out to us! We are happy to answer any questions you might have or use your feedback to optimize this series!
+
+<br/><br/>
 
 ----------
 
