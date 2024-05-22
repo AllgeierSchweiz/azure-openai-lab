@@ -31,6 +31,8 @@ The solution aims to combat food waste by empowering users to effortlessly manag
 
 Unfortunately, we don’t have time to build the entire architecture of this solution, for this reason, we will focus on creating the personalized recipe suggestions aspect using the Azure OpenAI Service.
 
+<br/><br/>
+
 #### 2.1 Objectives
 
 1.  We want the language model to create recipes from a list of ingredients we pass as the model input.
@@ -51,6 +53,8 @@ Users can utilize the Azure OpenAI Service through REST APIs, Python SDK, or the
 
 In our case, we will use the language models **GPT-4, GPT-3.5-Turbo,** and **Embeddings**. Each one will be called using the Azure OpenAI API.
 
+<br/><br/>
+
 #### 3.1 Azure OpenAI models being used
 
 -   **GPT-4 (**_Version 0125-preview, Version 1106-preview)_: This model is used to create our assistant for code interpretation. The GPT-4 series is a set of models that improve on the GPT-3.5 and can understand and generate natural language and code. The latest version, **0125-preview**, supersedes its predecessor, version **1106-preview**,  offering enhanced performance in code generation, a reduction in instances of incomplete model tasks and [additional enhancements](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#gpt-4-and-gpt-4-turbo-models).
@@ -63,11 +67,11 @@ In our case, we will use the language models **GPT-4, GPT-3.5-Turbo,** and **Emb
 
 In this workshop we will showcase three key techniques for improving the language model’s output: prompt engineering, retrieval-augmented generation (RAG), and Fine-tuning.
 
-  
-
 ![](https://cdn-images-1.medium.com/max/800/0*Q4tzzQAbnp249jQX.jpg)
 
 [Approaches to AI: When to Use Prompt Engineering, Embeddings, or Fine-tuning | Entry Point AI](https://www.entrypointai.com/blog/approaches-to-ai-prompt-engineering-embeddings-or-fine-tuning/)
+
+<br/><br/>
 
 #### 4.1 Prompt Engineering
 
@@ -77,11 +81,15 @@ Prompt engineering involves crafting a structurally optimized text prompt to gui
 
 Depending on the objective, prompt engineering can serve as an alternative approach to more complex techniques like **Retrieval Augmented Generation (RAG)**  or  **Fine-Tuning**  by  providing the model with an example of the desired model output. This is where concepts like **one-shot** and  **few-shot learning** become relevant. We will learn more about these concepts in Part 3.
 
+<br/><br/>
+
 #### 4.2 Retrieval Augmented Generation
 
 Retrieval Augmented Generation (RAG) is a retrieval strategy aimed at enhancing language models by providing them with supplementary information, a process also known as grounding. Rather than solely depending on the model’s existing knowledge, we can add proprietary data into the model prompt to guide it to a more precise and domain-specific response. It’s important to note that the model is **not** re-trained on the new data. The new data is only used as an additional prompt input, acting similarly to a one-shot learning.
 
 In this workshop, we’ll be working with a new dataset — a CSV file filled with details about vegan recipes. By incorporating this particular dataset, our model should more accurately produce vegan recipes. We will learn more about these concepts in Part 4.
+
+<br/><br/>
 
 #### 4.3 Fine-Tuning
 
@@ -98,6 +106,8 @@ In this workshop, we’ll be working with a new dataset — a CSV file fille
 Azure OpenAI combines the security features of Microsoft Azure with the various language models developed by OpenAI. This means customers can benefit from Azure’s reliability and safety measures while using OpenAI’s technology. OpenAI is ideal for experimenting and exploring new functionalities. However, when it comes to professional applications, security, and compliance, choose Azure OpenAI.
 
 Additionally, Azure OpenAI collaborates closely with OpenAI to develop the REST APIs. This partnership guarantees compatibility between the services and makes it easy for customers to switch between them with minimal hassle.
+
+<br/><br/>
 
 #### 5.1 Governance & Security
 
