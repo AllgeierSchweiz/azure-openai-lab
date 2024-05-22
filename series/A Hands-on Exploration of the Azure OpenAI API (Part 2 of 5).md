@@ -178,6 +178,7 @@ AZURE_OPENAI_ENDPOINT = ""
 
 GitHub Codespace currently throws an error when importing the `chromadb` package. The system uses an unsupported version of `sqlite3`, which we need to create our local database.
 
+```sql
 >>> import chromadb  
 Traceback (most recent call last):  
   File "<stdin>", line 1, in <module>  
@@ -185,6 +186,7 @@ Traceback (most recent call last):
     raise RuntimeError(  
 RuntimeError: Your system has an unsupported version of sqlite3. Chroma requires sqlite3 >= 3.35.0.  
 Please visit https://docs.trychroma.com/troubleshooting#sqlite to learn how to upgrade.
+```
 
 We need to implement a workaround to fix this issue.
 
@@ -200,9 +202,11 @@ We need to implement a workaround to fix this issue.
 
 -   Copy and paste the code below into the **_init_.py** file on line 68. Make sure to indent the code by highlighting it and clicking the tab button on your keyboard.
 
+```sql
 __import__('pysqlite3')  
 import sys  
 sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+```
 
 ![](https://cdn-images-1.medium.com/max/800/1*W6HkQTxIVM0QFvxiwmyuLA.png)
 
