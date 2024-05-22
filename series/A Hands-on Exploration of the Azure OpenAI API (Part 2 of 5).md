@@ -225,7 +225,11 @@ sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
 ![](https://cdn-images-1.medium.com/max/800/1*QsMvkmRyEEvlmajyOGcUnA.png)
 
+<br/><br/>
+
 Perfect! You have now finalized the required preparations to start running the Jupyter notebooks in Codespace. Lets get our hands dirty! We will continue with Part 3 of the workshop.
+
+<br/><br/>
 
 ----------
 
