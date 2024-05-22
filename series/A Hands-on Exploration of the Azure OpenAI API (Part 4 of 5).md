@@ -584,7 +584,11 @@ path_output = r"/workspaces/azure-openai-lab/data/recipes-from-rag.csv" #Change 
 recipes_from_rag.to_csv(path_output, sep='\t', encoding='utf-8', index=False)
 ```
 
+<br/><br/>
+
 Congratulations! You’ve made it through Part 4 of this workshop. We’ve learned how to use RAG to enhance our model using ChromaDB and LangChain. In Part 5, we’ll learn more about fine-tuning and even try pairing RAG with a fine-tuned model.
+
+<br/><br/>
 
 ----------
 
