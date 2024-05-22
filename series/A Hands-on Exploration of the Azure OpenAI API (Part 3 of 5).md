@@ -44,6 +44,8 @@ There are multiple options to run the code in a Notebook. You can:
 
 **_NOTE: We will run the code block-by-block using the Execute Cell button for the entire workshop series._**
 
+<br/><br/>
+
 #### 1.3 Initializing the Azure OpenAI Client
 
 We will start by importing the necessary Python packages to run our code.
@@ -96,6 +98,8 @@ client = AzureOpenAI(
 
 **_NOTE: The latest API version for the AzureOpenAI client can be found_** [**_here_**](https://learn.microsoft.com/en-us/azure/ai-services/openai/api-version-deprecation#latest-ga-api-release)**_._**
 
+<br/><br/>
+
 #### 1.4 Zero-Shot learning
 
 The client has been initialized so that we can create our first prompt following the Chat Completion transcript format mentioned in Chapter 1.
@@ -130,6 +134,8 @@ print("Summary: " + response.choices[0].message.content + "\n")
 **_NOTE: The model name being called in the chat completion client is the name of the model you deployed in your Azure OpenAI Service cockpit. For the SDSC workshop, all model deployments have already been provisioned and nothing needs to be changed._**
 
 The generated recipe seems plausible, however, we want to guide the model into creating more creative recipes for a specific use case. Additionally, we would prefer the output in a semi-structured format like JSON. Let’s adjust the system prompt to take our wishes into account.
+
+<br/><br/>
 
 #### 1.5 Prompt Engineering
 
@@ -220,6 +226,8 @@ print(response.choices[0].message.content + "\n")
 
 The generated output looks much better, but we can see that certain output attributes are sometimes left empty. Let’s provide the model with an example to guide it towards our desired output.
 
+<br/><br/>
+
 #### 1.6 One-Shot learning
 
 To give the Chat Completion Client an example, we need to supply an assistant role to the transcript format. This means our prompt has a **system, assistant,** and **user** role.
@@ -289,6 +297,8 @@ print(response.choices[0].message.content + "\n")
 ```
 
 The generated output looks great! The recipe is plausible, the output is in JSON format and none of the output attributes are empty. However, to ensure the model fully understands the direction we want the output to take, we can provide additional examples. Let’s do that!
+
+<br/><br/>
 
 #### 1.7 Few-Shot learning
 
@@ -377,14 +387,18 @@ response = client.chat.completions.create(
   
 print(response.choices[0].message.content + "\n")
 ```
+<br/><br/>
 
 Congratulations! You have completed Part 3 of this workshop. We have learned how to initialize the Azure OpenAI client to use the Azure OpenAI API with Python, and have implemented zero-shot, one-shot, and few-shot learning techniques, including advanced prompting, to optimize our model output. We will continue with Part 4 of the workshop.
 
+<br/><br/>
 ----------
 
 ### 2. Questions, Feedback, Support?
 
 Reach out to us! We are happy to answer any questions you might have or use your feedback to optimize this series!
+
+<br/><br/>
 
 ----------
 
