@@ -192,7 +192,7 @@ We need to implement a workaround to fix this issue.
 
 -   On the left of the codespace environment, select the **Explorer** icon.
 -   Within the explorer, open the tabs to the folders **.venv**, **lib,** and **chromadb**.
--   Select the Python script named **"_init_.py"** within the **chromadb** tab.
+-   Select the Python script named **<p>_init_.py<p>** within the **chromadb** tab.
 
 ![](https://cdn-images-1.medium.com/max/800/1*VH5gkNvFyc79jx3F1wK33Q.png)
 
