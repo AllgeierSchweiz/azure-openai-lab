@@ -7,7 +7,7 @@
 
 ### 1. Getting started with the Azure OpenAI API
 
-Lets explore how to create complex text inputs to enhance the model’s performance, also known as prompt engineering. This can be reinforced with techniques like **one-shot** and **few-shot learning**, where we provide relevant data or information to give the model additional context for the conversation. Alternatively, we create prompts without examples called z**ero-shot learning.** In all cases, we can enhance the prompt input by using prompt engineering frameworks like **AUTOMAT** to further guide the models output.
+Lets explore how to create complex text inputs to enhance the model’s performance, also known as prompt engineering. This can be reinforced with techniques like **one-shot** and **few-shot learning**, where we provide relevant data or information to give the model additional context for the conversation. Alternatively, we create prompts without examples called **zero-shot learning.** In all cases, we can enhance the prompt input by using prompt engineering frameworks to further guide the models output.
 
 The Jupyter Notebook we are going to work with is:
 
@@ -25,7 +25,7 @@ In this Notebook, we will call the Azure OpenAI API using the Chat Completion AP
 #### 1.1 Open the Notebook
 
 -   On the left of the codespace environment, select the **Explorer** icon.
--   Open the Notebook **P3-azure-openai-prompt-engineering.ipynb**_._
+-   Open the Notebook **P3-azure-openai-prompt-engineering.ipynb**.
 
 ![](https://cdn-images-1.medium.com/max/800/1*xz0by11chN-zudVuEtj_BA.png)
 
