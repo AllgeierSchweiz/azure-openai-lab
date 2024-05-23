@@ -19,6 +19,8 @@ The following series showcases how to use the Azure OpenAI Service in Python by 
 -   **Part 4** will show the readers how to implement a retrieval strategy such as Retrieval-Augmented Generation (RAG) using the Azure OpenAI API together with LangChain and ChromaDB as the vector database.
 -   **Part 5** will show the readers how to use fine-tuned model using the Azure OpenAI API and explore the implementation of RAG together with a fine-tuned model.
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ----------
 
 ### 2. Workshop Use Case
@@ -41,6 +43,8 @@ Unfortunately, we don’t have time to build the entire architecture of this sol
 4.  To further improve the recipes created by the model we will implement an enhancement technique called Fine-Tuning to re-train the base language model using a CSV file of vegan recipes as our training data. Furthermore, we will explore the implementation of RAG together with a fine-tuned model.
 5.  Before implementing the enhancement techniques listed in steps 3 and 4, we need to perform data preparation steps on the CSV file with vegan recipes. To achieve this, we will use the Azure OpenAI Assistant API with the code interpreter functionality. This will allow us to conduct data-wrangling steps on the data based on our natural language inputs.
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ----------
 
 ### 3. What is the Azure OpenAI Service?
@@ -60,6 +64,8 @@ In our case, we will use the language models **GPT-4, GPT-3.5-Turbo,** and **Emb
 -   **GPT-4 (**_Version 0125-preview, Version 1106-preview)_: This model is used to create our assistant for code interpretation. The GPT-4 series is a set of models that improve on the GPT-3.5 and can understand and generate natural language and code. The latest version, **0125-preview**, supersedes its predecessor, version **1106-preview**,  offering enhanced performance in code generation, a reduction in instances of incomplete model tasks and [additional enhancements](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#gpt-4-and-gpt-4-turbo-models).
 -   **GPT-3.5-Turbo** _(Version 0125, Version 1106, and Version 0613):_ This model is employed to generate recipes based on a list of ingredients as our input prompt. GPT-3.5 models can understand and generate natural language or code. The most capable and cost-effective model in the GPT-3.5 family is the GPT-3.5 Turbo. The latest **0125**  version replaces the **1106**  and offers higher accuracy at responding in requested formats and general bug fixes. For Fine-Tuning, we will use version **0613**.
 -   **Embeddings** _(text-embedding-3-large):_ This model is used to create an embedding of our recipe data which will be used to enhance our model output using Retrieval-Augmented Generation (RAG). An embedding is a compact, organized way to represent text information in numerical format using vectors. They are particularly useful in Artificial Intelligence applications, as it enables the essential meaning of text to be captured and transformed into a format that can be understood by an algorithm.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ----------
 
@@ -99,6 +105,8 @@ Large Language Models (LLMs) possess extensive knowledge of diverse topics drawn
 
 In this workshop, we’ll be working with a new dataset — a CSV file filled with details about vegan recipes. By re-training the model with this dataset, our model will be able to generate recipes that are finely tailored to the provided prompt input. We will learn more about these concepts in Part 5
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ----------
 
 ### 5. Azure OpenAI vs. OpenAI
@@ -118,6 +126,8 @@ Azure OpenAI provides features like data encryption, access control, private net
 ### 6. Questions, Feedback, Support?
 
 Reach out to us! We are happy to answer any questions you might have or use your feedback to optimize this series!
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ----------
 
