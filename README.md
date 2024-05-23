@@ -77,6 +77,8 @@ In our case, we will use the language models **GPT-4, GPT-3.5-Turbo,** and **Emb
 
 An assistant is an AI agent that is designed for a specific purpose. It augments the functionality of the Azure OpenAI models. The assistant facilitates the integration of third-party tools through custom functions and provides access to a coding environment through the Code Interpreter functionality. The exceptional performance of these AI agents is achieved through the utilisation of Threads, which facilitates the management and storage of message history.
 
+In our case, we will use these assistants to perform data pre-processing sets using the code interpreter functionality, granting the model a Python environment to perform data transformation using `pandas` .
+
 **_NOTE: It is important to note that Azure OpenAI Assistants are not the only agents that offer these functionalities. LangChain presented their own approach with the introduction of LangChain Agents._**
 
 #### 3.2 Azure OpenAI models being used
