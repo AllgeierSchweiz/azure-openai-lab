@@ -71,7 +71,7 @@ These models allow us to create written and image-based content, summarize infor
 
 Users can utilize the Azure OpenAI Service through REST APIs, Python SDK, or the web-based interface provided in the Azure OpenAI Studio.
 
-In our case, we will use the language models **GPT-4, GPT-3.5-Turbo,** and **Embeddings**. Each one will be called using the Azure OpenAI API. Additionally, we will use the Azure OpenAI Assistants API to perform data pre-processing operations using the code interpreter functionality.
+In our case, we will use the language models **GPT-4, GPT-3.5-Turbo,** and **Embeddings**. Each one will be called using the Azure OpenAI API. Additionally, we will use the **Azure OpenAI Assistants API** to perform data pre-processing operations using the code interpreter functionality.
 
 #### 3.1 Azure OpenAI Assistants
 
