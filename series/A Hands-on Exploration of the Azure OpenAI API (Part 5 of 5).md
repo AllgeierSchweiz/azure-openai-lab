@@ -180,7 +180,7 @@ DO NOT:
 
 #### 2.5 Create an Azure OpenAI Assistant
 
-Just like in Part 4, let’s start the Azure OpenAI Assistant using C**ode Interpreter** enabled to perform our data transformations.
+Just like in Part 4, let’s start the Azure OpenAI Assistant using **Code Interpreter** enabled to perform our data transformations.
 
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
@@ -200,6 +200,7 @@ fileId = assistant.file_ids[0]
 # Create a thread  
 thread = client.beta.threads.create()
 ```
+**_NOTE: A thread is a conversation session between an assistant and a user. Threads simplify application development by storing message history and truncating it when the conversation gets too long for the model’s context length._**
 
 We can now initialize the thread and send our instructions to the Azure OpenAI Assistant for evaluation.
 
