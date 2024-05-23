@@ -33,6 +33,8 @@ In Notebook **P4-azure-openai-rag.ipynb,** we will implement RAG using **ChromaD
 8.  The output from step 6 gets injected together with the original prompt augmenting the user input.
 9.  The model creates an output.
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ----------
 
 ### 2. Vector Database
@@ -43,6 +45,8 @@ It is important to understand the rationale behind RAG. The objective is to enha
 
 There are different types of vector databases. For our implementation, we’ll be using the open-source, locally instantiated [ChromaDB](https://www.trychroma.com/) vector database.
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ----------
 
 ### 3. LangChain
@@ -50,6 +54,8 @@ There are different types of vector databases. For our implementation, we’ll b
 LangChain is a Python library and an open-source framework for developing applications using large language models, such as those available on Azure OpenAI Services. As the name suggests, the capabilities of LangChain enable users to combine multiple key components to streamline the process of working with models.
 
 In our case, we will use LangChain to create our text chunks, generate the embeddings of our data, persist the vector database, create prompt templates, and call the Azure OpenAI model to generate a vegan recipe. All these components are combined to form a logical sequence creating a coherent workflow.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ----------
 
@@ -336,6 +342,8 @@ client.files.delete(messages.data[0].file_ids[0])
 
 **_NOTE: Since the data transformation steps use a random sample on the original data, we will use a standardized version of the generated file named recipes-preprocessed.csv to ascertain everyone has the same copy of the data._**
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ----------
 
 ### 5. Getting started with RAG
@@ -588,13 +596,15 @@ recipes_from_rag.to_csv(path_output, sep='\t', encoding='utf-8', index=False)
 
 Congratulations! You’ve made it through Part 4 of this workshop. We’ve learned how to use RAG to enhance our model using ChromaDB and LangChain. In Part 5, we’ll learn more about fine-tuning and even try pairing RAG with a fine-tuned model.
 
-<br/><br/>
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ----------
 
 ### 6. Questions, Feedback, Support?
 
 Reach out to us! We are happy to answer any questions you might have or use your feedback to optimize this series!
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ----------
 
