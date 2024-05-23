@@ -206,6 +206,7 @@ fileId = assistant.file_ids[0]
 # Create a thread  
 thread = client.beta.threads.create()
 ```
+**_NOTE: A thread is a conversation session between an assistant and a user. Threads simplify application development by storing message history and truncating it when the conversation gets too long for the model’s context length._**
 
 We can now initialize the thread and send our instructions to the Azure OpenAI Assistant for evaluation.
 
