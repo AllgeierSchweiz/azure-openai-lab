@@ -121,6 +121,8 @@ Additionally, Azure OpenAI collaborates closely with OpenAI to develop the REST 
 
 Azure OpenAI provides features like data encryption, access control, private networking, availability in different regions, and tools for responsible AI content filtering. In summary, it adds an extra layer of protection to your workload.
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ----------
 
 ### 6. Questions, Feedback, Support?
