@@ -33,6 +33,8 @@ Lets take a look at the vegan recipes it generates!
 5.  Create a user input i.e. prompt (list of ingredients).
 6.  The fine-tuned model creates an output.
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ----------
 
 ### 2. Data Pre-Processing with Azure OpenAI Assistant
@@ -340,6 +342,8 @@ client.files.delete(messages.data[0].file_ids[0])
 
 **_NOTE: In Chapter 4 we will use a standardized version of the generated training and validation files named recipes-training-set.jsonl and recipes-validation-set.jsonl_** **_to ascertain everyone has the same copy of the data._**
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ----------
 
 ### 3. Getting started with Fine-Tuning
@@ -452,6 +456,8 @@ completion = client.chat.completions.create(
   ]  
 )
 ```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ----------
 
@@ -641,13 +647,15 @@ The generated vegan recipe looks great! The recipe variables look plausible with
 
 Congratulations! You have finished the workshop!
 
-<br/><br/>
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ----------
 
 ### 5. Questions, Feedback, Support?
 
 Reach out to us! We are happy to answer any questions you might have or use your feedback to optimize this series!
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ----------
 
