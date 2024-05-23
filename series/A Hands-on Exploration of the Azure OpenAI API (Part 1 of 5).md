@@ -55,14 +55,18 @@ These models allow us to create written and image-based content, summarize infor
 
 Users can utilize the Azure OpenAI Service through REST APIs, Python SDK, or the web-based interface provided in the Azure OpenAI Studio.
 
-In our case, we will use the language models **GPT-4, GPT-3.5-Turbo,** and **Embeddings**. Each one will be called using the Azure OpenAI API.
+In our case, we will use the language models **GPT-4, GPT-3.5-Turbo,** and **Embeddings**. Each one will be called using the Azure OpenAI API. Additionally, we will use the Azure OpenAI Assistants API to perform data pre-processing operations using the code interpreter functionality.
 
-<br/><br/>
+#### 3.1 Azure OpenAI Assistants
 
-#### 3.1 Azure OpenAI models being used
+An assistant is an AI agent that is designed for a specific purpose. It augments the functionality of the Azure OpenAI models. The assistant facilitates the integration of third-party tools through custom functions and provides access to a coding environment through the Code Interpreter functionality. The exceptional performance of these AI agents is achieved through the utilisation of Threads, which facilitates the management and storage of message history.
+
+**_NOTE: It is important to note that Azure OpenAI Assistants are not the only agents that offer these functionalities. LangChain presented their own approach with the introduction of LangChain Agents._**
+
+#### 3.2 Azure OpenAI models being used
 
 -   **GPT-4 (**_Version 0125-preview, Version 1106-preview)_: This model is used to create our assistant for code interpretation. The GPT-4 series is a set of models that improve on the GPT-3.5 and can understand and generate natural language and code. The latest version, **0125-preview**, supersedes its predecessor, version **1106-preview**,  offering enhanced performance in code generation, a reduction in instances of incomplete model tasks and [additional enhancements](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#gpt-4-and-gpt-4-turbo-models).
--   **GPT-3.5-Turbo** _(Version 0125, Version 1106, and Version 0613):_ This model is employed to generate recipes based on a list of ingredients as our input prompt. GPT-3.5 models can understand and generate natural language or code. The most capable and cost-effective model in the GPT-3.5 family is the GPT-3.5 Turbo. The latest **0125**  version replaces the **1106**  and offers higher accuracy at responding in requested formats and general bug fixes. For Fine-Tuning, we will use version **0613**.
+-   **GPT-3.5-Turbo** _(Version 0125, Version 1106 and Version 0613):_ This model is used to create recipes based on a list of ingredients as our input prompt. GPT-3.5 models can understand and generate natural language or code. The most capable and cost-effective model in the GPT-3.5 family is the GPT-3.5 Turbo. The latest _0125_ version replaces the _1106_ and offers higher accuracy at responding in requested formats and general bug fixes. For Fine-Tuning, we will use version _0613_.
 -   **Embeddings** _(text-embedding-3-large):_ This model is used to create an embedding of our recipe data which will be used to enhance our model output using Retrieval-Augmented Generation (RAG). An embedding is a compact, organized way to represent text information in numerical format using vectors. They are particularly useful in Artificial Intelligence applications, as it enables the essential meaning of text to be captured and transformed into a format that can be understood by an algorithm.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
