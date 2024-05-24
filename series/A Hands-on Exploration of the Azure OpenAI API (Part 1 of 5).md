@@ -43,6 +43,7 @@ Unfortunately, we don’t have time to build the entire architecture of this sol
 3.  To further improve the recipes created by the model, specifically creating vegan recipes in JSON format, we will implement a retrieval strategy called Retrieval Augmented Generation (RAG) using a CSV file of vegan recipes as our data foundation.
 4.  To further improve the recipes created by the model we will implement an enhancement technique called Fine-Tuning to re-train the base language model using a CSV file of vegan recipes as our training data. Furthermore, we will explore the implementation of RAG together with a fine-tuned model.
 5.  Before implementing the enhancement techniques listed in steps 3 and 4, we need to perform data preparation steps on the CSV file. To achieve this, we will use the Azure OpenAI Assistant API with the code interpreter functionality. This will allow us to conduct data-wrangling steps on the data based on our natural language inputs.
+6.  We want to create a list of ingredients from a set of food product images that can be used to generate recipes. To achieve this, we will utilize the multimodal GPT-4o model, which enables the translation of images into text.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
