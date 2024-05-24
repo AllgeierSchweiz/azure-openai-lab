@@ -158,7 +158,7 @@ There are a number of frameworks that can assist users in creating the optimal i
 -   The **instructions** for the **target audience** we want the output to be geared towards.
 -   The output format we want our model to generate for us.
 
-With these 5 elements in mind, here is what our prompt might look like:
+With these 4 elements in mind, here is what our prompt might look like:
 
 ```sql
 """  
