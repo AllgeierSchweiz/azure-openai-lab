@@ -23,15 +23,17 @@ In Notebook **P4-azure-openai-rag.ipynb,** we will implement RAG using **ChromaD
 
 #### 1.2 What we are doing in a nutshell
 
-1.  Prepare the data for RAG
-2.  Import data in text format.
-3.  Split the text into chunks.
-4.  Convert each block of text into a vector (create embeddings).
-5.  Store the vector along with the original text in a vector database.
-6.  Create a user input i.e. prompt (list of ingredients).
-7.  Use a vector search function to find the most semantically similar information to the user input from your vector database.
-8.  The output from step 6 gets injected together with the original prompt augmenting the user input.
-9.  The model creates an output.
+![](https://cdn-images-1.medium.com/max/800/1*42TBGtmSVNIjjuVK-i6VqQ.png)
+
+1.  Import data in text format and split the text into chunks.
+2.  Convert each block of text into a vector using the embedding model `text-embedding-3-large` .
+3.  Store the vectors in a vector database.
+4.  Create a user input i.e. list of ingredients.
+5.  Convert the user input into a vector using the embedding model `text-embedding-3-large` .
+6.  Index the user input vector in the vector database.
+7.  Use a vector search function to find the most semantically similar information to the user input vector from the vector database.
+8.  Inject the information of the most similar vector from the embedding space into the original prompt, augmenting the prompt input, using the conversational model `gpt-35-turbo` .
+9.  The model creates the desired answer i.e. vegan recipe.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
