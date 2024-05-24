@@ -25,7 +25,7 @@ In Notebook **P4-azure-openai-rag.ipynb,** we will implement RAG using **ChromaD
 
 ![](https://cdn-images-1.medium.com/max/800/1*42TBGtmSVNIjjuVK-i6VqQ.png)
 
-1.  Import data in text format and split the text into chunks.
+1.  Import pre-processed data in text format and split the text into chunks.
 2.  Convert each block of text into a vector using the embedding model `text-embedding-3-large` .
 3.  Store the vectors in a vector database.
 4.  Create a user input i.e. list of ingredients.
