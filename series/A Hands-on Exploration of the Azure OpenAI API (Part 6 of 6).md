@@ -91,15 +91,15 @@ def encode_image(image_path):
     return base64.b64encode(image_file.read()).decode('utf-8')  
     
 # Image of a refrigerator with foods  
-refrigerator = encode_image(f"/workspaces/azure-openai-lab/images/products/refrigerator.jpg") #f"C:\\Python\\azure-openai-lab\\images\\products\\refrigerator.jpg"  
+refrigerator = encode_image(f"/workspaces/azure-openai-lab/images/products/refrigerator.jpg") 
   
 # Image of individual food products   
-avocado = encode_image(f"/workspaces/azure-openai-lab/images/products/avocado.jpg") #f"C:\\Python\\azure-openai-lab\\images\\products\\avocado.jpg"  
-tofu = encode_image(f"/workspaces/azure-openai-lab/images/products/tofu.jpg") #f"C:\\Python\\azure-openai-lab\\images\\products\\tofu.jpg"  
-broccoli = encode_image(f"/workspaces/azure-openai-lab/images/products/broccoli.jpg") #f"C:\\Python\\azure-openai-lab\\images\\products\\broccoli.jpg"  
-chili = encode_image(f"/workspaces/azure-openai-lab/images/products/chili.jpg") #f"C:\\Python\\azure-openai-lab\\images\\products\\chili.jpg"  
-coconut_milk = encode_image(f"/workspaces/azure-openai-lab/images/products/coconut_milk.jpg") #f"C:\\Python\\azure-openai-lab\\images\\products\\coconut_milk.jpg"  
-soy_sauce = encode_image(f"/workspaces/azure-openai-lab/images/products/soy_sauce.jpg") #f"C:\\Python\\azure-openai-lab\\images\\products\\soy_sauce.jpg"
+avocado = encode_image(f"/workspaces/azure-openai-lab/images/products/avocado.jpg")   
+tofu = encode_image(f"/workspaces/azure-openai-lab/images/products/tofu.jpg") 
+broccoli = encode_image(f"/workspaces/azure-openai-lab/images/products/broccoli.jpg")  
+chili = encode_image(f"/workspaces/azure-openai-lab/images/products/chili.jpg")
+coconut_milk = encode_image(f"/workspaces/azure-openai-lab/images/products/coconut_milk.jpg") 
+soy_sauce = encode_image(f"/workspaces/azure-openai-lab/images/products/soy_sauce.jpg")
 ```
 
 <br/><br/>
