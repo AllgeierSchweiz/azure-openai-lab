@@ -21,6 +21,14 @@ In this Notebook, we will call the Azure OpenAI API using the Chat Completion AP
 {"role": "assistant", "content": "Example answer goes here."},  
 {"role": "user", "content": "First question/message for the model to respond to."}
 ```
+What exactly do these roles mean?
+
+-   **System**: Allows you to specify the way the model answers questions and / or should behave. Prompt Engineering is done on this level.
+-   **User**: Equivalent to the queries made by the user.
+-   **Assistant**: The model’s responses, based on the user input. Examples for one-shot and few-shot learning are added here.
+
+**_NOTE: You may have more than one set of user/assistant roles in the prompt. This is the case when implementing few-shot learning._**
+
 <br/><br/>
 
 #### 1.1 Open the Notebook
