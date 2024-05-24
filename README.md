@@ -116,7 +116,7 @@ Depending on the objective, prompt engineering can serve as an alternative appro
 
 Retrieval Augmented Generation (RAG) is a retrieval strategy aimed at enhancing language models by providing them with supplementary information, a process also known as grounding. Rather than solely depending on the model’s existing knowledge, we can add proprietary data into the model prompt to guide it to more precise and domain-specific responses. It’s important to note that the model is **not** re-trained on the new data. The new data is only used as an additional prompt input, acting similarly to one-shot learning.
 
-![](https://cdn-images-1.medium.com/max/800/1*bmRA29kWZsaU8MvIqM1qDA.png)
+![RAG](images/RAG.jpg)
 
 In this workshop, we’ll work with a new dataset, a CSV file filled with examples of vegan recipes. By incorporating this particular dataset, our model should more accurately produce vegan recipes. We will learn more about these concepts in [Part 4][A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-4].
 
