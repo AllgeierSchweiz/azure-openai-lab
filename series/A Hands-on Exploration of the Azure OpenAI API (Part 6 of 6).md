@@ -338,6 +338,8 @@ omni_ingredients.to_csv(path_output, sep='\t', encoding='utf-8', index=False)
 ```
 We can now use this as an input for our implementations in Parts 3, 4, and 5.
 
+<br/><br/>
+
 Congratulations! You have finished the workshop!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
