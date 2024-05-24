@@ -646,7 +646,7 @@ The generated vegan recipe looks great! The recipe variables look plausible with
 
 <br/><br/>
 
-Congratulations! You have finished the workshop!
+Congratulations! You have completed Part 5 of this workshop. We have learned how to use the Azure OpenAI Assistant API for data pre-processing, and have used fine-tuned models to generate better recipe outputs. We will continue with Part 6 of the workshop and learn how we can use the new GPT-4o model to generate a list of ingredients from images.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
