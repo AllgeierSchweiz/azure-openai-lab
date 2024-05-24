@@ -19,6 +19,8 @@ In this Notebook, we will call the Azure OpenAI API with the Chat Completion API
 -   On the left of the codespace environment, select the **Explorer** icon.
 -   Open the Notebook **P6-azure-openai-omni-image-to-text.ipynb**
 
+![](https://cdn-images-1.medium.com/max/800/1*fTpm5q4wh08nfl6r9KzLzA.png)
+
 <br/><br/>
 
 #### 1.2 Initializing the Azure OpenAI Client
