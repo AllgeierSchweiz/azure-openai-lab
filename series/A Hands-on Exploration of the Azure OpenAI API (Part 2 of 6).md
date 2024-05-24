@@ -129,7 +129,7 @@ To work with Python, we need to select a Python Kernel. We will create a new sou
 
 ![](https://cdn-images-1.medium.com/max/800/1*wJ-9hVxiTlTUmDGdrZn66Q.png)
 
--   A new tab will open on the top of the environment. Select **Python Environments**.
+-   A new tab will open on the top of the environment. Select **Python Environments** (or **Select Another Kernel** first).
 
 ![](https://cdn-images-1.medium.com/max/800/1*4P3VpIkmzWSVYw12sHquBw.png)
 
