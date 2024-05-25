@@ -162,7 +162,6 @@ To perform our data pre-processing steps using the Azure OpenAI Assistant, we ne
 ```sql
 # Create data transformation instructions
 instructions = '''
-
 ### INSTRUCTIONS
 You are a senior data analyst who will work with data in a csv file in your files. 
 You have access to a sandbox environment for writing Python code.
