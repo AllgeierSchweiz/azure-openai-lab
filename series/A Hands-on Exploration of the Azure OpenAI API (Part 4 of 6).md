@@ -162,7 +162,6 @@ To perform our data pre-processing steps using the Azure OpenAI Assistant, we ne
 ```sql
 # Create data transformation instructions
 instructions = '''
-
 ### INSTRUCTIONS
 You are a senior data analyst who will work with data in a csv file in your files. 
 You have access to a sandbox environment for writing Python code.
@@ -251,41 +250,41 @@ Let’s check the status of the run while we wait.
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Check status of Azure OpenAI Assistant run  
-while True:  
-    sec = 30  
-    # Wait for 30 seconds  
-    time.sleep(sec)    
-    # Retrieve the run status  
-    run_status = client.beta.threads.runs.retrieve(  
-        thread_id=thread.id,  
-        run_id=run.id  
-    )  
-    # If run is completed, get messages  
-    if run_status.status == 'completed':  
-        messages = client.beta.threads.messages.list(  
-            thread_id=thread.id  
-        )  
-        # Loop through messages and print content based on role  
-        for msg in messages.data:  
-            role = msg.role  
-            try:  
-                content = msg.content[0].text.value  
-                print(f"{role.capitalize()}: {content}")  
-            except AttributeError:  
-                # This will execute if .text does not exist  
-                print(f"{role.capitalize()}: [Non-text content, possibly an image or other file type]")  
-        break  
-    elif run.status == "requires_action":  
-        # handle function calling and continue with the execution  
-        pass  
-    elif run.status == "expired" or run.status=="failed" or run.status=="cancelled":  
-        # run failed, expired, or was cancelled  
-        break      
-    elif run.last_error != "None":  
-        # run failed, expired, or was cancelled  
-        break       
-    else:  
+# Check status of Azure OpenAI Assistant run
+while True:
+    sec = 30
+    # Wait for 30 seconds
+    time.sleep(sec)  
+    # Retrieve the run status
+    run_status = client.beta.threads.runs.retrieve(
+        thread_id=thread.id,
+        run_id=run.id
+    )
+    # If run is completed, get messages
+    if run_status.status == 'completed':
+        messages = client.beta.threads.messages.list(
+            thread_id=thread.id
+        )
+        # Loop through messages and print content based on role
+        for msg in messages.data:
+            role = msg.role
+            try:
+                content = msg.content[0].text.value
+                print(f"{role.capitalize()}: {content}")
+            except AttributeError:
+                # This will execute if .text does not exist
+                print(f"{role.capitalize()}: [Non-text content, possibly an image or other file type]")
+        break
+    elif run.status == "requires_action":
+        # handle function calling and continue with the execution
+        pass
+    elif run.status == "expired" or run.status=="failed" or run.status=="cancelled":
+        # run failed, expired, or was cancelled
+        break    
+    # elif run.last_error != "None":
+    #     # run failed, expired, or was cancelled
+    #     break     
+    else:
         print("In progress...")
 ```
 
@@ -299,7 +298,7 @@ Let’s view the newly created file and check the transformations.
 
 ```sql
 # Functions to read csv files from Azure OpenAI Service
-output_path = r"/workspaces/azure-openai-lab/data/assistant_output/"
+output_path = r"/workspaces/azure-openai-lab/data/generated_output/"
 
 def read_and_save_file(first_file_id, file_name):    
     # its binary, so read it and then make it a file like object
@@ -328,9 +327,9 @@ def files_from_messages():
 files_from_messages()
 ```
 
--   To open the file, navigate the **Explorer** icon and select the file named **recipes-preprocessed.csv** in the **assistant_output** tab located under the **data** tab.
+-   To open the file, navigate the **Explorer** icon and select the file named **recipes-preprocessed.csv** in the **generated_output** tab located under the **data** tab.
 
-![](https://cdn-images-1.medium.com/max/800/1*0s_pC59YZ6TPRKbpTGIqJg.png)
+![](https://cdn-images-1.medium.com/max/800/1*FkaP2MMYmLvODihN52K9Hg.png)
 
 <br/><br/>
 
@@ -475,17 +474,17 @@ df_document_split = text_splitter.split_documents(df_document)
 
 **_NOTE: We opted for a smaller chunk size of 256 to capture more granular semantic information._**
 
-To generate the word embeddings of the chunked data , we use the Azure OpenAI embedding model **text-embedding-ada-002**. To use this model, we use LangChains `AzureOpenAIEmbeddings` constructor.
+To generate the word embeddings of the chunked data , we use the Azure OpenAI embedding model `text-embedding-3-large`. To use this model, we use LangChains `AzureOpenAIEmbeddings` constructor.
 
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Generate and store the Word Embeddings for the Dataset using Azure Openai  
-openai_ef = AzureOpenAIEmbeddings(  
-                deployment = "text-embedding-ada-002",  
-                openai_api_key = azure_oai_key,  
-                azure_endpoint = azure_oai_endpoint,  
-                openai_api_version = "2024-02-01",  
+# Generate the Word Embeddings for the Dataset using Azure OpenAI with model text-embedding-ada-002
+openai_ef = AzureOpenAIEmbeddings(
+                deployment = "text-embedding-3-large",
+                openai_api_key = azure_oai_key,
+                azure_endpoint = azure_oai_endpoint,
+                openai_api_version = "2024-02-01",
             )
 ```
 
@@ -501,7 +500,7 @@ vectordb = Chroma.from_documents(
                 documents = df_document_split,  
                 embedding = openai_ef,  
                 collection_name = "recipes",  
-                persist_directory = r"/workspaces/azure-openai-lab/data/chromadb", #r"/workspaces/azure-openai-lab/data/chromadb"  
+                persist_directory = r"/workspaces/azure-openai-lab/data/chromadb",
                 collection_metadata={"hnsw:space": "cosine"}  
             )
 ```
@@ -531,33 +530,36 @@ We will create a prompt template for our LangChain function using the same advan
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Zero-shot learning Prompt  
-prompt_template = \  
-"""  
-### Instructions  
-Persona: Act as a head chef such as Joël Robuchon who specializes in simple contemporary cuisine with a focus on vegan dishes.  
-Action: Create well-thought-out and flavourful vegan recipes from a list of ingredients from {question}, implementing classic culinary techniques using the provided {context}.  
-Target Audience: The recipients of these recipes are vegan couples who want to cook a special meal at least once a week.  
-  
-### Output format  
-Return a JSON array with the following format:  
-{{"name":"","minutes":,"tags":"[]","nutrition":"[]","n_steps":"","steps":"[]","description":"","ingredients":"[]","n_ingredients":}}  
-  
-The variables should contain the following information:  
-- name: the name of the recipe.  
-- minutes: the time in minutes to prepare the recipe.  
-- tags: a list of words that characterize the recipe.  
-- nutrition: a list of numeric values representing calories, total fat, sugar, sodium, protein, saturated fat, and carbohydrates.  
-- n_steps: the number of steps to prepare the recipe.  
-- steps: a list of steps to prepare the recipe.  
-- description: a summary of the recipe.  
-- ingredients: a list of ingredients used in the recipe including the amount and the units using the metric system.  
-- n_ingredients: the number of ingredients used in the recipe.  
-"""  
-  
-  
-simple_prompt = PromptTemplate(  
-    template=prompt_template, input_variables=["context", "question"]  
+# Zero-shot learning Prompt
+prompt_template = \
+"""
+### INSTRUCTIONS
+Persona: Act as a head chef such as Joël Robuchon who specializes in simple contemporary cuisine.
+Action: Create well-thought-out and flavourful vegan recipes from a list of ingredients {question}, implementing classic culinary techniques.
+Target Audience: The recipients of these vegan recipes are couples who want to cook a special meal at least once a week.
+
+### EXAMPLE
+{context}
+
+### OUTPUT FORMAT
+Output only one vegan recipe and return it as a JSON object with the following format:
+{{"name":"","minutes":,"tags":"[]","nutrition":"[]","n_steps":"","steps":"[]","description":"","ingredients":"[]", "n_ingredients":}}
+
+The variables should contain the following information:
+- name: the name of the recipe.
+- minutes: the time in minutes to prepare the recipe.
+- tags: a list of words that characterize the recipe.
+- nutrition: a list of numeric values representing calories, total fat, sugar, sodium, protein, saturated fat, and carbohydrates.
+- n_steps: the number of steps to prepare the recipe.
+- steps: a list of steps to prepare the recipe.
+- description: a summary of the recipe.
+- ingredients: a list of the ingredient names in the recipe.
+- n_ingredients: the total number of ingredients used in the recipe.
+"""
+
+
+simple_prompt = PromptTemplate(
+    template=prompt_template, input_variables=["context", "question"]
 )
 ```
 
@@ -585,18 +587,27 @@ The generated vegan recipe looks great! The recipe variables look plausible with
 
 <br/><br/>
 
-#### 5.6 Create CSV file from generated Recipes
+#### 5.6 Create Dataframe from generated Recipes
 
-We can now create a CSV file to save our newly generated recipes.
+We can now transform our generated output into a data frame to check the overall structure. Alternatively, we could save the generated output directly to a CSV file.
+
+**_NOTE: uncomment the last two lines of the Notebook code to save as CSV file._**
 
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-#Transform output to pandas dataframe and save as CSV file  
-recipes_from_rag_json = json.loads(result['result'])  
-recipes_from_rag = pd.json_normalize(recipes_from_rag_json)  
-path_output = r"/workspaces/azure-openai-lab/data/recipes-from-rag.csv" #Change path if required  
-recipes_from_rag.to_csv(path_output, sep='\t', encoding='utf-8', index=False)
+#Transform output to pandas dataframe and save as CSV file
+
+# Clean up Azure OpenAI Output
+json_data = result['result'].strip('` \n')
+
+if json_data.startswith('json'):
+    json_data = json_data[4:]  # Remove the first 4 characters 'json'
+
+recipes_from_rag_json = json.loads(json_data)
+recipes_from_rag = pd.json_normalize(recipes_from_rag_json)
+# path_output = r"/workspaces/azure-openai-lab/data/generated_output/recipes-from-rag.csv" #r"C:\Python\azure-openai-lab\data\generated_output\recipes-from-rag.csv"
+# recipes_from_rag.to_csv(path_output, sep='\t', encoding='utf-8', index=False)
 ```
 
 <br/><br/>
