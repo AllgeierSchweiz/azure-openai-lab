@@ -250,41 +250,41 @@ Let’s check the status of the run while we wait.
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Check status of Azure OpenAI Assistant run  
-while True:  
-    sec = 30  
-    # Wait for 30 seconds  
-    time.sleep(sec)    
-    # Retrieve the run status  
-    run_status = client.beta.threads.runs.retrieve(  
-        thread_id=thread.id,  
-        run_id=run.id  
-    )  
-    # If run is completed, get messages  
-    if run_status.status == 'completed':  
-        messages = client.beta.threads.messages.list(  
-            thread_id=thread.id  
-        )  
-        # Loop through messages and print content based on role  
-        for msg in messages.data:  
-            role = msg.role  
-            try:  
-                content = msg.content[0].text.value  
-                print(f"{role.capitalize()}: {content}")  
-            except AttributeError:  
-                # This will execute if .text does not exist  
-                print(f"{role.capitalize()}: [Non-text content, possibly an image or other file type]")  
-        break  
-    elif run.status == "requires_action":  
-        # handle function calling and continue with the execution  
-        pass  
-    elif run.status == "expired" or run.status=="failed" or run.status=="cancelled":  
-        # run failed, expired, or was cancelled  
-        break      
-    elif run.last_error != "None":  
-        # run failed, expired, or was cancelled  
-        break       
-    else:  
+# Check status of Azure OpenAI Assistant run
+while True:
+    sec = 30
+    # Wait for 30 seconds
+    time.sleep(sec)  
+    # Retrieve the run status
+    run_status = client.beta.threads.runs.retrieve(
+        thread_id=thread.id,
+        run_id=run.id
+    )
+    # If run is completed, get messages
+    if run_status.status == 'completed':
+        messages = client.beta.threads.messages.list(
+            thread_id=thread.id
+        )
+        # Loop through messages and print content based on role
+        for msg in messages.data:
+            role = msg.role
+            try:
+                content = msg.content[0].text.value
+                print(f"{role.capitalize()}: {content}")
+            except AttributeError:
+                # This will execute if .text does not exist
+                print(f"{role.capitalize()}: [Non-text content, possibly an image or other file type]")
+        break
+    elif run.status == "requires_action":
+        # handle function calling and continue with the execution
+        pass
+    elif run.status == "expired" or run.status=="failed" or run.status=="cancelled":
+        # run failed, expired, or was cancelled
+        break    
+    # elif run.last_error != "None":
+    #     # run failed, expired, or was cancelled
+    #     break     
+    else:
         print("In progress...")
 ```
 
