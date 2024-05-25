@@ -142,10 +142,10 @@ The data used for our RAG implementation in Chapter 5 is based on a CSV file con
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Import existing uploaded file on Azure OpenAI Service  
-for i in client.files.list():  
-    if i.filename == "recipes":  
-        file__id = i.id  
+# Import existing uploaded file on Azure OpenAI Service
+for i in client.files.list():
+    if i.filename == "recipes.csv":
+        file__id = i.id
         print(i.id)
 ```
 
@@ -160,27 +160,31 @@ To perform our data pre-processing steps using the Azure OpenAI Assistant, we ne
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Create data transformation instructions  
-instructions = '''  
-You are a senior data analyst who will work with data in a csv file in your files.   
-You have access to a sandbox environment for writing Python code.  
-When the user asks you to perform your actions, use the csv file to read the data into a pandas dataframe.  
-Execute each of the steps listed below in your ACTIONS section.  
-  
-  
-ACTIONS:  
-  
-1. Read the file data into a pandas DataFrame.   
-2. Drop columns "id", "contributor_id" and "submitted".  
-3. Trim column "name" by removing irregular text spacing at the front or back of each value while keeping single spaces between words.  
-4. Filter the data where column "tags" contains the word vegan.  
-5. Create a new column named "dense_feature" combining the values of the columns "name", "tags", "nutrition", "ingredients" and "steps" separated by a semicolon.  
-6. Prepare a final data set named "recipes-preprocessed" that only has 50 rows randomly sampled from the dataframe from step 5.  
-7. Prepare recipes-preprocessed as csv files for download by the user.   
-  
-DO NOT:  
-1. Do not return any images.   
-2. Do not return any other file types.  
+# Create data transformation instructions
+instructions = '''
+
+### INSTRUCTIONS
+You are a senior data analyst who will work with data in a csv file in your files. 
+You have access to a sandbox environment for writing Python code.
+When the user asks you to perform your actions, use the csv file to read the data into a pandas dataframe.
+Execute each of the steps listed below in your ACTIONS section.
+
+---
+
+### ACTIONS:
+1. Read the tab separated comma file data into a pandas DataFrame. 
+2. Drop columns "id", "contributor_id" and "submitted".
+3. Trim column "name" by removing irregular text spacing at the front or back of each value while keeping single spaces between words.
+4. Filter the data where column "tags" contains the word vegan.
+5. Create a new column named "dense_feature" combining the values of the columns "name", "tags", "nutrition", "ingredients" and "steps" separated by a semicolon.
+6. Prepare a final data set named "recipes-preprocessed" that only has 50 rows randomly sampled from the dataframe from step 5.
+7. Prepare recipes-preprocessed as csv files for download by the user. 
+
+---
+
+### DO NOT:
+1. Do not return any images. 
+2. Do not return any other file types.
 '''
 ```
 
@@ -198,7 +202,7 @@ assistant = client.beta.assistants.create(
     name = "data analyst assistant",  
     instructions = instructions,  
     tools = [{"type": "code_interpreter"}],  
-    model = "gpt-4-1106-preview", #"gpt-4-0125-preview", #You must replace this value with the deployment name for your model.  
+    model = "gpt-4-1106-preview", #You must replace this value with the deployment name for your model.  
     file_ids=[file__id]  
 )  
   
@@ -215,13 +219,13 @@ We can now initialize the thread and send our instructions to the Azure OpenAI A
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Initalize thread and start data transformation using the Azure OpenAI Assistant Code Interpreter  
-prompt = "Please execute your ACTIONS on the data stored in the csv file " + fileId  
-  
-message = client.beta.threads.messages.create(  
-    thread_id = thread.id,  
-    role = "user",  
-    content = prompt  
+# Initalize thread and start data transformation using the Azure OpenAI Assistant Code Interpreter
+prompt = "Please execute the INSTRUCTIONS and ACTIONS on the data stored in the csv file " + fileId
+
+message = client.beta.threads.messages.create(
+    thread_id = thread.id,
+    role = "user",
+    content = prompt
 )
 ```
 
@@ -294,33 +298,33 @@ Let’s view the newly created file and check the transformations.
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Functions to read csv files from Azure OpenAI Service  
-output_path = r"/workspaces/azure-openai-lab/data/"  
-  
-def read_and_save_file(first_file_id, file_name):      
-    # its binary, so read it and then make it a file like object  
-    file_data = client.files.content(first_file_id)  
-    file_data_bytes = file_data.read()  
-    file_like_object = io.BytesIO(file_data_bytes)  
-    #now read as csv to create df  
-    returned_data = pd.read_csv(file_like_object)  
-    returned_data.to_csv(output_path + file_name, index=False)  
-    return returned_data  
-    # file = read_and_save_file(first_file_id, "analyst_output.csv")  
-      
-def files_from_messages():  
-    messages = client.beta.threads.messages.list(  
-            thread_id=thread.id  
-        )  
-    first_thread_message = messages.data[0]  # Accessing the first ThreadMessage  
-    message_ids = first_thread_message.file_ids  
-    # Loop through each file ID and save the file with a sequential name  
-    for i, file_id in enumerate(message_ids):  
-        file_name = f"recipes-preprocessed.csv"  # Generate a sequential file name  
-        read_and_save_file(file_id, file_name)  
-        print(f'saved {file_name}')    
-  
-# Extract the file names from the response, retrieve the content and save the data as a csv file   
+# Functions to read csv files from Azure OpenAI Service
+output_path = r"/workspaces/azure-openai-lab/data/assistant_output/"
+
+def read_and_save_file(first_file_id, file_name):    
+    # its binary, so read it and then make it a file like object
+    file_data = client.files.content(first_file_id)
+    file_data_bytes = file_data.read()
+    file_like_object = io.BytesIO(file_data_bytes)
+    #now read as csv to create df
+    returned_data = pd.read_csv(file_like_object)
+    returned_data.to_csv(output_path + file_name, index=False)
+    return returned_data
+    # file = read_and_save_file(first_file_id, "analyst_output.csv")
+    
+def files_from_messages():
+    messages = client.beta.threads.messages.list(
+            thread_id=thread.id
+        )
+    first_thread_message = messages.data[0]  # Accessing the first ThreadMessage
+    message_ids = first_thread_message.file_ids
+    # Loop through each file ID and save the file with a sequential name
+    for i, file_id in enumerate(message_ids):
+        file_name = f"recipes-preprocessed.csv"  # Generate a sequential file name
+        read_and_save_file(file_id, file_name)
+        print(f'saved {file_name}')  
+
+# Extract the file names from the response, retrieve the content and save the data as a csv file 
 files_from_messages()
 ```
 
