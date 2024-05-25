@@ -140,39 +140,45 @@ To perform our data pre-processing steps using the Azure OpenAI Assistant, we ne
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Create data transformation instructions  
-instructions = '''  
-You are a senior data analyst who will work with data in an csv file.  
-You have access to a sandboxed environment for writing python code.  
-The objective is to create a datset for fine-tuning. The dataset must be formatted in the conversational format that is used by the Chat completions API.  
-An example of the conversational format is available in the EXAMPLES section.  
-When the user asks you to perform your actions, you will use the provided csv file and examples in the EXAMPLE section.  
-Execute each of the steps listed below in your ACTIONS section.  
-  
-EXAMPLES:  
-  
-{"messages": [{"role": "system", "content": "Act as a head chef and create a flavourful recipe from a list of ingredients"}, {"role": "user", "content": "'pork spareribs', 'soy sauce', 'fresh garlic', 'fresh ginger', 'chili powder', 'fresh coarse ground black pepper', 'salt', 'fresh cilantro leaves', 'tomato sauce', 'brown sugar', 'yellow onion', 'white vinegar', 'honey', 'a.1. original sauce', 'liquid smoke', 'cracked black pepper', 'cumin', 'dry mustard', 'cinnamon sticks', 'orange, juice of', 'mirin', 'water'"}, {"role": "assistant", "content": "{"name":"backyard style  barbecued ribs","minutes":120,"tags":"['weeknight', 'time-to-make', 'course', 'main-ingredient', 'cuisine', 'preparation', 'occasion', 'north-american', 'south-west-pacific', 'main-dish', 'pork', 'oven', 'holiday-event', 'stove-top', 'hawaiian', 'spicy', 'copycat', 'independence-day', 'meat', 'pork-ribs', 'super-bowl', 'novelty', 'taste-mood', 'savory', 'sweet', 'equipment', '4-hours-or-less']","nutrition":"[1109.5, 83.0, 378.0, 275.0, 96.0, 86.0, 36.0]","n_steps":10,"steps":"['in a medium saucepan combine all the ingredients for sauce#1 , bring to a full rolling boil , reduce heat to medium low and simmer for 1 hour , stirring often', 'rub the ribs with soy sauce , garlic , ginger , chili powder , pepper , salt and chopped cilantro , both sides !', 'wrap ribs in heavy duty foil', 'let stand 1 hour', 'preheat oven to 350 degrees', 'place ribs in oven for 1 hour , turning once after 30 minutes', '3 times during cooking the ribs open foil wrap and drizzle ribs with sauce#1', 'place all the ingredients for sauce#2 in a glass or plastic bowl , whisk well and set aside', 'remove ribs from oven and place on serving platter', 'offer both sauces at table to drizzle over ribs']","description":"this recipe is posted by request and was originaly from chef sam choy's cookbook ","ingredients":"['pork spareribs', 'soy sauce', 'fresh garlic', 'fresh ginger', 'chili powder', 'fresh coarse ground black pepper', 'salt', 'fresh cilantro leaves', 'tomato sauce', 'brown sugar', 'yellow onion', 'white vinegar', 'honey', 'a.1. original sauce', 'liquid smoke', 'cracked black pepper', 'cumin', 'dry mustard', 'cinnamon sticks', 'orange, juice of', 'mirin', 'water']","n_ingredients":22}"}]}  
-{"messages": [{"role": "system", "content": "Act as a head chef and create a flavourful recipe from a list of ingredients"}, {"role": "user", "content": "'lean pork chops', 'flour', 'salt', 'dry mustard', 'garlic powder', 'oil', 'chicken rice soup'"}, {"role": "assistant", "content": "{"name":"chicken lickin  good  pork chops","minutes":500,"tags":"['weeknight', 'time-to-make', 'course', 'main-ingredient', 'preparation', 'main-dish', 'pork', 'crock-pot-slow-cooker', 'dietary', 'meat', 'pork-chops', 'equipment']","nutrition":"[105.7, 8.0, 0.0, 26.0, 5.0, 4.0, 3.0]","n_steps":5,"steps":"['dredge pork chops in mixture of flour , salt , dry mustard and garlic powder', 'brown in oil in a large skillet', 'place browned pork chops in a crock pot', 'add the can of soup , undiluted', 'cover and cook on low for 6-8 hours']","description":"here's and old standby i enjoy from time to time. it's from an old newspaper clipping i cut out years ago. very tasty.","ingredients":"['lean pork chops', 'flour', 'salt', 'dry mustard', 'garlic powder', 'oil', 'chicken rice soup']","n_ingredients":7}"}]}  
-  
-  
-ACTIONS:  
-  
-1. Read the CSV file.  
-2. Transform the data and create a jsonl file formatted in the conversational format as shown in the EXAMPLES section.  
-3. The conversational format has a system, user and assistant text input stored inside an array of dictionaries.  
-4. The system text input is always "Act as a head chef and create a flavourful recipe from a list of ingredients".  
-5. The user text input takes the list of ingredients in the column "ingredients" of the CSV file.  
-6. The assistant input takes all the columns of the CSV file.  
-7. Split the data set into training and testing data sets with a 25% split.  
-8. Make sure both data sets have the same format provided by the EXAMPLES section.  
-9. Name the data set with 75% of the data "recipes-training-set".  
-10. Name the data set with 25% of the data "recipes-validation-set".  
-11. Prepare both data sets as a jsonl file for download by the user.  
-12. Provide a summary paragraph explaining the preparation of the dataset.  
-  
-DO NOT:  
-1. Do not return any images.   
-2. Do not return any other file types.  
+# Create data transformation instructions
+instructions = '''
+### INSTRUCTIONS
+You are a senior data analyst who will work with data in an csv file.
+You have access to a sandboxed environment for writing python code.
+The objective is to create a datset for fine-tuning. The dataset must be formatted in the conversational format that is used by the Chat completions API.
+An example of the conversational format is available in the EXAMPLES section.
+When the user asks you to perform your actions, you will use the provided csv file and examples in the EXAMPLE section.
+Execute each of the steps listed below in your ACTIONS section.
+
+---
+
+### EXAMPLES:
+
+{"messages": [{"role": "system", "content": "Act as a head chef and create a flavourful recipe from a list of ingredients"}, {"role": "user", "content": "'pork spareribs', 'soy sauce', 'fresh garlic', 'fresh ginger', 'chili powder', 'fresh coarse ground black pepper', 'salt', 'fresh cilantro leaves', 'tomato sauce', 'brown sugar', 'yellow onion', 'white vinegar', 'honey', 'a.1. original sauce', 'liquid smoke', 'cracked black pepper', 'cumin', 'dry mustard', 'cinnamon sticks', 'orange, juice of', 'mirin', 'water'"}, {"role": "assistant", "content": "{"name":"backyard style  barbecued ribs","minutes":120,"tags":"['weeknight', 'time-to-make', 'course', 'main-ingredient', 'cuisine', 'preparation', 'occasion', 'north-american', 'south-west-pacific', 'main-dish', 'pork', 'oven', 'holiday-event', 'stove-top', 'hawaiian', 'spicy', 'copycat', 'independence-day', 'meat', 'pork-ribs', 'super-bowl', 'novelty', 'taste-mood', 'savory', 'sweet', 'equipment', '4-hours-or-less']","nutrition":"[1109.5, 83.0, 378.0, 275.0, 96.0, 86.0, 36.0]","n_steps":10,"steps":"['in a medium saucepan combine all the ingredients for sauce#1 , bring to a full rolling boil , reduce heat to medium low and simmer for 1 hour , stirring often', 'rub the ribs with soy sauce , garlic , ginger , chili powder , pepper , salt and chopped cilantro , both sides !', 'wrap ribs in heavy duty foil', 'let stand 1 hour', 'preheat oven to 350 degrees', 'place ribs in oven for 1 hour , turning once after 30 minutes', '3 times during cooking the ribs open foil wrap and drizzle ribs with sauce#1', 'place all the ingredients for sauce#2 in a glass or plastic bowl , whisk well and set aside', 'remove ribs from oven and place on serving platter', 'offer both sauces at table to drizzle over ribs']","description":"this recipe is posted by request and was originaly from chef sam choy's cookbook ","ingredients":"['pork spareribs', 'soy sauce', 'fresh garlic', 'fresh ginger', 'chili powder', 'fresh coarse ground black pepper', 'salt', 'fresh cilantro leaves', 'tomato sauce', 'brown sugar', 'yellow onion', 'white vinegar', 'honey', 'a.1. original sauce', 'liquid smoke', 'cracked black pepper', 'cumin', 'dry mustard', 'cinnamon sticks', 'orange, juice of', 'mirin', 'water']","n_ingredients":22}"}]}
+{"messages": [{"role": "system", "content": "Act as a head chef and create a flavourful recipe from a list of ingredients"}, {"role": "user", "content": "'lean pork chops', 'flour', 'salt', 'dry mustard', 'garlic powder', 'oil', 'chicken rice soup'"}, {"role": "assistant", "content": "{"name":"chicken lickin  good  pork chops","minutes":500,"tags":"['weeknight', 'time-to-make', 'course', 'main-ingredient', 'preparation', 'main-dish', 'pork', 'crock-pot-slow-cooker', 'dietary', 'meat', 'pork-chops', 'equipment']","nutrition":"[105.7, 8.0, 0.0, 26.0, 5.0, 4.0, 3.0]","n_steps":5,"steps":"['dredge pork chops in mixture of flour , salt , dry mustard and garlic powder', 'brown in oil in a large skillet', 'place browned pork chops in a crock pot', 'add the can of soup , undiluted', 'cover and cook on low for 6-8 hours']","description":"here's and old standby i enjoy from time to time. it's from an old newspaper clipping i cut out years ago. very tasty.","ingredients":"['lean pork chops', 'flour', 'salt', 'dry mustard', 'garlic powder', 'oil', 'chicken rice soup']","n_ingredients":7}"}]}
+
+---
+
+### ACTIONS:
+
+1. Read the tab separated comma file data.
+2. Transform the data and create a jsonl file formatted in the conversational format as shown in the EXAMPLES section.
+3. The conversational format has a system, user and assistant text input stored inside an array of dictionaries.
+4. The system text input is always "Act as a head chef and create a flavourful recipe from a list of ingredients".
+5. The user text input takes the list of ingredients in the column "ingredients" of the CSV file.
+6. The assistant input takes all the columns of the CSV file.
+7. Split the data set into training and testing data sets with a 25% split.
+8. Make sure both data sets have the same format provided by the EXAMPLES section.
+9. Name the data set with 75% of the data "recipes-training-set".
+10. Name the data set with 25% of the data "recipes-validation-set".
+11. Prepare both data sets as a jsonl file for download by the user.
+12. Provide a summary paragraph explaining the preparation of the dataset.
+
+---
+
+### DO NOT:
+1. Do not return any images. 
+2. Do not return any other file types.
 '''
 ```
 
@@ -190,7 +196,7 @@ assistant = client.beta.assistants.create(
     name = "data analyst assistant",  
     instructions = instructions,  
     tools = [{"type": "code_interpreter"}],  
-    model = "gpt-4-1106-preview", #"gpt-4-0125-preview", #You must replace this value with the deployment name for your model.  
+    model = "gpt-4-1106-preview", 
     file_ids=[file__id]  
 )  
   
@@ -207,13 +213,13 @@ We can now initialize the thread and send our instructions to the Azure OpenAI A
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Initalize thread and start data transformation using the Azure OpenAI Assistant Code Interpreter  
-prompt = "Please execute your ACTIONS on the data stored in the CSV file using the EXAMPLES as reference for the dataset format " + fileId  
-  
-message = client.beta.threads.messages.create(  
-    thread_id = thread.id,  
-    role = "user",  
-    content = prompt  
+# Initalize thread and start data transformation using the Azure OpenAI Assistant Code Interpreter
+prompt = "Please execute the INSTRUCTIONS and ACTIONS on the data stored in the CSV file using the EXAMPLES as reference for the output format " + fileId
+
+message = client.beta.threads.messages.create(
+    thread_id = thread.id,
+    role = "user",
+    content = prompt
 )
 ```
 
@@ -239,41 +245,41 @@ Let’s check the status of the run while we wait.
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Check status of Azure OpenAI Assistant run  
-while True:  
-    sec = 30  
-    # Wait for 30 seconds  
-    time.sleep(sec)    
-    # Retrieve the run status  
-    run_status = client.beta.threads.runs.retrieve(  
-        thread_id=thread.id,  
-        run_id=run.id  
-    )  
-    # If run is completed, get messages  
-    if run_status.status == 'completed':  
-        messages = client.beta.threads.messages.list(  
-            thread_id=thread.id  
-        )  
-        # Loop through messages and print content based on role  
-        for msg in messages.data:  
-            role = msg.role  
-            try:  
-                content = msg.content[0].text.value  
-                print(f"{role.capitalize()}: {content}")  
-            except AttributeError:  
-                # This will execute if .text does not exist  
-                print(f"{role.capitalize()}: [Non-text content, possibly an image or other file type]")  
-        break  
-    elif run.status == "requires_action":  
-        # handle function calling and continue with the execution  
-        pass  
-    elif run.status == "expired" or run.status=="failed" or run.status=="cancelled":  
-        # run failed, expired, or was cancelled  
-        break     
-    elif run.last_error != "None":  
-        # run failed, expired, or was cancelled  
-        break    
-    else:  
+# Check status of Azure OpenAI Assistant run
+while True:
+    sec = 30
+    # Wait for 30 seconds
+    time.sleep(sec)  
+    # Retrieve the run status
+    run_status = client.beta.threads.runs.retrieve(
+        thread_id=thread.id,
+        run_id=run.id
+    )
+    # If run is completed, get messages
+    if run_status.status == 'completed':
+        messages = client.beta.threads.messages.list(
+            thread_id=thread.id
+        )
+        # Loop through messages and print content based on role
+        for msg in messages.data:
+            role = msg.role
+            try:
+                content = msg.content[0].text.value
+                print(f"{role.capitalize()}: {content}")
+            except AttributeError:
+                # This will execute if .text does not exist
+                print(f"{role.capitalize()}: [Non-text content, possibly an image or other file type]")
+        break
+    elif run.status == "requires_action":
+        # handle function calling and continue with the execution
+        pass
+    elif run.status == "expired" or run.status=="failed" or run.status=="cancelled":
+        # run failed, expired, or was cancelled
+        break   
+    # elif run.last_error != "None":
+    #     # run failed, expired, or was cancelled
+    #     break  
+    else:
         print("in progress...")
 ```
 
@@ -286,43 +292,44 @@ Let’s view the newly created file and check the transformations.
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Functions to read csv files from Azure OpenAI Service  
-output_path = r"/workspaces/azure-openai-lab/data/"  
-  
-# Write to jsonl  
-def write_jsonl(data_list: list, filename: str) -> None:  
-    with open(filename, "w") as out:  
-        for ddict in data_list:  
-            jout = json.dumps(ddict) + "\n"  
-            out.write(jout)  
-  
-  
-def read_and_save_file(first_file_id, file_name, output_path):     
-    # its binary, so read it and then make it a file like object  
-    file_data = client.files.content(first_file_id)  
-    file_data_bytes = file_data.read()  
-    file_data_decoded = file_data_bytes.decode('utf8').replace("'", '"')  
-    file_data_list = file_data_decoded.splitlines()  
-    write_jsonl(file_data_list, output_path + file_name)  
-  
-      
-def files_from_messages():  
-    messages = client.beta.threads.messages.list(  
-            thread_id=thread.id  
-        )  
-    first_thread_message = messages.data[0]  # Accessing the first ThreadMessage  
-    message_ids = first_thread_message.file_ids  
-    print(message_ids)  
-    # Loop through each file ID and save the file with a sequential name  
-    for i, file_id in enumerate(message_ids):  
-        if i == 1:  
-            file_name = f"recipes-training-set.jsonl"  # Generate a sequential file name  
-            read_and_save_file(file_id, file_name, output_path)  
-        else:  
-            file_name = f"recipes-validation-set.jsonl"  # Generate a sequential file name  
-            read_and_save_file(file_id, file_name, output_path)  
-  
-# Extract the file names from the response, retrieve the content and save the data as a jsonl file  
+# Functions to read xlsx files from Azure Openai
+
+output_path = r"/workspaces/azure-openai-lab/data/generated_output/"
+
+# Write to jsonl
+def write_jsonl(data_list: list, filename: str) -> None:
+    with open(filename, "w") as out:
+        for ddict in data_list:
+            jout = json.dumps(ddict) + "\n"
+            out.write(jout)
+
+
+def read_and_save_file(first_file_id, file_name, output_path):   
+    # its binary, so read it and then make it a file like object
+    file_data = client.files.content(first_file_id)
+    file_data_bytes = file_data.read()
+    file_data_decoded = file_data_bytes.decode('utf8').replace("'", '"')
+    file_data_list = file_data_decoded.splitlines()
+    write_jsonl(file_data_list, output_path + file_name)
+
+    
+def files_from_messages():
+    messages = client.beta.threads.messages.list(
+            thread_id=thread.id
+        )
+    first_thread_message = messages.data[0]  # Accessing the first ThreadMessage
+    message_ids = first_thread_message.file_ids
+    print(message_ids)
+    # Loop through each file ID and save the file with a sequential name
+    for i, file_id in enumerate(message_ids):
+        if i == 1:
+            file_name = f"recipes-training-set.jsonl"  # Generate a sequential file name
+            read_and_save_file(file_id, file_name, output_path)
+        else:
+            file_name = f"recipes-validation-set.jsonl"  # Generate a sequential file name
+            read_and_save_file(file_id, file_name, output_path)
+
+# Extract the file names from the response, retrieve the content and save the data as a jsonl file
 files_from_messages()
 ```
 
@@ -335,10 +342,11 @@ You want to make sure there aren’t any unnecessary artifacts laying around in 
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-#Clean up Azure OpenAI environment  
-client.beta.assistants.delete(assistant.id)  
-client.beta.threads.delete(thread.id)  
-client.files.delete(messages.data[0].file_ids[0])
+#Clean up Azure OpenAI environment
+client.beta.assistants.delete(assistant.id)
+client.beta.threads.delete(thread.id)
+for i in range(0, 2):
+    client.files.delete(messages.data[0].file_ids[i])
 ```
 
 **_NOTE: In Chapter 4 we will use a standardized version of the generated training and validation files named recipes-training-set.jsonl and recipes-validation-set.jsonl_** **_to ascertain everyone has the same copy of the data._**
