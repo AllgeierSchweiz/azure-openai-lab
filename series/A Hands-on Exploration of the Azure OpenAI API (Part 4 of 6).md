@@ -328,9 +328,9 @@ def files_from_messages():
 files_from_messages()
 ```
 
--   To open the file, navigate the **Explorer** icon and select the file named **recipes-preprocessed.csv** in the **data** tab.
+-   To open the file, navigate the **Explorer** icon and select the file named **recipes-preprocessed.csv** in the **assistant_output** tab located under the **data** tab.
 
-![](https://cdn-images-1.medium.com/max/800/1*TBzZr8DGy2RfTcGvT0tCfw.png)
+![](https://cdn-images-1.medium.com/max/800/1*0s_pC59YZ6TPRKbpTGIqJg.png)
 
 <br/><br/>
 
