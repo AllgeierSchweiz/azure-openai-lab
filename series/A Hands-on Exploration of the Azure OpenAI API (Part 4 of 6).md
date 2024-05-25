@@ -299,7 +299,7 @@ Let’s view the newly created file and check the transformations.
 
 ```sql
 # Functions to read csv files from Azure OpenAI Service
-output_path = r"/workspaces/azure-openai-lab/data/assistant_output/"
+output_path = r"/workspaces/azure-openai-lab/data/generated_output/"
 
 def read_and_save_file(first_file_id, file_name):    
     # its binary, so read it and then make it a file like object
@@ -475,17 +475,17 @@ df_document_split = text_splitter.split_documents(df_document)
 
 **_NOTE: We opted for a smaller chunk size of 256 to capture more granular semantic information._**
 
-To generate the word embeddings of the chunked data , we use the Azure OpenAI embedding model **text-embedding-ada-002**. To use this model, we use LangChains `AzureOpenAIEmbeddings` constructor.
+To generate the word embeddings of the chunked data , we use the Azure OpenAI embedding model `text-embedding-3-large`. To use this model, we use LangChains `AzureOpenAIEmbeddings` constructor.
 
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Generate and store the Word Embeddings for the Dataset using Azure Openai  
-openai_ef = AzureOpenAIEmbeddings(  
-                deployment = "text-embedding-ada-002",  
-                openai_api_key = azure_oai_key,  
-                azure_endpoint = azure_oai_endpoint,  
-                openai_api_version = "2024-02-01",  
+# Generate the Word Embeddings for the Dataset using Azure OpenAI with model text-embedding-ada-002
+openai_ef = AzureOpenAIEmbeddings(
+                deployment = "text-embedding-3-large",#"text-embedding-ada-002",
+                openai_api_key = azure_oai_key,
+                azure_endpoint = azure_oai_endpoint,
+                openai_api_version = "2024-02-01",
             )
 ```
 
