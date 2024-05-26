@@ -233,7 +233,7 @@ sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
 <br/><br/>
 
-Perfect! You have now finalized the required preparations to start running the Jupyter notebooks in Codespace. Lets get our hands dirty! We will continue with Part 3 of the workshop.
+Perfect! You have now finalized the required preparations to start running the Jupyter notebooks in Codespace. Lets get our hands dirty! We will continue with [Part 3][A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-3] of the workshop.
 
 <br/><br/>
 
@@ -262,3 +262,4 @@ Reach out to us! We are happy to answer any questions you might have or use your
 <!-- MARKDOWN LINKS & IMAGES -->
 [Notebooks]: https://github.com/AllgeierSchweiz/azure-openai-lab/tree/main/support/notebooks
 [Data]: https://github.com/AllgeierSchweiz/azure-openai-lab/tree/main/data
+[A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-3]: https://github.com/AllgeierSchweiz/azure-openai-lab/blob/main/series/A%20Hands-on%20Exploration%20of%20the%20Azure%20OpenAI%20API%20(Part%203%20of%C2%A06).md
