@@ -682,7 +682,7 @@ Reach out to us! We are happy to answer any questions you might have or use your
 
 ### 6. References
 
-[1] [python — LangChain Chroma — load data from Vector Database — Stack Overflow](https://stackoverflow.com/questions/76232375/langchain-chroma-load-data-from-vector-database)
+[1] [Full Fine-Tuning, PEFT, Prompt Engineering, or RAG? (deci.ai)](https://deci.ai/blog/fine-tuning-peft-prompt-engineering-and-rag-which-one-is-right-for-you/)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 [A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-6]: https://github.com/AllgeierSchweiz/azure-openai-lab/blob/main/series/A%20Hands-on%20Exploration%20of%20the%20Azure%20OpenAI%20API%20(Part%206%20of%C2%A06).md
