@@ -56,7 +56,7 @@ The Azure OpenAI Service sits in an Azure Resource Group within an Azure Subscri
 
 **_NOTE: For the SDSC workshop, all Azure resources, requests, and regions have been pre-selected and provisioned. No additional steps are required._**
 
-To access the Azure OpenAI REST API in Python an API Key and an API Endpoint URL are required. This information will be used in the GitHub Codespaces environment.
+To access the Azure OpenAI API using the Python SDK an **API Key** and an **API Endpoint URL** are required. This information will be used in the GitHub Codespaces environment.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
