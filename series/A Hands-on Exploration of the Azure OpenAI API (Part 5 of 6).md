@@ -26,6 +26,8 @@ Lets take a look at the vegan recipes it generates!
 
 #### 1.2 What we are doing in a nutshell
 
+![Fine-Tuned][Fine-Tuned]
+
 1.  Format the data for Fine-Tuning
 2.  Split the data into a training and validation set.
 3.  Import the datasets.
@@ -686,3 +688,4 @@ Reach out to us! We are happy to answer any questions you might have or use your
 
 <!-- MARKDOWN LINKS & IMAGES -->
 [A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-6]: https://github.com/AllgeierSchweiz/azure-openai-lab/blob/main/series/A%20Hands-on%20Exploration%20of%20the%20Azure%20OpenAI%20API%20(Part%206%20of%C2%A06).md
+[Fine-Tuned]: https://github.com/AllgeierSchweiz/azure-openai-lab/blob/main/images/Fine_Tuned.jpg
