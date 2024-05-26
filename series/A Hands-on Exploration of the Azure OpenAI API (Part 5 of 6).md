@@ -359,7 +359,21 @@ for i in range(0, 2):
 
 ### 3. Getting started with Fine-Tuning
 
-#### 3.1 Open the Notebook
+#### 3.1 Change Azure OpenAI API credentials
+
+We need to use an Azure OpenAI Service [region](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#fine-tuning-models) that allows us to create and use fine-tuned models. In our case, this is **East US 2**.
+
+Let’s change our API credential to reflect this new region.
+
+-   On the left of the codespace environment, select the **Explorer** icon.
+-   Click the **.env** file within the **.venv** tab.
+-   Change the entries of **AZURE_OPENAI_KEY** and **AZURE_OPENAI_ENDPOINT** to match the credentials supplied to you.
+
+![](https://cdn-images-1.medium.com/max/800/1*ozLKtxvGo5Lxk0fuuG0Geg.png)
+
+<br/><br/>
+
+#### 3.2 Open the Notebook
 
 -   On the left of the codespace environment, select the **Explorer** icon.
 -   Open the Notebook **P5-azure-openai-fine-tuning.ipynb.**
@@ -368,7 +382,7 @@ for i in range(0, 2):
 
 <br/><br/>
 
-#### 3.2 Initializing the Azure OpenAI Client
+#### 3.3 Initializing the Azure OpenAI Client
 
 We will start by importing the necessary Python packages to run our code.
 
@@ -422,7 +436,7 @@ client = AzureOpenAI(
 
 <br/><br/>
 
-#### 3.3 Zero-Shot learning
+#### 3.4 Zero-Shot learning
 
 The client has been initialized so that we can create our recipe using our fine-tuned model.
 
