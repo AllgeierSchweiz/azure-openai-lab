@@ -612,7 +612,7 @@ recipes_from_rag = pd.json_normalize(recipes_from_rag_json)
 
 <br/><br/>
 
-Congratulations! You’ve made it through Part 4 of this workshop. We’ve learned how to use RAG to enhance our model using ChromaDB and LangChain. In Part 5, we’ll learn more about fine-tuning and even try pairing RAG with a fine-tuned model.
+Congratulations! You’ve made it through Part 4 of this workshop. We’ve learned how to use RAG to enhance our model using ChromaDB and LangChain. In [Part 5][A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-5], we’ll learn more about fine-tuning and even try pairing RAG with a fine-tuned model.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -647,3 +647,6 @@ Reach out to us! We are happy to answer any questions you might have or use your
 [9] [What is a Vector Database & How Does it Work? Use Cases + Examples | Pinecone](https://www.pinecone.io/learn/vector-database/)
 
 [10] [What is LangChain? Getting Started with LangChain | DataStax](https://www.datastax.com/guides/what-is-langchain)
+
+<!-- MARKDOWN LINKS & IMAGES -->
+[A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-5]: https://github.com/AllgeierSchweiz/azure-openai-lab/blob/main/series/A%20Hands-on%20Exploration%20of%20the%20Azure%20OpenAI%20API%20(Part%205%20of%C2%A06).md
