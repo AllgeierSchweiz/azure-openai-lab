@@ -566,12 +566,12 @@ To do this, we need to re-initialize the `AzureOpenAIEmbeddings` constructor to 
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Generate the Word Embeddings for the Dataset using Azure OpenAI with model text-embedding-ada-002  
-openai_ef = AzureOpenAIEmbeddings(  
-                deployment = "text-embedding-ada-002",  
-                openai_api_key = azure_oai_key,  
-                azure_endpoint = azure_oai_endpoint,  
-                openai_api_version = "2024-02-01",  
+# Generate the Word Embeddings for the Dataset using Azure OpenAI with model text-embedding-ada-002
+openai_ef = AzureOpenAIEmbeddings(
+                deployment = "text-embedding-3-large",
+                openai_api_key = azure_oai_key,
+                azure_endpoint = azure_oai_endpoint,
+                openai_api_version = "2024-02-01",
             )
 ```
 
@@ -609,32 +609,36 @@ We will use the same prompt template as in Part 4.
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Zero-shot learning Prompt  
-prompt_template = \  
-"""  
-### Instructions  
-Persona: Act as a head chef such as Joël Robuchon who specializes in simple contemporary cuisine with a focus on vegan dishes.  
-Action: Create well-thought-out and flavourful vegan recipes from a list of ingredients from {question}, implementing classic culinary techniques using the provided {context}.  
-Target Audience: The recipients of these recipes are vegan couples who want to cook a special meal at least once a week.  
-  
-### Output format  
-Return a JSON array with the following format:  
-{{"name":"","minutes":,"tags":"[]","nutrition":"[]","n_steps":"","steps":"[]","description":"","ingredients":"[]","n_ingredients":}}  
-  
-The variables should contain the following information:  
-- name: the name of the recipe.  
-- minutes: the time in minutes to prepare the recipe.  
-- tags: a list of words that characterize the recipe.  
-- nutrition: a list of numeric values representing calories, total fat, sugar, sodium, protein, saturated fat, and carbohydrates.  
-- n_steps: the number of steps to prepare the recipe.  
-- steps: a list of steps to prepare the recipe.  
-- description: a summary of the recipe.  
-- ingredients: a list of ingredients used in the recipe including the amount and the units using the metric system.  
-- n_ingredients: the number of ingredients used in the recipe.  
-"""  
-  
-simple_prompt = PromptTemplate(  
-    template=prompt_template, input_variables=["context", "question"]  
+# Zero-shot learning Prompt
+prompt_template = \
+"""
+### INSTRUCTIONS
+Persona: Act as a head chef such as Joël Robuchon who specializes in simple contemporary cuisine.
+Action: Create well-thought-out and flavourful vegan recipes from a list of ingredients {question}, implementing classic culinary techniques.
+Target Audience: The recipients of these vegan recipes are couples who want to cook a special meal at least once a week.
+
+### EXAMPLE
+{context}
+
+### OUTPUT FORMAT
+Output only one vegan recipe and return it as a JSON object with the following format:
+{{"name":"","minutes":,"tags":"[]","nutrition":"[]","n_steps":"","steps":"[]","description":"","ingredients":"[]", "n_ingredients":}}
+
+The variables should contain the following information:
+- name: the name of the recipe.
+- minutes: the time in minutes to prepare the recipe.
+- tags: a list of words that characterize the recipe.
+- nutrition: a list of numeric values representing calories, total fat, sugar, sodium, protein, saturated fat, and carbohydrates.
+- n_steps: the number of steps to prepare the recipe.
+- steps: a list of steps to prepare the recipe.
+- description: a summary of the recipe.
+- ingredients: a list of the ingredient names in the recipe.
+- n_ingredients: the total number of ingredients used in the recipe.
+"""
+
+
+simple_prompt = PromptTemplate(
+    template=prompt_template, input_variables=["context", "question"]
 )
 ```
 
