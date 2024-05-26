@@ -125,6 +125,8 @@ Fine-tuning is a technique used to re-train a pre-trained model using a new foun
 
 Azure OpenAI models possess extensive knowledge of diverse topics drawn from different data sources up until April 2023. This enables the model to address a wide array of problems, however, not every business requires a model capable of addressing an extensive range of topics simultaneously. Fine-tuning allows us to counteract this state, allowing the language model to become sharper in a specific knowledge domain.
 
+![Fine-Tuning](images/Fine_Tuning.jpg)
+
 The fine-tuning process requires a careful investment of time and effort. You should first try to get good results with prompt engineering or RAG. As fine-tuning is more time and resource-intensive, requiring us to create datasets and run training jobs, implementing these alternative enhancement techniques should always be pursued first. In cases where fine-tuning is implemented, prompt engineering work is not wasted. The best results are usually obtained by combining good prompt engineering with a fine-tuned model.
 
 In this workshop, we’ll work with a new dataset, a CSV file filled with examples of vegan recipes. By re-training the model with this dataset, our model will be able to generate higher-quality vegan recipes that are finely tailored to the provided prompt input. We will learn more about these concepts in [Part 5][A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-5]
