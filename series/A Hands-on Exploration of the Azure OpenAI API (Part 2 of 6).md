@@ -23,7 +23,7 @@ All relevant files are in the Allgeier Schweiz [GitHub repository](https://githu
 
 #### 2.1 Notebooks
 
-The workshop has 6 Jupyter Notebooks we will work through:
+The workshop has 6 [Jupyter Notebooks]Notebooks] we will work through:
 
 1.  _P3-azure-openai-prompt-engineering.ipynb_
 2.  _P4-azure-openai-assistant-rag-data-preprocessing.ipynb_
@@ -259,4 +259,5 @@ Reach out to us! We are happy to answer any questions you might have or use your
 
 [4] [python — AttributeError: module ‘chromadb’ has no attribute ‘config’ — Stack Overflow](https://stackoverflow.com/questions/76921252/attributeerror-module-chromadb-has-no-attribute-config)
 
-###
+<!-- MARKDOWN LINKS & IMAGES -->
+[Notebooks]: https://github.com/AllgeierSchweiz/azure-openai-lab/tree/main/support/notebooks
