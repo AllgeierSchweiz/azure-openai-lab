@@ -336,7 +336,7 @@ omni_ingredients = pd.json_normalize(omni_ingredients_from_json)
 path_output = r"/workspaces/azure-openai-lab/data/omni-ingredients.csv"  
 omni_ingredients.to_csv(path_output, sep='\t', encoding='utf-8', index=False)
 ```
-We can now use this as an input for our implementations in Parts 3, 4, and 5.
+We can now use this as an input for our implementations in [Part 3][A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-3], [Part 4][A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-4], and [Part 5][A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-5].
 
 <br/><br/>
 
@@ -359,3 +359,8 @@ Reach out to us! We are happy to answer any questions you might have or use your
 [1] [https://community.openai.com/t/issue-with-useage-of-json-output-an-citation/584189](https://community.openai.com/t/issue-with-useage-of-json-output-an-citation/584189)
 
 [2] [https://alexholmeset.blog/2024/05/22/use-the-azure-openai-gpt-4o-all-in-one-model-with-powershell/](https://alexholmeset.blog/2024/05/22/use-the-azure-openai-gpt-4o-all-in-one-model-with-powershell/)
+
+<!-- MARKDOWN LINKS & IMAGES -->
+[A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-3]: https://github.com/AllgeierSchweiz/azure-openai-lab/blob/main/series/A%20Hands-on%20Exploration%20of%20the%20Azure%20OpenAI%20API%20(Part%203%20of%C2%A06).md
+[A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-4]: https://github.com/AllgeierSchweiz/azure-openai-lab/blob/main/series/A%20Hands-on%20Exploration%20of%20the%20Azure%20OpenAI%20API%20(Part%204%20of%C2%A06).md
+[A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-5]: https://github.com/AllgeierSchweiz/azure-openai-lab/blob/main/series/A%20Hands-on%20Exploration%20of%20the%20Azure%20OpenAI%20API%20(Part%205%20of%C2%A06).md
