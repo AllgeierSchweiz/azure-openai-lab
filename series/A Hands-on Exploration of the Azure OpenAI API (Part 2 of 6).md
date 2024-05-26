@@ -35,12 +35,12 @@ The workshop has 7 [Jupyter Notebooks][Notebooks] we will work through:
 
 #### 2.2 Files
 
-The workshop has 4 prepared [files][Data]. Only the **recipes.csv** will be actively used throughout this series. The other 3 files are backups.
+The workshop has 4 prepared [files][Data]. The **recipes.csv** and **recipes-preprocessed.csv** will be actively used throughout this series. The other 2 files are backups.
 
 The CSV file **recipes.csv**  consists of 200K recipes covering 18 years of user interactions and uploads on Food.com. The original dataset comes from the paper: [Generating Personalized Recipes from Historical User Preferences](https://aclanthology.org/D19-1613.pdf).
 
 1.  _recipes.csv_
-2.  _recipes-preprocessed.csv (Backup)_
+2.  _recipes-preprocessed.csv_
 3.  _recipes-training-set.jsonl (Backup)_
 4.  _recipes-validation-set.jsonl (Backup)_
 
