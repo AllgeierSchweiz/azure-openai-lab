@@ -51,6 +51,7 @@ The use case of this series revolves around the [Food Fighters](https://github.c
 
 The solution aims to combat food waste by empowering users to effortlessly manage their food inventory, track food expiration dates, and receive personalized recipe suggestions via email, all with a simple product scan.
 
+Unfortunately, we don't have time to build the entire architecture of this solution, for this reason, we will focus on creating the personalized recipe suggestions aspect using the Azure OpenAI Service.
 
 #### 2.1 Objectives
 
@@ -97,8 +98,6 @@ In our case, we will use this agent to perform data pre-processing steps using t
 ### 4. Enhancement Techniques
 
 In this workshop we will showcase three key techniques for improving the language model’s output: prompt engineering, retrieval-augmented generation (RAG), and Fine-tuning.
-
-  
 
 ![](https://cdn-images-1.medium.com/max/800/0*Q4tzzQAbnp249jQX.jpg)
 
