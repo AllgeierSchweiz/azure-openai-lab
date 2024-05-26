@@ -23,7 +23,7 @@ All relevant files are in the Allgeier Schweiz [GitHub repository](https://githu
 
 #### 2.1 Notebooks
 
-The workshop has 6 [Jupyter Notebooks]Notebooks] we will work through:
+The workshop has 6 [Jupyter Notebooks][Notebooks] we will work through:
 
 1.  _P3-azure-openai-prompt-engineering.ipynb_
 2.  _P4-azure-openai-assistant-rag-data-preprocessing.ipynb_
