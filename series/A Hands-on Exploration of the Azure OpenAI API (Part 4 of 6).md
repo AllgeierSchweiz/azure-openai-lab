@@ -17,7 +17,7 @@ The two Jupyter Notebooks we are going to work with are:
 
 In Notebook **P4-azure-openai-assistant-rag-data-preprocessing.ipynb,** we will conduct data pre-processing steps using the Azure OpenAI Assistant API using the GPT-4 model version **1106 Preview**. We will input data-wrangling instructions in text format and have the code interpreter of the Azure OpenAI Assistant execute our requirements.
 
-In Notebook **P4-azure-openai-rag.ipynb,** we will implement RAG using **ChromaDB** as our Vector Database together with **LangChain** and the Azure OpenAI embedding model `text-embedding-3-large`. Subsequently, we will use the GPT-3.5-Turbo model with the aid of RAG to create well-thought-out and flavourful vegan recipes for special occasions.
+In Notebook **P4-azure-openai-rag.ipynb,** we will implement RAG using **ChromaDB** as our Vector Database together with **LangChain** and the Azure OpenAI embedding model **Text-Embedding-3-Large**. Subsequently, we will use the **GPT-3.5-Turbo** model with the aid of RAG to create well-thought-out and flavourful vegan recipes for special occasions.
 
 <br/><br/>
 
