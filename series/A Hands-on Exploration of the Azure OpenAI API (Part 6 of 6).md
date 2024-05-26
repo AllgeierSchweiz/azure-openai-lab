@@ -181,80 +181,79 @@ We are going to adjust our system prompt with additional instructions and output
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Generate a list of ingredients from individual food product images.  
-  
-# Create advanced System prompt  
-systemcontent = \  
-"""  
-### Instructions  
-1. Analyze the provided images.  
-2. Determine the food product being depicted.  
-3. Count the numbers of invidual food product items in bowls or vessels.  
-  
-### Output format  
-Return a JSON array with the following format:  
-{"name":"",amount:"", units:"", expiration_days:}  
-  
-The variables should contain the following information:  
-- name: the name of the product in each image.  
-- amount: the number of products in each image.  
-- units: the unit of the product in each image using the metric system.  
-- expiration_days: the expiration date of the product in each image in average number of days.  
-  
-"""  
-  
-# Send request to Azure OpenAI model  
-response = client.chat.completions.create(  
-    model="gpt-4o",  
-    temperature=0.7,  
-    #max_tokens=120,  
-    messages=[  
-            {  
-            "role": "user",  
-            "content": [  
-                {"type": "text", "text": systemcontent},  
-                {  
-                "type": "image_url",  
-                "image_url": {  
-                    "url": f"data:image/jpeg;base64,{avocado}"  
-                    },  
-                },  
-                {  
-                "type": "image_url",  
-                "image_url": {  
-                    "url": f"data:image/jpeg;base64,{tofu}"  
-                    },  
-                },  
-                {  
-                "type": "image_url",  
-                "image_url": {  
-                    "url": f"data:image/jpeg;base64,{broccoli}"  
-                    },  
-                },  
-                {  
-                "type": "image_url",  
-                "image_url": {  
-                    "url": f"data:image/jpeg;base64,{chili}"  
-                    },  
-                },  
-                {  
-                "type": "image_url",  
-                "image_url": {  
-                    "url": f"data:image/jpeg;base64,{coconut_milk}"  
-                    },  
-                },  
-                {  
-                "type": "image_url",  
-                "image_url": {  
-                    "url": f"data:image/jpeg;base64,{soy_sauce}"  
-                    },  
-                },                                                                  
-            ],  
-        }  
-    ]  
-)  
-  
-result = response.choices[0].message.content  
+# Generate a list of ingredients from individual food product images.
+
+# Create advanced System prompt
+systemcontent = \
+"""
+### INSTRUCTIONS
+1. Analyze the provided images.
+2. Determine the food product being depicted.
+3. Count the numbers of invidual food product items in bowls or vessels.
+
+### OUTPUT FORMAT
+Return a JSON array with the following format:
+{"name":"",amount:"", units:"", expiration_days:}
+
+The variables should contain the following information:
+- name: the name of the product in each image.
+- amount: the number of products in each image.
+- units: the unit of the product in each image using the metric system.
+- expiration_days: the expiration date of the product in each image in average number of days.
+"""
+
+# Send request to Azure OpenAI model
+response = client.chat.completions.create(
+    model="gpt-4o",
+    temperature=0.7,
+    #max_tokens=120,
+    messages=[
+            {
+            "role": "user",
+            "content": [
+                {"type": "text", "text": systemcontent},
+                {
+                "type": "image_url",
+                "image_url": {
+                    "url": f"data:image/jpeg;base64,{avocado}"
+                    },
+                },
+                {
+                "type": "image_url",
+                "image_url": {
+                    "url": f"data:image/jpeg;base64,{tofu}"
+                    },
+                },
+                {
+                "type": "image_url",
+                "image_url": {
+                    "url": f"data:image/jpeg;base64,{broccoli}"
+                    },
+                },
+                {
+                "type": "image_url",
+                "image_url": {
+                    "url": f"data:image/jpeg;base64,{chili}"
+                    },
+                },
+                {
+                "type": "image_url",
+                "image_url": {
+                    "url": f"data:image/jpeg;base64,{coconut_milk}"
+                    },
+                },
+                {
+                "type": "image_url",
+                "image_url": {
+                    "url": f"data:image/jpeg;base64,{soy_sauce}"
+                    },
+                },                                                                
+            ],
+        }
+    ]
+)
+
+result = response.choices[0].message.content
 print(result + "\n")
 ```
 
@@ -267,50 +266,49 @@ We are going to change the image input and re-run the code.
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Generate a list of ingredients from a single image containing multiple food product.  
-  
-# Create advanced System prompt  
-systemcontent = \  
-"""  
-### Instructions  
-1. Analyze the provided images.  
-2. Determine the food product being depicted.  
-3. Count the numbers of invidual food product items in bowls or vessels.  
-  
-### Output format  
-Return a JSON array with the following format:  
-{"name":"",amount:"", units:"", expiration_days:}  
-  
-The variables should contain the following information:  
-- name: the name of the product in each image.  
-- amount: the number of products in each image.  
-- units: the unit of the product in each image using the metric system.  
-- expiration_days: the expiration date of the product in each image in average number of days.  
-  
-"""  
-  
-# Send request to Azure OpenAI model  
-response = client.chat.completions.create(  
-    model="gpt-4o",  
-    temperature=0.7,  
-    #max_tokens=120,  
-    messages=[  
-            {  
-            "role": "user",  
-            "content": [  
-                {"type": "text", "text": systemcontent},  
-                {  
-                "type": "image_url",  
-                "image_url": {  
-                    "url": f"data:image/jpeg;base64,{refrigerator}"  
-                    },  
-                },                                                                 
-            ],  
-        }  
-    ]  
-)  
-  
-result = response.choices[0].message.content  
+# Generate a list of ingredients from a single image containing multiple food product.
+
+# Create advanced System prompt
+systemcontent = \
+"""
+### INSTRUCTIONS
+1. Analyze the provided images.
+2. Determine the food product being depicted.
+3. Count the numbers of invidual food product items in bowls or vessels.
+
+### OUTPUT FORMAT
+Return a JSON array with the following format:
+{"name":"",amount:"", units:"", expiration_days:}
+
+The variables should contain the following information:
+- name: the name of the product in each image.
+- amount: the number of products in each image.
+- units: the unit of the product in each image using the metric system.
+- expiration_days: the expiration date of the product in each image in average number of days.
+"""
+
+# Send request to Azure OpenAI model
+response = client.chat.completions.create(
+    model="gpt-4o",
+    temperature=0.7,
+    #max_tokens=120,
+    messages=[
+            {
+            "role": "user",
+            "content": [
+                {"type": "text", "text": systemcontent},
+                {
+                "type": "image_url",
+                "image_url": {
+                    "url": f"data:image/jpeg;base64,{refrigerator}"
+                    },
+                },                                                               
+            ],
+        }
+    ]
+)
+
+result = response.choices[0].message.content
 print(result + "\n")
 ```
 
