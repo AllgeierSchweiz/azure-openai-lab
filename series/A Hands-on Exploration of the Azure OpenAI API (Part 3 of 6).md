@@ -385,7 +385,7 @@ print(result + "\n")
 ```
 <br/><br/>
 
-Congratulations! You have completed Part 3 of this workshop. We have learned how to initialize the Azure OpenAI client to use the Azure OpenAI API with Python, and have implemented zero-shot, one-shot, and few-shot learning techniques, including advanced prompting, to optimize our model output. We will continue with Part 4 of the workshop.
+Congratulations! You have completed Part 3 of this workshop. We have learned how to initialize the Azure OpenAI client to use the Azure OpenAI API with Python, and have implemented zero-shot, one-shot, and few-shot learning techniques, including advanced prompting, to optimize our model output. We will continue with [Part 4][A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-4] of the workshop.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -406,3 +406,6 @@ Reach out to us! We are happy to answer any questions you might have or use your
 [2] [The Perfect Prompt: A Prompt Engineering Cheat Sheet | by Maximilian Vogel | The Generator | Apr, 2024 | Medium](https://medium.com/the-generator/the-perfect-prompt-prompt-engineering-cheat-sheet-d0b9c62a2bba)
 
 [3] [Ultimate guide to 44 different AI prompt engineering strategies for best output! (beeazt.com)](https://beeazt.com/knowledge-base/prompt-frameworks/)
+
+<!-- MARKDOWN LINKS & IMAGES -->
+[A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-4]: https://github.com/AllgeierSchweiz/azure-openai-lab/blob/main/series/A%20Hands-on%20Exploration%20of%20the%20Azure%20OpenAI%20API%20(Part%204%20of%C2%A06).md
