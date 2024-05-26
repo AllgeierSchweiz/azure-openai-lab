@@ -361,7 +361,7 @@ for i in range(0, 2):
 
 #### 3.1 Change Azure OpenAI API credentials
 
-We need to use an Azure OpenAI Service [region](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#fine-tuning-models) that allows us to create and use fine-tuned models. In our case, this is **East US 2**.
+We need to use an Azure OpenAI Service environment located in a [region](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#fine-tuning-models) that allows us to create and use fine-tuned models. In our case, this is **East US 2**.
 
 Let’s change our API credential to reflect this new region.
 
