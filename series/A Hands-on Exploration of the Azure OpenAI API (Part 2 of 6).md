@@ -94,6 +94,8 @@ The Codespace user interface is identical to the layout in Visual Studio Code. T
 -   **Panel**: An additional space for views below the editor region. By default, it contains output, debug information, errors and warnings, and an integrated terminal.
 -   **Status Bar**: Located at the bottom spanning the entire screen horizontally. This slim panel contains information about the opened project and the files you edit.
 
+**_NOTE: The language of your Codespace environment depends on the selected browser language. You may need to adjust the browser language to English in the browser settings._**
+
 <br/><br/>
 
 #### 4.2 Installing Visual Studio Code Extensions
