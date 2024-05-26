@@ -80,7 +80,7 @@ client = AzureOpenAI(
 
 #### 1.3 Image Processing
 
-We will be sending our images to the Azure OpenAI API as a base64 format. A bit of encoding will do the trick.
+We have the images of 6 different food products, as we would find them in the supermarket. We will be sending these images to the Azure OpenAI API as a base64 format. A bit of encoding will do the trick.
 
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
