@@ -472,6 +472,7 @@ completion = client.chat.completions.create(
 result = completion.choices[0].message.content
 print(result)
 ```
+The generated recipe is indeed vegan and it looks plausible! The format fits our specified JSON object too! We are all set at this point, but out of curiosity, let's add RAG to the mix.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
