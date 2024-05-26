@@ -149,6 +149,8 @@ To work with Python, we need to select a Python Kernel. We will create a new sou
 
 ![](https://cdn-images-1.medium.com/max/800/1*ZGDK77ul1QzYeeWrR2_agw.png)
 
+**_NOTE: The requirements text file has all the Python packages we need to install in our_** `Venv` **_environment before we get started._**
+
 Once the environment creation starts, you will receive a message on the bottom right of the screen.
 
 ![](https://cdn-images-1.medium.com/max/800/1*rNeNSG1x6DsJD1seNINwIg.png)
