@@ -164,5 +164,5 @@ Reach out to us! We are happy to answer any questions you might have or use your
 
 [9] [Optimizing Azure OpenAI: A Guide to Limits, Quotas, and Best Practices — Microsoft Community Hub](https://techcommunity.microsoft.com/t5/fasttrack-for-azure/optimizing-azure-openai-a-guide-to-limits-quotas-and-best/ba-p/4076268)
 
-
+<!-- MARKDOWN LINKS & IMAGES -->
 [Food_Fighter]: https://github.com/AllgeierSchweiz/azure-openai-lab/blob/main/images/Food_Fighter.jpg
