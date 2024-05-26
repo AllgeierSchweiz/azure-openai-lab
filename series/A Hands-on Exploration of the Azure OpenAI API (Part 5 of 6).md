@@ -542,17 +542,18 @@ azure_oai_key = os.environ['AZURE_OPENAI_KEY']
 azure_oai_endpoint = os.environ['AZURE_OPENAI_ENDPOINT']
 ```
 
-Once the credentials are available as variables, we can initialize the Azure OpenAI client.
+Once the credentials are available as variables, we can initialize the Azure OpenAI client using our new fine-tuned model `gpt-35-turbo-0613-ft`.
 
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Initialize the Azure OpenAI client  
-client = AzureOpenAI(  
-        azure_endpoint = azure_oai_endpoint,   
-        api_key=azure_oai_key,    
-        api_version="2024-02-01"  
-        )
+# Initalize Azure Openai using LangChain (Default gpt-35-turbo and fine-tuned gpt-35-turbo-0613-ft)
+client = AzureChatOpenAI(
+                deployment_name = "gpt-35-turbo-0613-ft",
+                openai_api_key = azure_oai_key,
+                azure_endpoint = azure_oai_endpoint,
+                openai_api_version = "2024-02-15-preview"
+        )   
 ```
 
 **_NOTE: The latest API version for the AzureOpenAI client can be found_** [**_here_**](https://learn.microsoft.com/en-us/azure/ai-services/openai/api-version-deprecation#latest-ga-api-release)**_._**
@@ -590,21 +591,7 @@ vectordb = Chroma(persist_directory=r"/workspaces/azure-openai-lab/data/chromadb
 
 #### 4.4 Zero-Shot learning
 
-Let’s run a zero-shot learning prompt using our fine-tuned model together with our RAG implementation.
-
-First, we need to initialize the Azure OpenAI client. We will use the LangChain `AzureChatOpenAI` constructor and call the Fine-Tuned GPT-3.5-Turbo model called `gpt-35-turbo-0613-ft`.
-
--   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
-
-```sql
-# Initalize Azure Openai using LangChain (Default gpt-35-turbo and fine-tuned gpt-35-turbo-0613-ft)  
-client = AzureChatOpenAI(  
-                deployment_name = "gpt-35-turbo-0613-ft",  
-                openai_api_key = azure_oai_key,  
-                azure_endpoint = azure_oai_endpoint,  
-                openai_api_version = "2024-02-01"  
-        ) 
-```
+Let's run a zero-shot learning prompt using our fine-tuned model together with our RAG implementation.    
 
 We will use the same prompt template as in Part 4.
 
