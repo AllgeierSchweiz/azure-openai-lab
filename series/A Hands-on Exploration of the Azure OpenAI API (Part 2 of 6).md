@@ -34,7 +34,7 @@ The workshop has 6 [Jupyter Notebooks][Notebooks] we will work through:
 
 #### 2.2 Files
 
-The workshop has 4 prepared files. Only the **recipes.csv** _w_ill be actively used throughout this series. The other 3 files are backups.
+The workshop has 4 prepared [files][Data]. Only the **recipes.csv** _w_ill be actively used throughout this series. The other 3 files are backups.
 
 The CSV file **recipes.csv**  consists of 200K recipes covering 18 years of user interactions and uploads on Food.com. The original dataset comes from the paper: [Generating Personalized Recipes from Historical User Preferences](https://aclanthology.org/D19-1613.pdf).
 
@@ -261,3 +261,4 @@ Reach out to us! We are happy to answer any questions you might have or use your
 
 <!-- MARKDOWN LINKS & IMAGES -->
 [Notebooks]: https://github.com/AllgeierSchweiz/azure-openai-lab/tree/main/support/notebooks
+[Data]: https://github.com/AllgeierSchweiz/azure-openai-lab/tree/main/data
