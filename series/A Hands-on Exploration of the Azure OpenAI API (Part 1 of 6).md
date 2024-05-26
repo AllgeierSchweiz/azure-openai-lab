@@ -28,7 +28,7 @@ The following series showcases how to use the Azure OpenAI Service in Python by 
 
 The use case of this series revolves around the [Food Fighters](https://github.com/AllgeierSchweiz/aihackers) concept created for [The Microsoft Fabric Global AI Hack](https://github.com/microsoft/Hack-Together-Fabric-AI) of 2024.
 
-![Food_Fighter][Food_Fighter]
+![Food-Fighter][Food-Fighter]
 
 The solution aims to combat food waste by empowering users to effortlessly manage their food inventory, track food expiration dates, and receive personalized recipe suggestions via email, all with a simple product scan.
 
@@ -165,4 +165,4 @@ Reach out to us! We are happy to answer any questions you might have or use your
 [9] [Optimizing Azure OpenAI: A Guide to Limits, Quotas, and Best Practices — Microsoft Community Hub](https://techcommunity.microsoft.com/t5/fasttrack-for-azure/optimizing-azure-openai-a-guide-to-limits-quotas-and-best/ba-p/4076268)
 
 <!-- MARKDOWN LINKS & IMAGES -->
-[Food_Fighter]: https://github.com/AllgeierSchweiz/azure-openai-lab/blob/main/images/Food_Fighter.jpg
+[Food-Fighter]: https://github.com/AllgeierSchweiz/azure-openai-lab/blob/main/images/Food_Fighter.jpg
