@@ -193,9 +193,9 @@ AZURE_OPENAI_KEY_P56 = ""
 AZURE_OPENAI_ENDPOINT_P56 = ""
 ```
 
--   Change the entries of **AZURE_OPENAI_KEY** and **AZURE_OPENAI_ENDPOINT** to match the credentials supplied to you.
+-   Change the entries of **AZURE_OPENAI_KEY_P34, AZURE_OPENAI_ENDPOINT_P34, AZURE_OPENAI_KEY_P56,** and **AZURE_OPENAI_ENDPOINT_56** to match the credentials supplied to you.
 
-![](https://cdn-images-1.medium.com/max/800/1*P9hRF15NkZOhPu0v-HHnqg.png)
+![](https://cdn-images-1.medium.com/max/800/1*9SNDyr7cKrt09zmsIcMNlA.png)
 
 <br/><br/>
 
