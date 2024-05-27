@@ -30,7 +30,7 @@ This is part one of a six-part series developed by the Data Analytics Team at [A
 
 You can also find the series in the Allgeier Schweiz [GitHub repository](https://github.com/AllgeierSchweiz/azure-openai-lab).
 
-The following series showcases how to use the Azure OpenAI Service in Python by calling the Azure OpenAI REST API.
+The following series showcases how to use the Python SDK to call large language models available in Azure OpenAI Service through the Azure OpenAI API.
 
 -   **[Part 1][A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-1]:** (this page) provides the readers with an overview of the workshop use case, what Azure OpenAI Service is, the language models used, the different techniques to enhance these models and the differences between Azure OpenAI and OpenAI.
 -   **[Part 2][A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-2]** will show the readers the preparations required to start using the Azure OpenAI API in Python using GitHub Codespaces.
