@@ -173,6 +173,8 @@ Have fun!
 - Use openai=1.12. Newest version is problematic. Especially with Assistant and Fine-Tuning.
 - Embedding with Proxy API does **not** work. We'll need to fall back on the original Endpoint and API Key.
 - Azure OpenAI Assistant API not creating output file from transformation. Token limit needs to be increased.
+- P3, P4 and P5 data preprocessing requires models gpt-35-turbo, gpt-4-1106-preview and text-embedding-3-large.
+- P5 and P6 requires models gpt-4o, gpt-35-turbo and text-embedding-3-large.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
