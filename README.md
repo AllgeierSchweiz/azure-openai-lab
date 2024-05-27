@@ -30,7 +30,7 @@ This is part one of a six-part series developed by the Data Analytics Team at [A
 
 You can also find the series in the Allgeier Schweiz [GitHub repository](https://github.com/AllgeierSchweiz/azure-openai-lab).
 
-The following series showcases how to use the Azure OpenAI Service in Python by calling the Azure OpenAI REST API.
+The following series showcases how to use the Python SDK to call large language models available in Azure OpenAI Service through the Azure OpenAI API.
 
 -   **[Part 1][A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-1]:** (this page) provides the readers with an overview of the workshop use case, what Azure OpenAI Service is, the language models used, the different techniques to enhance these models and the differences between Azure OpenAI and OpenAI.
 -   **[Part 2][A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-2]** will show the readers the preparations required to start using the Azure OpenAI API in Python using GitHub Codespaces.
@@ -51,7 +51,7 @@ The use case of this series revolves around the [Food Fighters](https://github.c
 
 The solution aims to combat food waste by empowering users to effortlessly manage their food inventory, track food expiration dates, and receive personalized recipe suggestions via email, all with a simple product scan.
 
-Unfortunately, we don't have time to build the entire architecture of this solution, for this reason, we will focus on creating the personalized recipe suggestions aspect using the Azure OpenAI Service.
+Unfortunately, we don't have time to build the entire architecture of this solution, for this reason, we will focus on creating the personalized recipe suggestions aspect using Azure OpenAI Service.
 
 #### 2.1 Objectives
 
@@ -74,7 +74,7 @@ These models allow us to create written and image-based content, summarize infor
 
 Users can utilize the Azure OpenAI Service through REST APIs, Python SDK, or the web-based interface provided in the Azure OpenAI Studio.
 
-In our case, we will use the language models **GPT-4, GPT-3.5-Turbo,** and **Embeddings**. Each one will be called using the Azure OpenAI API. Additionally, we will use the **Azure OpenAI Assistants API** to perform data pre-processing operations using the code interpreter functionality.
+In our case, we will use the language models **GPT-4o, GPT-4, GPT-3.5-Turbo,** and **Embeddings**. Each one will be called using the Azure OpenAI API. Additionally, we will use the **Azure OpenAI Assistants API** to perform data pre-processing operations using the code interpreter functionality.
 
 #### 3.1 Azure OpenAI Assistants
 
@@ -86,9 +86,9 @@ In our case, we will use this agent to perform data pre-processing steps using t
 
 #### 3.2 Azure OpenAI models being used
 
--   **GPT-4o (_Version_** _2024–05–13_): This model is used to translate food product images into text i.e. a list of ingredients. GPT-4o models are multimodal, meaning that they integrate text and image processing in a single model, enabling the handling of multiple data types simultaneously. This is also the latest model and offers superior AI capabilities compared to the GPT-4 Turbo model.
--   **GPT-4 (**_Version 0125-preview, Version 1106-preview)_: This model is used to create our assistant for code interpretation. The GPT-4 series is a set of models that improve on the GPT-3.5 and can understand and generate natural language and code. The latest version, **0125-preview**, supersedes its predecessor, version **1106-preview**,  offering enhanced performance in code generation, a reduction in instances of incomplete model tasks and [additional enhancements](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#gpt-4-and-gpt-4-turbo-models).
--   **GPT-3.5-Turbo** _(Version 0125, Version 1106 and Version 0613):_ This model is used to create recipes based on a list of ingredients as our input prompt. GPT-3.5 models can understand and generate natural language or code. The most capable and cost-effective model in the GPT-3.5 family is the GPT-3.5 Turbo. The latest _0125_ version replaces the _1106_ and offers higher accuracy at responding in requested formats and general bug fixes. For Fine-Tuning, we will use version _0613_.
+-   **GPT-4o** _(Version 2024–05–13):_ This model is used to translate food product images into text i.e. a list of ingredients. GPT-4o models are multimodal, meaning that they integrate text and image processing in a single model, enabling the handling of multiple data types simultaneously. This is also the latest model and offers superior AI capabilities compared to the GPT-4 Turbo model.
+-   **GPT-4** _(Version 0125-preview and Version 1106-preview):_ This model is used to create our assistant for code interpretation. The GPT-4 series is a set of models that improve on the GPT-3.5 and can understand and generate natural language and code. The latest version, **0125-preview**, supersedes its predecessor, version **1106-preview**,  offering enhanced performance in code generation, a reduction in instances of incomplete model tasks and [additional enhancements](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#gpt-4-and-gpt-4-turbo-models).
+-   **GPT-3.5-Turbo** _(Version 0125, Version 1106 and Version 0613):_ This model is used to create recipes based on a list of ingredients as our input prompt. GPT-3.5 models can understand and generate natural language or code. The most capable and cost-effective model in the GPT-3.5 family is the GPT-3.5 Turbo. The latest **0125** version replaces the **1106** and offers higher accuracy at responding in requested formats and general bug fixes. For Fine-Tuning, we will use version **0613**.
 -   **Embeddings** _(text-embedding-3-large):_ This model is used to create an embedding of our recipe data which will be used to enhance our model output using Retrieval-Augmented Generation (RAG). An embedding is a compact, organized way to represent text information in numerical format using vectors. They are particularly useful in Artificial Intelligence applications, as it enables the essential meaning of text to be captured and transformed into a format that can be understood by an algorithm.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -173,6 +173,8 @@ Have fun!
 - Use openai=1.12. Newest version is problematic. Especially with Assistant and Fine-Tuning.
 - Embedding with Proxy API does **not** work. We'll need to fall back on the original Endpoint and API Key.
 - Azure OpenAI Assistant API not creating output file from transformation. Token limit needs to be increased.
+- P3, P4 and P5 data preprocessing requires models gpt-35-turbo, gpt-4-1106-preview and text-embedding-3-large.
+- P5 and P6 requires models gpt-4o, gpt-35-turbo and text-embedding-3-large.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

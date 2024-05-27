@@ -23,7 +23,7 @@ All relevant files are in the Allgeier Schweiz [GitHub repository](https://githu
 
 #### 2.1 Notebooks
 
-The workshop has 6 [Jupyter Notebooks][Notebooks] we will work through:
+The workshop has 7 [Jupyter Notebooks][Notebooks] we will work through:
 
 1.  _P3-azure-openai-prompt-engineering.ipynb_
 2.  _P4-azure-openai-assistant-rag-data-preprocessing.ipynb_
@@ -31,15 +31,16 @@ The workshop has 6 [Jupyter Notebooks][Notebooks] we will work through:
 4.  _P5-azure-openai-assistant-fine-tuning-data-preprocessing.ipynb_
 5.  _P5-azure-openai-fine-tuning.ipynb_
 6.  _P5-azure-openai-rag-with-fine-tuning.ipynb_
+7.  _P6-azure-openai-omni-image-to-text.ipynb_
 
 #### 2.2 Files
 
-The workshop has 4 prepared [files][Data]. Only the **recipes.csv** will be actively used throughout this series. The other 3 files are backups.
+The workshop has 4 prepared [files][Data]. The **recipes.csv** and **recipes-preprocessed.csv** will be actively used throughout this series. The other 2 files are backups used for fine-tuning.
 
 The CSV file **recipes.csv**  consists of 200K recipes covering 18 years of user interactions and uploads on Food.com. The original dataset comes from the paper: [Generating Personalized Recipes from Historical User Preferences](https://aclanthology.org/D19-1613.pdf).
 
 1.  _recipes.csv_
-2.  _recipes-preprocessed.csv (Backup)_
+2.  _recipes-preprocessed.csv_
 3.  _recipes-training-set.jsonl (Backup)_
 4.  _recipes-validation-set.jsonl (Backup)_
 
@@ -55,7 +56,7 @@ The Azure OpenAI Service sits in an Azure Resource Group within an Azure Subscri
 
 **_NOTE: For the SDSC workshop, all Azure resources, requests, and regions have been pre-selected and provisioned. No additional steps are required._**
 
-To access the Azure OpenAI REST API in Python an API Key and an API Endpoint URL are required. This information will be used in the GitHub Codespaces environment.
+To access the Azure OpenAI API using the Python SDK an **API Key** and an **API Endpoint URL** are required. This information will be used in the GitHub Codespaces environment.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -92,6 +93,8 @@ The Codespace user interface is identical to the layout in Visual Studio Code. T
 -   **Editor**: The main area to edit your files. Located in the middle and may be comprised of different tabs. You can open as many editors as you like side by side vertically and horizontally.
 -   **Panel**: An additional space for views below the editor region. By default, it contains output, debug information, errors and warnings, and an integrated terminal.
 -   **Status Bar**: Located at the bottom spanning the entire screen horizontally. This slim panel contains information about the opened project and the files you edit.
+
+**_NOTE: The language of your Codespace environment depends on the selected browser language. You may need to adjust the browser language to English in the browser settings._**
 
 <br/><br/>
 
@@ -183,13 +186,16 @@ We will save these credentials in a `.env` file within our Python environment.
 # Resource Group name: rg-sdsc2024-x
 # Azure OpenAI Resource name: oai-sdsc2024-x
 
-AZURE_OPENAI_KEY = ""
-AZURE_OPENAI_ENDPOINT = ""
+AZURE_OPENAI_KEY_P34 = ""
+AZURE_OPENAI_ENDPOINT_P34 = ""
+
+AZURE_OPENAI_KEY_P56 = ""
+AZURE_OPENAI_ENDPOINT_P56 = ""
 ```
 
--   Change the entries of **AZURE_OPENAI_KEY** and **AZURE_OPENAI_ENDPOINT** to match the credentials supplied to you.
+-   Change the entries of **AZURE_OPENAI_KEY_P34, AZURE_OPENAI_ENDPOINT_P34, AZURE_OPENAI_KEY_P56,** and **AZURE_OPENAI_ENDPOINT_56** to match the credentials supplied to you.
 
-![](https://cdn-images-1.medium.com/max/800/1*P9hRF15NkZOhPu0v-HHnqg.png)
+![](https://cdn-images-1.medium.com/max/800/1*9SNDyr7cKrt09zmsIcMNlA.png)
 
 <br/><br/>
 
@@ -215,19 +221,9 @@ We need to implement a workaround to fix this issue.
 
 ![](https://cdn-images-1.medium.com/max/800/1*VH5gkNvFyc79jx3F1wK33Q.png)
 
--   Within the **\_init\_.py** file go to line 67 and comment out lines **68 to 85** by highlighting the rows and selecting the keyboard combination **CTRL+K+C**. The area should become green with “#” symbols in front of each code line.
+-   Within the **_init_.py** file go to line 68 and change the if statement from **“if IN_COLAB”** to **“if True”**
 
-![](https://cdn-images-1.medium.com/max/800/1*J3KmFvgYOSM4pNxxLDVdBw.png)
-
--   Copy and paste the code below into the **\_init\_.py** file on line 68. Make sure to indent the code by highlighting it and clicking the tab button on your keyboard.
-
-```sql
-__import__('pysqlite3')  
-import sys  
-sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
-```
-
-![](https://cdn-images-1.medium.com/max/800/1*W6HkQTxIVM0QFvxiwmyuLA.png)
+![](https://cdn-images-1.medium.com/max/800/1*fDH4MliLq4qSSA0DwrCMiw.png)
 
 -   Once you have made the changes close the **\_init\_.py** file. All changes are automatically saved. Not to worry!
 
