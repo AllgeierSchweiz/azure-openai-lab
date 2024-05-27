@@ -186,8 +186,11 @@ We will save these credentials in a `.env` file within our Python environment.
 # Resource Group name: rg-sdsc2024-x
 # Azure OpenAI Resource name: oai-sdsc2024-x
 
-AZURE_OPENAI_KEY = ""
-AZURE_OPENAI_ENDPOINT = ""
+AZURE_OPENAI_KEY_P34 = ""
+AZURE_OPENAI_ENDPOINT_P34 = ""
+
+AZURE_OPENAI_KEY_P56 = ""
+AZURE_OPENAI_ENDPOINT_P56 = ""
 ```
 
 -   Change the entries of **AZURE_OPENAI_KEY** and **AZURE_OPENAI_ENDPOINT** to match the credentials supplied to you.
