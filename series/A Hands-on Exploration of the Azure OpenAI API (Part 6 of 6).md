@@ -80,31 +80,34 @@ client = AzureOpenAI(
 
 #### 1.3 Image Processing
 
-We have the images of 6 different food products, as we would find them in the supermarket. We will be sending these images to the Azure OpenAI API as a base64 format. A bit of encoding will do the trick.
+We have the images of six different food products, one image of the contents of a refrigerator, and one image of a recipe book page. We will be sending these images to the Azure OpenAI API as a base64 format. A bit of encoding will do the trick.
 
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Prepare image for Azure OpenAI model  
-def encode_image(image_path):  
-  with open(image_path, "rb") as image_file:  
-    return base64.b64encode(image_file.read()).decode('utf-8')  
-    
-# Image of a refrigerator with foods  
-refrigerator = encode_image(f"/workspaces/azure-openai-lab/images/products/refrigerator.jpg") 
-  
-# Image of individual food products   
-avocado = encode_image(f"/workspaces/azure-openai-lab/images/products/avocado.jpg")   
-tofu = encode_image(f"/workspaces/azure-openai-lab/images/products/tofu.jpg") 
-broccoli = encode_image(f"/workspaces/azure-openai-lab/images/products/broccoli.jpg")  
-chili = encode_image(f"/workspaces/azure-openai-lab/images/products/chili.jpg")
-coconut_milk = encode_image(f"/workspaces/azure-openai-lab/images/products/coconut_milk.jpg") 
-soy_sauce = encode_image(f"/workspaces/azure-openai-lab/images/products/soy_sauce.jpg")
+# Prepare image for Azure OpenAI model
+def encode_image(image_path):
+  with open(image_path, "rb") as image_file:
+    return base64.b64encode(image_file.read()).decode('utf-8')
+
+# Image of individual food products  
+avocado = encode_image(f"/workspaces/azure-openai-lab/images/products/avocado.jpg") #f"C:\\Python\\azure-openai-lab\\images\\products\\avocado.jpg"
+tofu = encode_image(f"/workspaces/azure-openai-lab/images/products/tofu.jpg") #f"C:\\Python\\azure-openai-lab\\images\\products\\tofu.jpg"
+broccoli = encode_image(f"/workspaces/azure-openai-lab/images/products/broccoli.jpg") #f"C:\\Python\\azure-openai-lab\\images\\products\\broccoli.jpg"
+chili = encode_image(f"/workspaces/azure-openai-lab/images/products/chili.jpg") #f"C:\\Python\\azure-openai-lab\\images\\products\\chili.jpg"
+coconut_milk = encode_image(f"/workspaces/azure-openai-lab/images/products/coconut_milk.jpg") #f"C:\\Python\\azure-openai-lab\\images\\products\\coconut_milk.jpg"
+soy_sauce = encode_image(f"/workspaces/azure-openai-lab/images/products/soy_sauce.jpg") #f"C:\\Python\\azure-openai-lab\\images\\products\\soy_sauce.jpg"
+
+# Image of a refrigerator with foods
+refrigerator = encode_image(f"/workspaces/azure-openai-lab/images/products/refrigerator.jpg") #f"C:\\Python\\azure-openai-lab\\images\\products\\refrigerator.jpg"
+
+# Image of a recipe book page
+recipe = encode_image(f"/workspaces/azure-openai-lab/images/recipes/biscotti.jpg") #f"C:\\Python\\azure-openai-lab\\images\\products\\refrigerator.jpg"
 ```
 
 <br/><br/>
 
-#### 1.4 Zero-Shot learning
+#### 1.4 Individual Food Product Images
 
 The client has been initialized and the images have imported and reformatted. We will not include any examples to aid the model, we are therefore following a zero-shot learning approach.
 
@@ -181,7 +184,7 @@ We are going to adjust our system prompt with additional instructions and output
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Generate a list of ingredients from individual food product images.
+# Generate a list of ingredients and additional attributes from individual food product images.
 
 # Create advanced System prompt
 systemcontent = \
@@ -190,6 +193,8 @@ systemcontent = \
 1. Analyze the provided images.
 2. Determine the food product being depicted.
 3. Count the numbers of invidual food product items in bowls or vessels.
+
+---
 
 ### OUTPUT FORMAT
 Return a JSON array with the following format:
@@ -259,14 +264,16 @@ print(result + "\n")
 
 The model did a great job! We got precise food product names and additional attributes exactly as instructed.
 
-But what if we have one image containing multiple food products in different amounts? For example, the contents of a refrigerator. Could the model still produce an accurate output? Lets find out!
+#### Single Image with Multiple Food Products
 
-We are going to change the image input and re-run the code.
+What if we have one image containing multiple food products in different amounts? For example, the contents of a refrigerator. Could the model still produce an accurate output? Lets find out!
+
+We are going to change the image input and re-run the code using the same system prompt.
 
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Generate a list of ingredients from a single image containing multiple food product.
+# Generate a list of ingredients and additional attributes from a single image containing multiple food product.
 
 # Create advanced System prompt
 systemcontent = \
@@ -275,6 +282,8 @@ systemcontent = \
 1. Analyze the provided images.
 2. Determine the food product being depicted.
 3. Count the numbers of invidual food product items in bowls or vessels.
+
+---
 
 ### OUTPUT FORMAT
 Return a JSON array with the following format:
@@ -316,9 +325,75 @@ Brilliant! The model did a great job even with images containing multiple food p
 
 <br/><br/>
 
-#### 1.6 Create CSV file from generated Ingredients
+#### 1.6 Single Image of Recipe Book Page
 
-We can now create a CSV file to save our newly generated ingredients.
+Often we have an image of a scanned document that we'd like to convert to a structured format. What if we have a page from a recipe book. Can we convert the information on that page into a structured table?
+
+We are going to adjust the system prompt, change the image input, and re-run the code.
+
+-   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
+
+```sql
+# Generate a list of ingredients and additional attributes from a recipe book page containing text.
+
+# Create advanced System prompt
+systemcontent = \
+"""
+### INSTRUCTIONS
+1. Analyze the provided recipe image.
+2. Extract the recipe name located at the top of the image with the largest orange font.
+3. Extract the recipe description located at the top of the image in quotes.
+4. Extract the recipe ingredients located under the "INGREDIENTS" header.
+5. Extract the recipe steps located under the "INSTRUCTIONS" header.
+6. Extract the recipe nutritions at the bottom of the image starting after "Nutrition Tip" in the grey font.
+
+---
+
+### OUTPUT FORMAT
+Return a JSON array with the following format:
+{"name":"","description":"", "ingredients":"[]", amount:"[]", units:"[]", "steps":"[]", "nutritions":"", expiration_days:}
+
+The variables should contain the following information:
+- name: the name of the recipe.
+- description: the description of the recipe.
+- ingredients: a list of the ingredients of the recipe.
+- amount: a list of the number of each ingredient used in the recipe in numeric form. If no number is visible, define the value as "variable".
+- units: a list of the units of each ingredient using the metric system. If no unit is visible, define the value as "null".
+- steps: a list of the preparation instructions of the recipe.
+- nutritions: a summary of the nutritional information of the recipe. If no nutritional information is found, define the value as "null".
+- expiration_days: the expiration date of each ingredient in average number of days. If no expiration date is known, define the value as "null".
+
+"""
+
+# Send request to Azure OpenAI model
+response = client.chat.completions.create(
+    model="gpt-4o",
+    temperature=0.7,
+    #max_tokens=120,
+    messages=[
+            {
+            "role": "user",
+            "content": [
+                {"type": "text", "text": systemcontent},
+                {
+                "type": "image_url",
+                "image_url": {
+                    "url": f"data:image/jpeg;base64,{recipe}"
+                    },
+                },                                                               
+            ],
+        }
+    ]
+)
+
+result = response.choices[0].message.content
+print(result + "\n")
+```
+This is remarkable! The output looks fantastic! Optical Character Recognition (OCR) is an important implementation in any business scenario. Let's have a look at the generated output as a dataframe. We'll also save it as a CSV for later use.
+
+#### 1.7 Create CSV file from generated Ingredients
+
+We can now transform the JSON into a pandas data frame and create a CSV file to save our newly generated ingredients.
 
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
