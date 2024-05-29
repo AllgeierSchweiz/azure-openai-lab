@@ -1,10 +1,10 @@
 ----------
 
-### A Hands-on Exploration of the Azure OpenAI API (Part 2 of 5)
+# A Hands-on Exploration of the Azure OpenAI API (Part 2 of 5)
 
 ![](https://cdn-images-1.medium.com/max/800/1*PV9Eh3WpAhnW9NZCijZPzw.png)
 
-### 1. Preparations
+## 1. Preparations
 
 The following prerequisites must be met to successfully start this series:
 
@@ -17,11 +17,11 @@ The following prerequisites must be met to successfully start this series:
 
 ----------
 
-### 2. Files & Data
+## 2. Files & Data
 
 All relevant files are in the Allgeier Schweiz [GitHub repository](https://github.com/AllgeierSchweiz/azure-openai-lab).
 
-#### 2.1 Notebooks
+### 2.1 Notebooks
 
 The workshop has 7 [Jupyter Notebooks][Notebooks] we will work through:
 
@@ -33,7 +33,7 @@ The workshop has 7 [Jupyter Notebooks][Notebooks] we will work through:
 6.  _P5-azure-openai-rag-with-fine-tuning.ipynb_
 7.  _P6-azure-openai-omni-image-to-text.ipynb_
 
-#### 2.2 Files
+### 2.2 Files
 
 The workshop has 4 prepared [files][Data]. The **recipes.csv** and **recipes-preprocessed.csv** will be actively used throughout this series. The other 2 files are backups used for fine-tuning.
 
@@ -48,7 +48,7 @@ The CSV file **recipes.csv**  consists of 200K recipes covering 18 years of user
 
 ----------
 
-### 3. Azure Resources
+## 3. Azure Resources
 
 To use Azure OpenAI models you must first request access to the Azure OpenAI Service using the [Microsoft registration form](https://customervoice.microsoft.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR7en2Ais5pxKtso_Pz4b1_xUNTZBNzRKNlVQSFhZMU9aV09EVzYxWFdORCQlQCN0PWcu).
 
@@ -62,7 +62,7 @@ To access the Azure OpenAI API using the Python SDK an **API Key** and an **API 
 
 ----------
 
-### 4. GitHub Codespaces
+## 4. GitHub Codespaces
 
 To run the Python Notebooks we will use GitHub Codespaces. This convenient web-based environment mimics Visual Studio Code directly in your web browser. The environment offers users 60 hours a month of free computing and 15GB of free storage. This is more than enough to get us through the workshop!
 
@@ -70,7 +70,7 @@ To run the Python Notebooks we will use GitHub Codespaces. This convenient web-b
 
 <br/><br/>
 
-#### 4.1 Starting GitHub Codespaces
+### 4.1 Starting GitHub Codespaces
 
 -   Open the [GitHub Repository](https://github.com/AllgeierSchweiz/azure-openai-lab) and select the green button named **Code**  on the top right corner of the page.
 -   In the newly opened tab, select the button **Create codespace on main**.
@@ -98,7 +98,7 @@ The Codespace user interface is identical to the layout in Visual Studio Code. T
 
 <br/><br/>
 
-#### 4.2 Installing Visual Studio Code Extensions
+### 4.2 Installing Visual Studio Code Extensions
 
 To work with Python and Jupyter Notebooks, we need to install their respective extensions in codespace.
 
@@ -116,7 +116,7 @@ To work with Python and Jupyter Notebooks, we need to install their respective e
     
 <br/><br/>
 
-#### 4.3 Creating a Python Kernel Source
+### 4.3 Creating a Python Kernel Source
 
 To work with Python, we need to select a Python Kernel. We will create a new source using a virtual environment.
 
@@ -162,7 +162,7 @@ Once the environment creation starts, you will receive a message on the bottom r
 
 <br/><br/>
 
-#### 4.4 Setting up Azure OpenAI API credentials
+### 4.4 Setting up Azure OpenAI API credentials
 
 To work with the Azure OpenAI API we need to configure the codespace environment to use the **Azure OpenAI API Key** and **Azure OpenAI Endpoint URL**. These credentials can be found in the Azure OpenAI Service overview within the Azure Portal. We have provided these credentials on the paper in front of you.
 
@@ -199,7 +199,7 @@ AZURE_OPENAI_ENDPOINT_P56 = ""
 
 <br/><br/>
 
-#### 4.5 ChromaDB troubleshooting
+### 4.5 ChromaDB troubleshooting
 
 GitHub Codespace currently throws an error when importing the `chromadb` package. The system uses an unsupported version of `sqlite3`, which we need to create our local database.
 
@@ -239,7 +239,7 @@ Perfect! You have now finalized the required preparations to start running the J
 
 ----------
 
-### 5. Questions, Feedback, Support?
+## 5. Questions, Feedback, Support?
 
 Reach out to us! We are happy to answer any questions you might have or use your feedback to optimize this series!
 
@@ -247,7 +247,7 @@ Reach out to us! We are happy to answer any questions you might have or use your
 
 ----------
 
-### 6. References
+## 6. References
 
 [1] [venv — Creation of virtual environments — Python 3.12.3 documentation](https://docs.python.org/3/library/venv.html)
 
