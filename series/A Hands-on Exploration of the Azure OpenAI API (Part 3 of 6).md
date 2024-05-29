@@ -1,11 +1,11 @@
 
 ----------
 
-### A Hands-on Exploration of the Azure OpenAI API (Part 3 of 5)
+# A Hands-on Exploration of the Azure OpenAI API (Part 3 of 5)
 
 ![](https://cdn-images-1.medium.com/max/800/1*PV9Eh3WpAhnW9NZCijZPzw.png)
 
-### 1. Getting started with the Azure OpenAI API
+## 1. Getting started with the Azure OpenAI API
 
 Lets explore how to create complex text inputs to enhance the model’s performance, also known as prompt engineering. This can be reinforced with techniques like **one-shot** and **few-shot learning**, where we provide relevant data or information to give the model additional context for the conversation. Alternatively, we create prompts without examples called **zero-shot learning.** In all cases, we can enhance the prompt input by using prompt engineering frameworks to further guide the models output.
 
@@ -31,7 +31,7 @@ What exactly do these roles mean?
 
 <br/><br/>
 
-#### 1.1 Open the Notebook
+### 1.1 Open the Notebook
 
 -   On the left of the codespace environment, select the **Explorer** icon.
 -   Open the Notebook **P3-azure-openai-prompt-engineering.ipynb**.
@@ -40,7 +40,7 @@ What exactly do these roles mean?
 
 <br/><br/>
 
-#### 1.2 Running the Code
+### 1.2 Running the Code
 
 There are multiple options to run the code in a Notebook. You can:
 
@@ -54,7 +54,7 @@ There are multiple options to run the code in a Notebook. You can:
 
 <br/><br/>
 
-#### 1.3 Initializing the Azure OpenAI Client
+### 1.3 Initializing the Azure OpenAI Client
 
 We will start by importing the necessary Python packages to run our code.
 
@@ -108,7 +108,7 @@ client = AzureOpenAI(
 
 <br/><br/>
 
-#### 1.4 Zero-Shot learning
+### 1.4 Zero-Shot learning
 
 The client has been initialized so that we can create our first prompt following the Chat Completion transcript format mentioned in Chapter 1.
 
@@ -146,7 +146,7 @@ The generated recipe seems plausible, however, we want to guide the model into c
 
 <br/><br/>
 
-#### 1.5 Prompt Engineering
+### 1.5 Prompt Engineering
 
 The fundamental concept underlying prompt engineering is that generic inputs will inevitably result in the generation of generic outputs. In order to generate outputs that are of any use, it is necessary to provide the model with direction and guidance.
 
@@ -240,7 +240,7 @@ The generated output looks much better, but we can see that certain output attri
 
 <br/><br/>
 
-#### 1.6 One-Shot learning
+### 1.6 One-Shot learning
 
 To give the Chat Completion Client an example, we need to supply an assistant role to the transcript format. This means our prompt has a **system, assistant,** and **user** role.
 
@@ -314,7 +314,7 @@ The generated output looks great! The recipe is plausible, the output is in JSON
 
 <br/><br/>
 
-#### 1.7 Few-Shot learning
+### 1.7 Few-Shot learning
 
 The prompt structure remains the same, but we can now add two or more examples using the **user** and **assistant** roles.
 
@@ -391,7 +391,7 @@ Congratulations! You have completed Part 3 of this workshop. We have learned how
 
 ----------
 
-### 2. Questions, Feedback, Support?
+## 2. Questions, Feedback, Support?
 
 Reach out to us! We are happy to answer any questions you might have or use your feedback to optimize this series!
 
@@ -399,7 +399,7 @@ Reach out to us! We are happy to answer any questions you might have or use your
 
 ----------
 
-### 3. References
+## 3. References
 
 [1] [Work with the GPT-35-Turbo and GPT-4 models — Azure OpenAI Service | Microsoft Learn](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/chatgpt?tabs=python-new)
 
