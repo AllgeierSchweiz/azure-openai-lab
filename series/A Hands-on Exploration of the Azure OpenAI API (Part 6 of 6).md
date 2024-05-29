@@ -391,6 +391,8 @@ print(result + "\n")
 ```
 This is remarkable! The output looks fantastic! Optical Character Recognition (OCR) is an important implementation in any business scenario. Let's have a look at the generated output as a dataframe. We'll also save it as a CSV for later use.
 
+<br/><br/>
+
 ### 1.8 Create CSV file from generated Ingredients
 
 We can now transform the JSON into a pandas data frame and create a CSV file to save our newly generated ingredients.
