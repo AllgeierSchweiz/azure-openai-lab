@@ -1,10 +1,10 @@
 ----------
 
-### A Hands-on Exploration of the Azure OpenAI API (Part 4 of 5)
+# A Hands-on Exploration of the Azure OpenAI API (Part 4 of 5)
 
 ![](https://cdn-images-1.medium.com/max/800/1*PV9Eh3WpAhnW9NZCijZPzw.png)
 
-### 1. Retrieval-Augmented Generation
+## 1. Retrieval-Augmented Generation
 
 Let’s continue our journey and learn more about enhancing our model output using Retrieval-Augmented Generation (RAG).
 
@@ -21,7 +21,7 @@ In Notebook **P4-azure-openai-rag.ipynb,** we will implement RAG using **ChromaD
 
 <br/><br/>
 
-#### 1.2 What we are doing in a nutshell
+### 1.2 What we are doing in a nutshell
 
 ![](https://cdn-images-1.medium.com/max/800/1*42TBGtmSVNIjjuVK-i6VqQ.png)
 
@@ -39,7 +39,7 @@ In Notebook **P4-azure-openai-rag.ipynb,** we will implement RAG using **ChromaD
 
 ----------
 
-### 2. Vector Database
+## 2. Vector Database
 
 Vector databases operate in a similar manner to traditional databases, but they have been specifically designed to store, index, and search for vectors. These vectors represent information such as text or images in numerical format from proprietary data. This numerical representation is created by using an embedding model such as the Azure OpenAI `text-embedding-3-large` model.
 
@@ -51,7 +51,7 @@ There are different types of vector databases. For our implementation, we’ll b
 
 ----------
 
-### 3. LangChain
+## 3. LangChain
 
 LangChain is a Python library and an open-source framework for developing applications using large language models, such as those available on Azure OpenAI Services. As the name suggests, the capabilities of LangChain enable users to combine multiple key components to streamline the process of working with models.
 
@@ -61,7 +61,7 @@ In our case, we will use LangChain to create our text chunks, generate the embed
 
 ----------
 
-### 4. Data Pre-Processing with Azure OpenAI Assistants
+## 4. Data Pre-Processing with Azure OpenAI Assistants
 
 Before starting our RAG implementation, we need to certify the data used to augment our prompt is correctly structured and contains the correct information.
 
@@ -73,7 +73,7 @@ The Jupyter Notebook we are going to work with is called **P4-azure-openai-assis
 
 <br/><br/>
 
-#### 4.1 Open the Notebook
+### 4.1 Open the Notebook
 
 -   On the left of the codespace environment, select the **Explorer** icon.
 -   Open the Notebook **P4-azure-openai-assistant-rag-data-preprocessing.ipynb.**
@@ -82,7 +82,7 @@ The Jupyter Notebook we are going to work with is called **P4-azure-openai-assis
 
 <br/><br/>
 
-#### 4.2 Initializing the Azure OpenAI Client
+### 4.2 Initializing the Azure OpenAI Client
 
 We will start by importing the necessary Python packages to run our code.
 
@@ -135,7 +135,7 @@ client = AzureOpenAI(
 
 <br/><br/>
 
-#### 4.3 Import File from Azure OpenAI Service
+### 4.3 Import File from Azure OpenAI Service
 
 The data used for our RAG implementation in Chapter 5 is based on a CSV file containing 200'000 example recipes. We first need to do some data wrangling. Let’s import that file into our Notebook.
 
@@ -153,7 +153,7 @@ for i in client.files.list():
 
 <br/><br/>
 
-#### 4.4 Data Wrangling Instructions
+### 4.4 Data Wrangling Instructions
 
 To perform our data pre-processing steps using the Azure OpenAI Assistant, we need to provide the model with clear instructions outlining our requirements.
 
@@ -189,7 +189,7 @@ Execute each of the steps listed below in your ACTIONS section.
 
 <br/><br/>
 
-#### 4.4 Create an Azure OpenAI Assistant
+### 4.4 Create an Azure OpenAI Assistant
 
 The Azure OpenAI Assistant requires C**ode Interpreter** enabled to perform our data transformations. The Code Interpreter enables Assistants to write and run Python code in a sandbox environment. It can process files with various data and formats and iteratively solve complex coding problems. In our case, we want to perform data transformation using `pandas` .
 
@@ -230,7 +230,7 @@ message = client.beta.threads.messages.create(
 
 <br/><br/>
 
-#### 4.5 Run the Azure OpenAI Assistant
+### 4.5 Run the Azure OpenAI Assistant
 
 All variables have been setup, we can now run the Azure OpenAI Assistant
 
@@ -290,7 +290,7 @@ while True:
 
 <br/><br/>
 
-#### 4.6 Import Generated CSV
+### 4.6 Import Generated CSV
 
 Let’s view the newly created file and check the transformations.
 
@@ -333,7 +333,7 @@ files_from_messages()
 
 <br/><br/>
 
-#### 4.7 Clean up Azure OpenAI Assistant Environment
+### 4.7 Clean up Azure OpenAI Assistant Environment
 
 It’s important to make sure there aren’t any unnecessary artifacts lying around in Azure OpenAI Service. Let’s delete the assistant, thread, and generated CSV file from the Azure OpenAI environment.
 
@@ -352,13 +352,13 @@ client.files.delete(messages.data[0].file_ids[0])
 
 ----------
 
-### 5. Getting started with RAG
+## 5. Getting started with RAG
 
 The Jupyter Notebook we are going to work with is called **P4-azure-openai-rag.ipynb.**
 
 <br/><br/>
 
-#### 5.1 Open the Notebook
+### 5.1 Open the Notebook
 
 -   On the left of the codespace environment, select the **Explorer** icon.
 -   Open the Notebook **P4-azure-openai-rag.ipynb.**
@@ -367,7 +367,7 @@ The Jupyter Notebook we are going to work with is called **P4-azure-openai-rag.i
 
 <br/><br/>
 
-#### 5.2 Initializing the Azure OpenAI Client
+### 5.2 Initializing the Azure OpenAI Client
 
 We will start by importing the necessary Python packages to run our code.
 
@@ -429,7 +429,7 @@ client = AzureOpenAI(
 
 <br/><br/>
 
-#### 5.3 Import CSV
+### 5.3 Import CSV
 
 RAG relies on underlying data to supplement the model. In our case, we will use a CSV file containing vegan recipes. Let’s import that file into our Notebook.
 
@@ -443,7 +443,7 @@ df = pd.read_csv(path_input , sep=',', on_bad_lines='skip', low_memory=False)
 
 <br/><br/>
 
-#### 5.4 Vector Database Preparations
+### 5.4 Vector Database Preparations
 
 Before embedding and saving our data into a vector database such as chromadb, we first conduct some pre-processing steps. We will use the column **dense_feature** as our vector database input. This column combines the values of the columns: **name, tags, nutrition, ingredients,** and **steps** separated by a semicolon.
 
@@ -507,7 +507,7 @@ vectordb = Chroma.from_documents(
 
 <br/><br/>
 
-#### 5.5 Zero-Shot learning
+### 5.5 Zero-Shot learning
 
 Let’s run a zero-shot learning prompt and see if our RAG implementation assists us in creating vegan recipes.
 
@@ -587,7 +587,7 @@ The generated vegan recipe looks great! The recipe variables look plausible with
 
 <br/><br/>
 
-#### 5.6 Create Dataframe from generated Recipes
+### 5.6 Create Dataframe from generated Recipes
 
 We can now transform our generated output into a data frame to check the overall structure. Alternatively, we could save the generated output directly to a CSV file.
 
@@ -618,7 +618,7 @@ Congratulations! You’ve made it through Part 4 of this workshop. We’ve learn
 
 ----------
 
-### 6. Questions, Feedback, Support?
+## 6. Questions, Feedback, Support?
 
 Reach out to us! We are happy to answer any questions you might have or use your feedback to optimize this series!
 
@@ -626,7 +626,7 @@ Reach out to us! We are happy to answer any questions you might have or use your
 
 ----------
 
-### 7. References
+## 7. References
 
 [1] [Embeddings and RAG with Azure OpenAI API — CSC Blog (ethz.ch)](https://cscblog.ethz.ch/index.php/2024/02/06/az-open-ai-rag-chromadb-langchain/)
 
