@@ -1,10 +1,10 @@
 ----------
 
-### A Hands-on Exploration of the Azure OpenAI API (Part 6 of 6)
+# A Hands-on Exploration of the Azure OpenAI API (Part 6 of 6)
 
 ![](https://cdn-images-1.medium.com/max/800/1*PV9Eh3WpAhnW9NZCijZPzw.png)
 
-### 1. Omni Image-to-Text
+## 1. Omni Image-to-Text
 
 Let’s continue our journey and learn how we can use the new GPT-4o model to translate images of food into text, i.e. a list of ingredients, which we can use to create new recipes.
 
@@ -14,7 +14,7 @@ In this Notebook, we will call the Azure OpenAI API with the Chat Completion API
 
 <br/><br/>
 
-#### 1.1 Open the Notebook
+### 1.1 Open the Notebook
 
 -   On the left of the codespace environment, select the **Explorer** icon.
 -   Open the Notebook **P6-azure-openai-omni-image-to-text.ipynb**
@@ -23,7 +23,7 @@ In this Notebook, we will call the Azure OpenAI API with the Chat Completion API
 
 <br/><br/>
 
-#### 1.2 Initializing the Azure OpenAI Client
+### 1.2 Initializing the Azure OpenAI Client
 
 We will start by importing the necessary Python packages to run our code.
 
@@ -78,7 +78,7 @@ client = AzureOpenAI(
 
 <br/><br/>
 
-#### 1.3 Image Processing
+### 1.3 Image Processing
 
 We have the images of six different food products, one image of the contents of a refrigerator, and one image of a recipe book page. We will be sending these images to the Azure OpenAI API as a base64 format. A bit of encoding will do the trick.
 
@@ -107,7 +107,7 @@ recipe = encode_image(f"/workspaces/azure-openai-lab/images/recipes/biscotti.jpg
 
 <br/><br/>
 
-#### 1.4 Individual Food Product Images
+### 1.4 Individual Food Product Images
 
 The client has been initialized and the images have imported and reformatted. We will not include any examples to aid the model, we are therefore following a zero-shot learning approach.
 
@@ -177,7 +177,7 @@ Awesome! The model managed to decipher the images and generated a correct list o
 
 <br/><br/>
 
-#### 1.5 Prompt Engineering
+### 1.5 Prompt Engineering
 
 We are going to adjust our system prompt with additional instructions and output format details, to guide the model.
 
@@ -264,7 +264,7 @@ print(result + "\n")
 
 The model did a great job! We got precise food product names and additional attributes exactly as instructed.
 
-#### Single Image with Multiple Food Products
+### 1.6 Single Image with Multiple Food Products
 
 What if we have one image containing multiple food products in different amounts? For example, the contents of a refrigerator. Could the model still produce an accurate output? Lets find out!
 
@@ -325,7 +325,7 @@ Brilliant! The model did a great job even with images containing multiple food p
 
 <br/><br/>
 
-#### 1.6 Single Image of Recipe Book Page
+### 1.7 Single Image of Recipe Book Page
 
 Often we have an image of a scanned document that we'd like to convert to a structured format. What if we have a page from a recipe book. Can we convert the information on that page into a structured table?
 
@@ -391,7 +391,7 @@ print(result + "\n")
 ```
 This is remarkable! The output looks fantastic! Optical Character Recognition (OCR) is an important implementation in any business scenario. Let's have a look at the generated output as a dataframe. We'll also save it as a CSV for later use.
 
-#### 1.7 Create CSV file from generated Ingredients
+### 1.8 Create CSV file from generated Ingredients
 
 We can now transform the JSON into a pandas data frame and create a CSV file to save our newly generated ingredients.
 
@@ -421,7 +421,7 @@ Congratulations! You have finished the workshop!
 
 ----------
 
-### 2. Questions, Feedback, Support?
+## 2. Questions, Feedback, Support?
 
 Reach out to us! We are happy to answer any questions you might have or use your feedback to optimize this series!
 
@@ -429,7 +429,7 @@ Reach out to us! We are happy to answer any questions you might have or use your
 
 ----------
 
-### 3. References
+## 3. References
 
 [1] [https://community.openai.com/t/issue-with-useage-of-json-output-an-citation/584189](https://community.openai.com/t/issue-with-useage-of-json-output-an-citation/584189)
 
