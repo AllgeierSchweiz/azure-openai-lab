@@ -24,7 +24,7 @@
 
 <!-- GETTING STARTED -->
 
-### 1. Introduction
+## 1. Introduction
 
 This is part one of a six-part series developed by the Data Analytics Team at [Allgeier Schweiz](https://www.allgeier.ch/it-services/data-analytics/). The original implementation was part of a workshop for the [Swiss Data Science Conference](https://sds2024.ch/) of 2024.
 
@@ -43,7 +43,7 @@ The following series showcases how to use the Python SDK to call large language 
 
 ----------
 
-### 2. Workshop Use Case
+## 2. Workshop Use Case
 
 The use case of this series revolves around the [Food Fighters](https://github.com/AllgeierSchweiz/aihackers) concept created for [The Microsoft Fabric Global AI Hack](https://github.com/microsoft/Hack-Together-Fabric-AI) of 2024.
 
@@ -53,7 +53,7 @@ The solution aims to combat food waste by empowering users to effortlessly manag
 
 Unfortunately, we don't have time to build the entire architecture of this solution, for this reason, we will focus on creating the personalized recipe suggestions aspect using Azure OpenAI Service.
 
-#### 2.1 Objectives
+### 2.1 Objectives
 
 1.  We want the language model to create recipes from a list of ingredients we pass as the model input.
 2.  To improve the recipes created by the model we will implement model enhancement techniques such as prompt engineering with zero-shot, one-shot and few-shot learning.
@@ -66,7 +66,7 @@ Unfortunately, we don't have time to build the entire architecture of this solut
 
 ----------
 
-### 3. What is the Azure OpenAI Service?
+## 3. What is the Azure OpenAI Service?
 
 The Azure OpenAI Service offers access to various large language models (LLMs), including GPT-4o, GPT-4, GPT-4 Turbo with Vision, GPT-3.5-Turbo, and Embeddings model series. These are the same language models made available by [OpenAI](https://platform.openai.com/docs/models).
 
@@ -76,7 +76,7 @@ Users can utilize the Azure OpenAI Service through REST APIs, Python SDK, or the
 
 In our case, we will use the language models **GPT-4o, GPT-4, GPT-3.5-Turbo,** and **Embeddings**. Each one will be called using the Azure OpenAI API. Additionally, we will use the **Azure OpenAI Assistants API** to perform data pre-processing operations using the code interpreter functionality.
 
-#### 3.1 Azure OpenAI Assistants
+### 3.1 Azure OpenAI Assistants
 
 An assistant is an AI agent that is designed for a specific purpose. It augments the functionality of the Azure OpenAI models. The assistant facilitates the integration of third-party tools through custom functions and provides access to a coding environment through the Code Interpreter functionality. The exceptional performance of these AI agents is achieved through the utilisation of Threads, which facilitates the management and storage of message history.
 
@@ -84,7 +84,7 @@ In our case, we will use this agent to perform data pre-processing steps using t
 
 **_NOTE: It is important to note that Azure OpenAI Assistants are not the only agents that offer these functionalities. LangChain presented their own approach with the introduction of LangChain Agents._**
 
-#### 3.2 Azure OpenAI models being used
+### 3.2 Azure OpenAI models being used
 
 -   **GPT-4o** _(Version 2024–05–13):_ This model is used to translate food product images into text i.e. a list of ingredients. GPT-4o models are multimodal, meaning that they integrate text and image processing in a single model, enabling the handling of multiple data types simultaneously. This is also the latest model and offers superior AI capabilities compared to the GPT-4 Turbo model.
 -   **GPT-4** _(Version 0125-preview and Version 1106-preview):_ This model is used to create our assistant for code interpretation. The GPT-4 series is a set of models that improve on the GPT-3.5 and can understand and generate natural language and code. The latest version, **0125-preview**, supersedes its predecessor, version **1106-preview**,  offering enhanced performance in code generation, a reduction in instances of incomplete model tasks and [additional enhancements](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#gpt-4-and-gpt-4-turbo-models).
@@ -95,7 +95,7 @@ In our case, we will use this agent to perform data pre-processing steps using t
 
 ----------
 
-### 4. Enhancement Techniques
+## 4. Enhancement Techniques
 
 In this workshop we will showcase three key techniques for improving the language model’s output: prompt engineering, retrieval-augmented generation (RAG), and Fine-tuning.
 
@@ -103,7 +103,7 @@ In this workshop we will showcase three key techniques for improving the languag
 
 [Approaches to AI: When to Use Prompt Engineering, Embeddings, or Fine-tuning | Entry Point AI](https://www.entrypointai.com/blog/approaches-to-ai-prompt-engineering-embeddings-or-fine-tuning/)
 
-#### 4.1 Prompt Engineering
+### 4.1 Prompt Engineering
 
 The model’s used in this workshop are prompt-based. With prompt-based models, the user interacts with the model by entering a text prompt i.e. text input, to which the model responds with a text completion. This completion is the model’s continuation of the input text i.e. text output.
 
@@ -111,7 +111,7 @@ Prompt engineering involves crafting a structurally optimized text prompt to gui
 
 Depending on the objective, prompt engineering can serve as an alternative approach to more complex techniques like **Retrieval Augmented Generation (RAG)**  or  **Fine-Tuning**  by  providing the model with an example of the desired model output. This is where concepts like **one-shot** and  **few-shot learning** become relevant. We will learn more about these concepts in [Part 3][A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-3].
 
-#### 4.2 Retrieval Augmented Generation
+### 4.2 Retrieval Augmented Generation
 
 Retrieval Augmented Generation (RAG) is a retrieval strategy aimed at enhancing language models by providing them with supplementary information, a process also known as grounding. Rather than solely depending on the model’s existing knowledge, we can add proprietary data into the model prompt to guide it to more precise and domain-specific responses. It’s important to note that the model is **not** re-trained on the new data. The new data is only used as an additional prompt input, acting similarly to one-shot learning.
 
@@ -119,7 +119,7 @@ Retrieval Augmented Generation (RAG) is a retrieval strategy aimed at enhancing 
 
 In this workshop, we’ll work with a new dataset, a CSV file filled with examples of vegan recipes. By incorporating this particular dataset, our model should more accurately produce vegan recipes. We will learn more about these concepts in [Part 4][A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-4].
 
-#### 4.3 Fine-Tuning
+### 4.3 Fine-Tuning
 
 Fine-tuning is a technique used to re-train a pre-trained model using a new foundation of information i.e. training data, to suit a specific task.
 
@@ -135,13 +135,13 @@ In this workshop, we’ll work with a new dataset, a CSV file filled with exampl
 
 ----------
 
-### 5. Azure OpenAI vs. OpenAI
+## 5. Azure OpenAI vs. OpenAI
 
 Azure OpenAI combines the security features of Microsoft Azure with the various language models developed by OpenAI. This means customers can benefit from Azure’s reliability and safety measures while using OpenAI’s technology. OpenAI is ideal for experimenting and exploring new functionalities. However, when it comes to professional applications, security, and compliance, choose Azure OpenAI.
 
 Additionally, Azure OpenAI collaborates closely with OpenAI to develop the REST APIs. This partnership guarantees compatibility between the services and makes it easy for customers to switch between them with minimal hassle.
 
-#### 5.1 Governance & Security
+### 5.1 Governance & Security
 
 Azure OpenAI provides features like data encryption, access control, private networking, availability in different regions, and tools for responsible AI content filtering. In summary, it adds an extra layer of protection to your workload.
 
@@ -150,7 +150,7 @@ Azure OpenAI provides features like data encryption, access control, private net
 ----------
 
 <!-- CONTACT -->
-### 6. Questions, Feedback, Support?
+## 6. Questions, Feedback, Support?
 
 Reach out to us! We are happy to answer any questions you might have or use your feedback to optimize this series!
 
@@ -162,7 +162,7 @@ Reach out to us! We are happy to answer any questions you might have or use your
 ----------
 
 <!-- FILES -->
-### 7. Documentation, Data & Support Files
+## 7. Documentation, Data & Support Files
 
 Download and unzip the file on your local computer.
 
