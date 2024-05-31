@@ -274,7 +274,7 @@ AZURE_OPENAI_ENDPOINT_P56 = ""
 
 ### 4.5 ChromaDB troubleshooting
 
-GitHub Codespace currently throws an error when importing the `chromadb` package. The system uses an unsupported version of `sqlite3`, which we need to create our local database.
+GitHub Codespace currently throws an error when importing the `chromadb` package. The system uses an unsupported version of `sqlite3`.
 
 ```sql
 >>> import chromadb  
@@ -294,13 +294,16 @@ We need to implement a workaround to fix this issue.
 
 ![](https://cdn-images-1.medium.com/max/800/1*VH5gkNvFyc79jx3F1wK33Q.png)
 
--   Within the **\_init\_.py** file go to line 68 and change the if statement from **“if IN_COLAB”** to **“if True”**
+-   Within the **\_init\_.py** file go to line 68 and change the if statement from **if IN_COLAB:** to **if True:**
 
 ![](https://cdn-images-1.medium.com/max/800/1*fDH4MliLq4qSSA0DwrCMiw.png)
 
 -   Once you have made the changes close the **\_init\_.py** file. All changes are automatically saved. Not to worry!
 
 ![](https://cdn-images-1.medium.com/max/800/1*QsMvkmRyEEvlmajyOGcUnA.png)
+
+
+**_NOTE: These changes are relevant for Notebook P5-azure-openai-fine-tuning.ipynb. If you’re getting an error message related to ChromaDB when running the code in this notebook, try restarting the Kernel and re-running the code._**
 
 <br/><br/>
 
