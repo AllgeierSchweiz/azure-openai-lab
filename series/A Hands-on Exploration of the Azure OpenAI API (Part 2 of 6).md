@@ -71,6 +71,9 @@ We will now create three model deployments. It’s important to set the **deploy
 ![](https://cdn-images-1.medium.com/max/800/1*e8zPx-SluT7poj-BCnwVqg.png)
 
 -   In Azure OpenAI Studio, select the **Deployments** tab on the left panel and select the button **Create new deployment**
+
+![](https://cdn-images-1.medium.com/max/800/1*w_xfEmCeuE58oF7MIaW17g.png)
+
 -   Let’s first create the GPT-3.5 Turbo model deployment. Define the parameters as shown in the image below and select **create**.
 
 ![](https://cdn-images-1.medium.com/max/800/1*As2b42oJxAXjczVo7l9yFw.png)
@@ -90,6 +93,9 @@ We will now create three model deployments. It’s important to set the **deploy
 ![](https://cdn-images-1.medium.com/max/800/1*e8zPx-SluT7poj-BCnwVqg.png)
 
 -   In Azure OpenAI Studio, select the **Deployments** tab on the left panel and select the button **Create new deployment**
+
+![](https://cdn-images-1.medium.com/max/800/1*w_xfEmCeuE58oF7MIaW17g.png)
+
 -   Let’s first create the GPT-3.5 Turbo model deployment. Define the parameters as shown in the image below and select **create**.
 
 ![](https://cdn-images-1.medium.com/max/800/1*As2b42oJxAXjczVo7l9yFw.png)
