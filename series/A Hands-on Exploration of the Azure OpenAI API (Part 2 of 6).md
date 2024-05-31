@@ -256,7 +256,17 @@ AZURE_OPENAI_KEY_P56 = ""
 AZURE_OPENAI_ENDPOINT_P56 = ""
 ```
 
--   Change the entries of **AZURE_OPENAI_KEY_P34, AZURE_OPENAI_ENDPOINT_P34, AZURE_OPENAI_KEY_P56,** and **AZURE_OPENAI_ENDPOINT_56** to match the credentials supplied to you.
+-   Paste the API credentials you copied in Chapter 3.2 as described below:
+
+1.  AZURE_OPENAI_KEY_P34 = **KEY 1** from Azure OpenAI Service located in **Sweden Central**
+2.  AZURE_OPENAI_ENDPOINT_P34 = **Endpoint** from Azure OpenAI Service located in **Sweden Central**
+
+  
+
+1.  AZURE_OPENAI_KEY_P56 = **KEY 1** from Azure OpenAI Service located in **East US 2**
+2.  AZURE_OPENAI_ENDPOINT_P56 = **Endpoint** from Azure OpenAI Service located in **East US 2**
+
+**_NOTE: Do not forget to put both KEY1 and Endpoint in quotation marks._**
 
 ![](https://cdn-images-1.medium.com/max/800/1*9SNDyr7cKrt09zmsIcMNlA.png)
 
