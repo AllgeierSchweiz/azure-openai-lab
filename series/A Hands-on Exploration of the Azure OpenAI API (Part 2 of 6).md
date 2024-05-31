@@ -303,7 +303,7 @@ We need to implement a workaround to fix this issue.
 ![](https://cdn-images-1.medium.com/max/800/1*QsMvkmRyEEvlmajyOGcUnA.png)
 
 
-**_NOTE: These changes are relevant for Notebook P5-azure-openai-fine-tuning.ipynb. If you’re getting an error message related to ChromaDB when running the code in this notebook, try restarting the Kernel and re-running the code._**
+**_NOTE: These changes are relevant for Notebook P5-azure-openai-fine-tuning.ipynb. If you’re getting an error message related to ChromaDB when running the code in this Notebook, try restarting the Kernel and re-running the code._**
 
 <br/><br/>
 
