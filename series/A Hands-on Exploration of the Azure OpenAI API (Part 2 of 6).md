@@ -50,13 +50,70 @@ The CSV file **recipes.csv**  consists of 200K recipes covering 18 years of user
 
 ## 3. Azure Resources
 
-To use Azure OpenAI models you must first request access to the Azure OpenAI Service using the [Microsoft registration form](https://customervoice.microsoft.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR7en2Ais5pxKtso_Pz4b1_xUNTZBNzRKNlVQSFhZMU9aV09EVzYxWFdORCQlQCN0PWcu).
 
-The Azure OpenAI Service sits in an Azure Resource Group within an Azure Subscription. The [region](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#standard-deployment-model-availability) of the Azure OpenAI Service must be selected carefully since only a handful of regions grant access to specific language model versions and functionalities.
+To create an Azure OpenAI Service resource in Azure, you must first request access to the Azure OpenAI Service using the [Microsoft registration form](https://customervoice.microsoft.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR7en2Ais5pxKtso_Pz4b1_xUNTZBNzRKNlVQSFhZMU9aV09EVzYxWFdORCQlQCN0PWcu).
 
-**_NOTE: For the SDSC workshop, all Azure resources, requests, and regions have been pre-selected and provisioned. No additional steps are required._**
+Unfortunately, Azure OpenAI Service requires registration and is only available to eligible customers and partners. For specific requirements and reasons, see the [Limited Access to Azure OpenAI Service](https://learn.microsoft.com/en-us/legal/cognitive-services/openai/limited-access?context=%2Fazure%2Fcognitive-services%2Fopenai%2Fcontext%2Fcontext) documentation.
 
-To access the Azure OpenAI API using the Python SDK an **API Key** and an **API Endpoint URL** are required. This information will be used in the GitHub Codespaces environment.
+If you are eligible for Azure OpenAI Service, fantastic! Once you have requested access, you will create two Azure OpenAI Service resources in the Azure Portal and deploy the required models listed below in Azure OpenAI Studio.
+
+The Azure OpenAI Service [region](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#standard-deployment-model-availability) must be selected carefully since only a handful of regions grant access to specific language model versions and functionalities. In our case we will use the following regions:
+
+-   **Sweden Central** gives us access to **GPT-4** (version **1106-preview** for the **Azure OpenAI** **Assistant API**), **GPT-3.5 Turbo**, and **Embedding models** (text-embedding-3-large). These will be used in Parts 3 and Part 4.
+-   **East US 2** gives us access to **GPT-4o**, **GPT-3.5 Turbo**, and **Embedding models** (text-embedding-3-large). Additionally, we can also deploy **fine-tuned** models in this region. These will be used in Parts 5 and Parts 6.
+
+We will now create three model deployments. It’s important to set the **deployment name** exactly as described below, since this name will be used in the Notebooks later.
+
+### 3.1 Sweden Central
+
+-   In the Azure Portal, open the Azure OpenAI Service resource you created located in **Sweden Central** and select the **Go to Azure OpenAI Studio** button
+
+![](https://cdn-images-1.medium.com/max/800/1*e8zPx-SluT7poj-BCnwVqg.png)
+
+-   In Azure OpenAI Studio, select the **Deployments** tab on the left panel and select the button **Create new deployment**
+-   Let’s first create the GPT-3.5 Turbo model deployment. Define the parameters as shown in the image below and select **create**.
+
+![](https://cdn-images-1.medium.com/max/800/1*As2b42oJxAXjczVo7l9yFw.png)
+
+-   Let’s continue with the deployment of the GPT-4 model version **1106-preview.** Define the parameters as shown in the image below and select **create**.
+
+![](https://cdn-images-1.medium.com/max/800/1*zK1Qub6jBQow1vjwQy2Ndw.png)
+
+-   Last but not least, we deploy the Embedding model**.** Define the parameters as shown in the image below and select **create**.
+
+![](https://cdn-images-1.medium.com/max/800/1*2QilIrhYnzSkKMsMcluA2A.png)
+
+### 3.2 East US 2
+
+-   In the Azure Portal, open the Azure OpenAI Service resource you created located in **East US 2** and select the **Go to Azure OpenAI Studio** button
+
+![](https://cdn-images-1.medium.com/max/800/1*e8zPx-SluT7poj-BCnwVqg.png)
+
+-   In Azure OpenAI Studio, select the **Deployments** tab on the left panel and select the button **Create new deployment**
+-   Let’s first create the GPT-3.5 Turbo model deployment. Define the parameters as shown in the image below and select **create**.
+
+![](https://cdn-images-1.medium.com/max/800/1*As2b42oJxAXjczVo7l9yFw.png)
+
+-   Let’s continue with the deployment of the GPT-4o model.  Define the parameters as shown in the image below and select **create**.
+
+![](https://cdn-images-1.medium.com/max/800/1*nM7FzFjqDWx6iGmJs8RWeA.png)
+
+-   Last but not least, we deploy the Embedding model**.** Define the parameters as shown in the image below and select **create**.
+
+![](https://cdn-images-1.medium.com/max/800/1*2QilIrhYnzSkKMsMcluA2A.png)
+
+### 3.3 API Credentials
+
+To access the Azure OpenAI API using the Python SDK an **API Key** and an **API Endpoint URL** are required.
+
+You will need the **API Key** and **API Endpoint URL** of both Azure OpenAI Service resources. Copy these and paste them into your GitHub Codespaces environment as described in Chapter 4.4.
+
+-   In the Azure Portal, open the Azure OpenAI Service and select the **Key and Endpoints** tab.
+-   Copy **KEY 1** (API Key) and the **Endpoint** (API Endpoint URL).
+
+![](https://cdn-images-1.medium.com/max/800/1*rojaqdXJCSRRYZshnJpqJw.png)
+
+Repeat these steps for both of your Azure OpenAI Service resources. You should have copied 2 sets of credentials.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
