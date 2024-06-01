@@ -62,7 +62,7 @@ The Azure OpenAI Service [region](https://learn.microsoft.com/en-us/azure/ai-ser
 -   **Sweden Central** gives us access to **GPT-4** (version **1106-preview** for the **Azure OpenAI** **Assistant API**), **GPT-3.5 Turbo**, and **Embedding models** (text-embedding-3-large). These will be used in Parts 3 and Part 4.
 -   **East US 2** gives us access to **GPT-4o**, **GPT-3.5 Turbo**, and **Embedding models** (text-embedding-3-large). Additionally, we can also deploy **fine-tuned** models in this region. These will be used in Parts 5 and Parts 6.
 
-We will now create three model deployments. It’s important to set the **deployment name** exactly as described below, since this name will be used in the Notebooks later.
+We will now create the model deployments. It’s important to set the **deployment name** exactly as described below, since this name will be used in the Notebooks later.
 
 ### 3.1 Sweden Central
 
