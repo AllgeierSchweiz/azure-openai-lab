@@ -274,7 +274,7 @@ AZURE_OPENAI_ENDPOINT_P56 = ""
 
 ### 4.5 ChromaDB troubleshooting
 
-GitHub Codespace currently throws an error when importing the `chromadb` package. The system uses an unsupported version of `sqlite3`.
+GitHub Codespace currently throws the error below when importing the `chromadb` package. The system uses an unsupported version of `sqlite3`.
 
 ```
 >>> import chromadb  
