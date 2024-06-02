@@ -50,13 +50,76 @@ The CSV file **recipes.csv**  consists of 200K recipes covering 18 years of user
 
 ## 3. Azure Resources
 
-To use Azure OpenAI models you must first request access to the Azure OpenAI Service using the [Microsoft registration form](https://customervoice.microsoft.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR7en2Ais5pxKtso_Pz4b1_xUNTZBNzRKNlVQSFhZMU9aV09EVzYxWFdORCQlQCN0PWcu).
 
-The Azure OpenAI Service sits in an Azure Resource Group within an Azure Subscription. The [region](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#standard-deployment-model-availability) of the Azure OpenAI Service must be selected carefully since only a handful of regions grant access to specific language model versions and functionalities.
+To create an Azure OpenAI Service resource in Azure, you must first request access to the Azure OpenAI Service using the [Microsoft registration form](https://customervoice.microsoft.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR7en2Ais5pxKtso_Pz4b1_xUNTZBNzRKNlVQSFhZMU9aV09EVzYxWFdORCQlQCN0PWcu).
 
-**_NOTE: For the SDSC workshop, all Azure resources, requests, and regions have been pre-selected and provisioned. No additional steps are required._**
+Unfortunately, Azure OpenAI Service requires registration and is only available to eligible customers and partners. For specific requirements and reasons, see the [Limited Access to Azure OpenAI Service](https://learn.microsoft.com/en-us/legal/cognitive-services/openai/limited-access?context=%2Fazure%2Fcognitive-services%2Fopenai%2Fcontext%2Fcontext) documentation.
 
-To access the Azure OpenAI API using the Python SDK an **API Key** and an **API Endpoint URL** are required. This information will be used in the GitHub Codespaces environment.
+If you are eligible for Azure OpenAI Service, fantastic! Once you have requested access, you will create two Azure OpenAI Service resources in the Azure Portal and deploy the required models listed below in Azure OpenAI Studio.
+
+The Azure OpenAI Service [region](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#standard-deployment-model-availability) must be selected carefully since only a handful of regions grant access to specific language model versions and functionalities. In our case we will use the following regions:
+
+-   **Sweden Central** gives us access to **GPT-4** (version **1106-preview** for the **Azure OpenAI** **Assistant API**), **GPT-3.5 Turbo**, and **Embedding models** (text-embedding-3-large). These will be used in Parts 3 and Part 4.
+-   **East US 2** gives us access to **GPT-4o**, **GPT-3.5 Turbo**, and **Embedding models** (text-embedding-3-large). Additionally, we can also deploy **fine-tuned** models in this region. These will be used in Parts 5 and Parts 6.
+
+We will now create the model deployments. It’s important to set the **deployment name** exactly as described below, since this name will be used in the Notebooks later.
+
+### 3.1 Sweden Central
+
+-   In the Azure Portal, open the Azure OpenAI Service resource you created located in **Sweden Central** and select the **Go to Azure OpenAI Studio** button
+
+![](https://cdn-images-1.medium.com/max/800/1*e8zPx-SluT7poj-BCnwVqg.png)
+
+-   In Azure OpenAI Studio, select the **Deployments** tab on the left panel and select the button **Create new deployment**
+
+![](https://cdn-images-1.medium.com/max/800/1*VqQKH4kbqCayaz_sVPbJGw.png)
+
+-   Let’s first create the GPT-3.5 Turbo model deployment. Define the parameters as shown in the image below and select **create**.
+
+![](https://cdn-images-1.medium.com/max/800/1*As2b42oJxAXjczVo7l9yFw.png)
+
+-   Let’s continue with the deployment of the GPT-4 model version **1106-preview.** Define the parameters as shown in the image below and select **create**.
+
+![](https://cdn-images-1.medium.com/max/800/1*zK1Qub6jBQow1vjwQy2Ndw.png)
+
+-   Last but not least, we deploy the Embedding model**.** Define the parameters as shown in the image below and select **create**.
+
+![](https://cdn-images-1.medium.com/max/800/1*2QilIrhYnzSkKMsMcluA2A.png)
+
+### 3.2 East US 2
+
+-   In the Azure Portal, open the Azure OpenAI Service resource you created located in **East US 2** and select the **Go to Azure OpenAI Studio** button
+
+![](https://cdn-images-1.medium.com/max/800/1*e8zPx-SluT7poj-BCnwVqg.png)
+
+-   In Azure OpenAI Studio, select the **Deployments** tab on the left panel and select the button **Create new deployment**
+
+![](https://cdn-images-1.medium.com/max/800/1*VqQKH4kbqCayaz_sVPbJGw.png)
+
+-   Let’s first create the GPT-3.5 Turbo model deployment. Define the parameters as shown in the image below and select **create**.
+
+![](https://cdn-images-1.medium.com/max/800/1*As2b42oJxAXjczVo7l9yFw.png)
+
+-   Let’s continue with the deployment of the GPT-4o model.  Define the parameters as shown in the image below and select **create**.
+
+![](https://cdn-images-1.medium.com/max/800/1*nM7FzFjqDWx6iGmJs8RWeA.png)
+
+-   Last but not least, we deploy the Embedding model**.** Define the parameters as shown in the image below and select **create**.
+
+![](https://cdn-images-1.medium.com/max/800/1*2QilIrhYnzSkKMsMcluA2A.png)
+
+### 3.3 API Credentials
+
+To access the Azure OpenAI API using the Python SDK an **API Key** and an **API Endpoint URL** are required.
+
+You will need the **API Key** and **API Endpoint URL** of both Azure OpenAI Service resources. Copy these and paste them into your GitHub Codespaces environment as described in Chapter 4.4.
+
+-   In the Azure Portal, open the Azure OpenAI Service and select the **Key and Endpoints** tab.
+-   Copy **KEY 1** (API Key) and the **Endpoint** (API Endpoint URL).
+
+![](https://cdn-images-1.medium.com/max/800/1*rojaqdXJCSRRYZshnJpqJw.png)
+
+Repeat these steps for both of your Azure OpenAI Service resources. You should have copied 2 sets of credentials.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -193,7 +256,17 @@ AZURE_OPENAI_KEY_P56 = ""
 AZURE_OPENAI_ENDPOINT_P56 = ""
 ```
 
--   Change the entries of **AZURE_OPENAI_KEY_P34, AZURE_OPENAI_ENDPOINT_P34, AZURE_OPENAI_KEY_P56,** and **AZURE_OPENAI_ENDPOINT_56** to match the credentials supplied to you.
+-   Paste the API credentials you copied in Chapter 3.2 as described below:
+
+1.  AZURE_OPENAI_KEY_P34 = **KEY 1** from Azure OpenAI Service located in **Sweden Central**
+2.  AZURE_OPENAI_ENDPOINT_P34 = **Endpoint** from Azure OpenAI Service located in **Sweden Central**
+
+  
+
+1.  AZURE_OPENAI_KEY_P56 = **KEY 1** from Azure OpenAI Service located in **East US 2**
+2.  AZURE_OPENAI_ENDPOINT_P56 = **Endpoint** from Azure OpenAI Service located in **East US 2**
+
+**_NOTE: Do not forget to put both KEY1 and Endpoint in quotation marks._**
 
 ![](https://cdn-images-1.medium.com/max/800/1*9SNDyr7cKrt09zmsIcMNlA.png)
 
@@ -201,9 +274,9 @@ AZURE_OPENAI_ENDPOINT_P56 = ""
 
 ### 4.5 ChromaDB troubleshooting
 
-GitHub Codespace currently throws an error when importing the `chromadb` package. The system uses an unsupported version of `sqlite3`, which we need to create our local database.
+GitHub Codespace currently throws the error below when importing the `chromadb` package. The system uses an unsupported version of `sqlite3`.
 
-```sql
+```
 >>> import chromadb  
 Traceback (most recent call last):  
   File "<stdin>", line 1, in <module>  
@@ -221,13 +294,16 @@ We need to implement a workaround to fix this issue.
 
 ![](https://cdn-images-1.medium.com/max/800/1*VH5gkNvFyc79jx3F1wK33Q.png)
 
--   Within the **\_init\_.py** file go to line 68 and change the if statement from **“if IN_COLAB”** to **“if True”**
+-   Within the **\_init\_.py** file go to line 68 and change the if statement from **if IN_COLAB:** to **if True:**
 
 ![](https://cdn-images-1.medium.com/max/800/1*fDH4MliLq4qSSA0DwrCMiw.png)
 
 -   Once you have made the changes close the **\_init\_.py** file. All changes are automatically saved. Not to worry!
 
 ![](https://cdn-images-1.medium.com/max/800/1*QsMvkmRyEEvlmajyOGcUnA.png)
+
+
+**_NOTE: These changes are relevant for Notebook P5-azure-openai-fine-tuning.ipynb. If you’re getting an error message related to ChromaDB when running the code in this Notebook, try restarting the Kernel and re-running the code._**
 
 <br/><br/>
 
