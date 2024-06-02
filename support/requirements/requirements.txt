@@ -6,7 +6,6 @@
 #py -m pip install <package>
 
 numpy
-openai==1.12
 pandas
 python-dotenv
 seaborn
@@ -21,15 +20,11 @@ langchain-openai
 python-dotenv
 pysqlite3-binary
 
-#
+
 ###### Requirements with Version Specifiers ######
 #   See https://www.python.org/dev/peps/pep-0440/#version-specifiers
-# numpy==1.26.1
-# openai==0.28.1
-# pandas==2.1.1
-# python-dotenv==1.0.0
-# seaborn==0.13.0
-# streamlit==1.27.2
+
+openai==1.12
 
 
 ###### Refer to other requirements files ######
