@@ -57,13 +57,13 @@ These models allow us to create written and image-based content, summarize infor
 
 Users can utilize the Azure OpenAI Service through REST APIs, Python SDK, or the web-based interface provided in the Azure OpenAI Studio.
 
-In our case, we will use the language models **GPT-4, GPT-3.5-Turbo,** and **Embeddings**. Each one will be called using the Azure OpenAI API. Additionally, we will use the **Azure OpenAI Assistants API** to perform data pre-processing operations using the code interpreter functionality.
+In our case, we will use the language models **GPT-4o, GPT-4, GPT-3.5-Turbo,** and **Embeddings**. Each one will be called using the Azure OpenAI API. Additionally, we will use the **Azure OpenAI Assistants API** to perform data pre-processing operations using the code interpreter functionality.
 
 ### 3.1 Azure OpenAI Assistants
 
 An assistant is an AI agent that is designed for a specific purpose. It augments the functionality of the Azure OpenAI models. The assistant facilitates the integration of third-party tools through custom functions and provides access to a coding environment through the Code Interpreter functionality. The exceptional performance of these AI agents is achieved through the utilisation of Threads, which facilitates the management and storage of message history.
 
-In our case, we will use this agent to perform data pre-processing steps using the code interpreter functionality, which grants the model a Python environment to perform data transformation using `pandas` .
+In our case, we will use this agent to perform data pre-processing steps using the code interpreter functionality. This functionality grants the model a Python environment to run the Python code it generates to perform data transformation steps.
 
 **_NOTE: It is important to note that Azure OpenAI Assistants are not the only agents that offer these functionalities. LangChain presented their own approach with the introduction of LangChain Agents._**
 
@@ -108,9 +108,9 @@ In this workshop, we’ll work with a new dataset, a CSV file filled with exampl
 
 ### 4.3 Fine-Tuning
 
-Fine-tuning is a technique used to re-train a pre-trained model using a new foundation of information i.e. training data, to suit a specific task.
+Fine-tuning is a technique used to train a pre-trained base model using a new foundation of information i.e. training data, to suit a specific task.
 
-Azure OpenAI models possess extensive knowledge of diverse topics drawn from different data sources up until April 2023. This enables the model to address a wide array of problems, however, not every business requires a model capable of addressing an extensive range of topics simultaneously. Fine-tuning allows us to counteract this state, allowing the language model to become sharper in a specific knowledge domain.
+Azure OpenAI models possess extensive knowledge of diverse topics drawn from different data sources. This enables the model to address a wide array of problems; however, not every business requires a model capable of simultaneously addressing an extensive range of topics. Fine-tuning allows us to counteract this state, making the language model sharper in a specific knowledge domain.
 
 The fine-tuning process requires a careful investment of time and effort. You should first try to get good results with prompt engineering or RAG. As fine-tuning is more time and resource-intensive, requiring us to create datasets and run training jobs, implementing these alternative enhancement techniques should always be pursued first. In cases where fine-tuning is implemented, prompt engineering work is not wasted. The best results are usually obtained by combining good prompt engineering with a fine-tuned model.
 
