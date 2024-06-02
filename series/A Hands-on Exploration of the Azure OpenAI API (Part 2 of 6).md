@@ -276,7 +276,7 @@ AZURE_OPENAI_ENDPOINT_P56 = ""
 
 GitHub Codespace currently throws an error when importing the `chromadb` package. The system uses an unsupported version of `sqlite3`.
 
-```sql
+```
 >>> import chromadb  
 Traceback (most recent call last):  
   File "<stdin>", line 1, in <module>  
