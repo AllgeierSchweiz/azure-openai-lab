@@ -25,7 +25,7 @@ Unfortunately, creating a fine-tuned model is very resource-intensive and costly
 
 ### 1.2 What we are doing in a nutshell
 
-![](https://cdn-images-1.medium.com/max/800/1*tFzNR58h4r1VUfx6EPOQTA.png)
+![Fine-Tuned][Fine-Tuned]
 
 1.  Format the data for Fine-Tuning.
 2.  Split the data into a training and validation set.
@@ -856,3 +856,7 @@ Reach out to us! We are happy to answer any questions you might have or use your
 ## 7. References
 
 [1] [Full Fine-Tuning, PEFT, Prompt Engineering, or RAG? (deci.ai)](https://deci.ai/blog/fine-tuning-peft-prompt-engineering-and-rag-which-one-is-right-for-you/)
+
+<!-- MARKDOWN LINKS & IMAGES -->
+[A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-6]: https://github.com/AllgeierSchweiz/azure-openai-lab/blob/main/series/A%20Hands-on%20Exploration%20of%20the%20Azure%20OpenAI%20API%20(Part%206%20of%C2%A06).md
+[Fine-Tuned]: https://github.com/AllgeierSchweiz/azure-openai-lab/blob/main/images/Fine_Tuning.jpg
