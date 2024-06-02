@@ -47,7 +47,7 @@ The following series showcases how to use the Azure OpenAI Service in Python by 
 
 The use case of this series revolves around the [Food Fighters](https://github.com/AllgeierSchweiz/aihackers) concept created for [The Microsoft Fabric Global AI Hack](https://github.com/microsoft/Hack-Together-Fabric-AI) of 2024.
 
-![Food-Fighter][Food-Fighter]
+![Food-Fighter](images/Food_Fighter.jpg)
 
 The solution aims to combat food waste by empowering users to effortlessly manage their food inventory, track food expiration dates, and receive personalized recipe suggestions via email, all with a simple product scan.
 
@@ -121,13 +121,15 @@ Depending on the objective, prompt engineering can serve as an alternative appro
 
 Retrieval Augmented Generation (RAG) is a retrieval strategy aimed at enhancing language models by providing them with supplementary information, a process also known as grounding. Rather than solely depending on the model’s existing knowledge, we can add proprietary data into the model prompt to guide it to more precise and domain-specific responses. It’s important to note that the model is **not** re-trained on the new data. The new data is only used as an additional prompt input, acting similarly to one-shot learning.
 
-![](https://cdn-images-1.medium.com/max/800/1*bmRA29kWZsaU8MvIqM1qDA.png)
+![RAG](images/RAG.jpg)
 
 In this workshop, we’ll work with a new dataset, a CSV file filled with examples of vegan recipes. By incorporating this particular dataset, our model should more accurately produce vegan recipes. We will learn more about these concepts in [Part 4][A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-4].
 
 ### 4.3 Fine-Tuning
 
 Fine-tuning is a technique used to train a pre-trained base model using a new foundation of information i.e. training data, to suit a specific task.
+
+![Fine-Tuning](images/Fine_Tuning.jpg)
 
 Azure OpenAI models possess extensive knowledge of diverse topics drawn from different data sources. This enables the model to address a wide array of problems; however, not every business requires a model capable of simultaneously addressing an extensive range of topics. Fine-tuning allows us to counteract this state, making the language model sharper in a specific knowledge domain.
 
