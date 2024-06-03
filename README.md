@@ -72,7 +72,7 @@ Unfortunately, we don't have time to build the entire architecture of this solut
 
 The Azure OpenAI Service offers access to various large language models (LLMs), including GPT-4o, GPT-4, GPT-4 Turbo with Vision, GPT-3.5-Turbo, and Embeddings model series. These are the same language models made available by [OpenAI](https://platform.openai.com/docs/models).
 
-These models allow us to create written and image-based content, summarize information, do semantic searches, and natural language to code translations.
+These models allow us to create written, image, and audio-based content, summarize information, perform semantic searches, and use natural language to code translations.
 
 Users can utilize the Azure OpenAI Service through REST APIs, Python SDK, or the web-based interface provided in the Azure OpenAI Studio.
 
