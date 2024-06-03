@@ -15,7 +15,7 @@ The following series showcases how to use the Azure OpenAI Service in Python by 
 
 -   **Part 1** provides the readers with an overview of the workshop use case, what Azure OpenAI Service is, the language models used, the different techniques to enhance these models and the differences between Azure OpenAI and OpenAI.
 -   **Part 2** will show the readers the preparations required to start using the Azure OpenAI API in Python using GitHub Codespaces.
--   **Part 3** will show the readers how to start using the Azure OpenAI API. Model enhancement techniques such as prompt engineering, zero-shot, one-shot, and few-shot learning will be implemented.
+-   **Part 3** will show the readers how to start using the Azure OpenAI API. Model enhancement techniques will be implemented, such as prompt engineering, zero-shot, one-shot, and few-shot learning.
 -   **Part 4** will show the readers how to implement a retrieval strategy such as Retrieval-Augmented Generation (RAG) using the Azure OpenAI API together with LangChain and ChromaDB as the vector database. Additionally, the implementation of the Azure OpenAI Assistant API for data pre-processing of the data for RAG will also be showcased.
 -   **Part 5** will show the readers how to use fine-tuned model using the Azure OpenAI API and explore the implementation of RAG together with a fine-tuned model. Additionally, the implementation of the Azure OpenAI Assistant API for data pre-processing of the data for fine-tuning will also be showcased.
 -   **Part 6** will show the reader how to translate images into text using the new GPT-4o model through the Azure OpenAI API.
