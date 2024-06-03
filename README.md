@@ -32,12 +32,12 @@ You can also find the series in the Allgeier Schweiz [GitHub repository](https:/
 
 The following series showcases how to use the Azure OpenAI Service in Python by calling the Azure OpenAI REST API.
 
--   **[Part 1][A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-1]:** (this page) provides the readers with an overview of the workshop use case, what Azure OpenAI Service is, the language models used, the different techniques to enhance these models and the differences between Azure OpenAI and OpenAI.
--   **[Part 2][A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-2]** will show the readers the preparations required to start using the Azure OpenAI API in Python using GitHub Codespaces.
--   **[Part 3][A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-3]** will show the readers how to start using the Azure OpenAI API. Model enhancement techniques will be implemented, such as prompt engineering, zero-shot, one-shot, and few-shot learning.
--   **[Part 4][A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-4]** will show the readers how to implement a retrieval strategy such as Retrieval-Augmented Generation (RAG) using the Azure OpenAI API together with LangChain and ChromaDB as the vector database. Additionally, the implementation of the Azure OpenAI Assistant API for data pre-processing of the data for RAG will also be showcased.
--   **[Part 5][A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-5]** will show the readers how to use a fine-tuned model using the Azure OpenAI API and explore the implementation of RAG together with a fine-tuned model. Additionally, the implementation of the Azure OpenAI Assistant API for data pre-processing for fine-tuning will also be showcased.
--   **[Part 6][A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-6]** will show the readers how to translate images into text using the new GPT-4o model through the Azure OpenAI API.
+-   **[Part 1][A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-1]:** (this page) provides readers with an overview of the workshop use case, what Azure OpenAI Service is, the language models used, the different techniques to enhance these models and the differences between Azure OpenAI and OpenAI.
+-   **[Part 2][A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-2]** will show readers the preparations required to start using the Azure OpenAI API in Python using GitHub Codespaces.
+-   **[Part 3][A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-3]** will show readers how to start using the Azure OpenAI API. Model enhancement techniques will be implemented, such as prompt engineering, zero-shot, one-shot, and few-shot learning.
+-   **[Part 4][A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-4]** will show readers how to implement a retrieval strategy such as Retrieval-Augmented Generation (RAG) using the Azure OpenAI API together with LangChain and ChromaDB as the vector database. Additionally, the implementation of the Azure OpenAI Assistant API for data pre-processing of the data for RAG will also be showcased.
+-   **[Part 5][A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-5]** will show readers how to use a fine-tuned model using the Azure OpenAI API and explore the implementation of RAG together with a fine-tuned model. Additionally, the implementation of the Azure OpenAI Assistant API for data pre-processing for fine-tuning will also be showcased.
+-   **[Part 6][A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-6]** will show readers how to translate images into text using the new GPT-4o model through the Azure OpenAI API.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
