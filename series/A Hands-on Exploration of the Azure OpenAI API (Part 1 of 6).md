@@ -80,7 +80,7 @@ In our case, we will use this agent to perform data pre-processing steps using t
 
 ## 4. Enhancement Techniques
 
-In this workshop we will showcase three key techniques for improving the language model’s output: prompt engineering, retrieval-augmented generation (RAG), and Fine-tuning.
+This workshop will showcase three key techniques for improving the language model's output: prompt engineering, retrieval-augmented generation (RAG), and Fine-tuning.
 
 ![](https://cdn-images-1.medium.com/max/800/0*Q4tzzQAbnp249jQX.jpg)
 
