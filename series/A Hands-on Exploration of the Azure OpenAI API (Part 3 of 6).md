@@ -13,7 +13,7 @@ The Jupyter Notebook we are going to work with is:
 
 1.  _P3-azure-openai-prompt-engineering.ipynb_
 
-In this Notebook, we will call the Azure OpenAI API using the Chat Completion API using the GPT-3.5-Turbo model. This model is optimized for conversational interfaces and expects an input formatted in a [specific chat-like transcript](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/chatgpt) stored inside an array of dictionaries. The structure looks as follows:
+In this Notebook, we will call the Azure OpenAI API using the Chat Completion API using the GPT-4o-mini model. This model is optimized for conversational interfaces and expects an input formatted in a [specific chat-like transcript](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/chatgpt) stored inside an array of dictionaries. The structure looks as follows:
 
 ```sql
 {"role": "system", "content": "Provide context and / or instructions to the model."},  

@@ -59,67 +59,47 @@ If you are eligible for Azure OpenAI Service, fantastic! Once you have requested
 
 The Azure OpenAI Service [region](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#standard-deployment-model-availability) must be selected carefully since only a handful of regions grant access to specific language model versions and functionalities. In our case we will use the following regions:
 
--   **Sweden Central** gives us access to **GPT-4** (version **1106-preview** for the **Azure OpenAI** **Assistant API**), **GPT-3.5 Turbo**, and **Embedding models** (text-embedding-3-large). These will be used in Parts 3 and Part 4.
--   **East US 2** gives us access to **GPT-4o**, **GPT-3.5 Turbo**, and **Embedding models** (text-embedding-3-large). Additionally, we can also deploy **fine-tuned** models in this region. These will be used in Parts 5 and Parts 6.
+-   **Sweden Central** gives us access to **GPT-4o-mini** (version **2024-07-18** for **Chat Completion**, the **Azure OpenAI Assistant API** and **Fine-Tuning**), and **Embedding models** (text-embedding-3-large).
 
 We will now create the model deployments. It’s important to set the **deployment name** exactly as described below, since this name will be used in the Notebooks later.
 
 ### 3.1 Sweden Central
 
--   In the Azure Portal, open the Azure OpenAI Service resource you created located in **Sweden Central** and select the **Go to Azure OpenAI Studio** button
+-   In the Azure Portal, open the Azure OpenAI resource you created located in **Sweden Central** and select the **Explore Azure AI Foundry portal** button
 
-![](https://cdn-images-1.medium.com/max/800/1*e8zPx-SluT7poj-BCnwVqg.png)
+![](https://cdn-images-1.medium.com/max/800/1*PLejFC9jozUzVhWlzLYjUA.png)
 
--   In Azure OpenAI Studio, select the **Deployments** tab on the left panel and select the button **Create new deployment**
+-   In Azure AI Foundry, select the **Deployments** tab on the left panel and select the button **Deploy model,** followed by **Deploy base model.**
 
-![](https://cdn-images-1.medium.com/max/800/1*VqQKH4kbqCayaz_sVPbJGw.png)
+![](https://cdn-images-1.medium.com/max/800/1*H-qJS2beIWixWD28Uii5MA.png)
 
--   Let’s first create the GPT-3.5 Turbo model deployment. Define the parameters as shown in the image below and select **create**.
+-   Let’s first create the GPT-4o-mini Turbo model named `gpt-4o-mini`. Search for and select **gpt-4o-mini**, followed by the button **Confirm**
 
-![](https://cdn-images-1.medium.com/max/800/1*As2b42oJxAXjczVo7l9yFw.png)
+![](https://cdn-images-1.medium.com/max/800/1*VCiOPHNb-qwUvPAAr9BnDg.png)
 
--   Let’s continue with the deployment of the GPT-4 model version **1106-preview.** Define the parameters as shown in the image below and select **create**.
+Adjust the D**eployment name** if necessary, this should be `gpt-4o-mini`and any parameters as depicted below. Select the button **Deploy** once you’re ready.
 
-![](https://cdn-images-1.medium.com/max/800/1*zK1Qub6jBQow1vjwQy2Ndw.png)
+![](https://cdn-images-1.medium.com/max/800/1*jgcEia5gwOfHCVLucazNpA.png)
 
--   Last but not least, we deploy the Embedding model**.** Define the parameters as shown in the image below and select **create**.
+-   Let’s continue with the deployment of the Embedding model version named  `text-embedding-3-large`**.**
 
-![](https://cdn-images-1.medium.com/max/800/1*2QilIrhYnzSkKMsMcluA2A.png)
+![](https://cdn-images-1.medium.com/max/800/1*A-eNYvt_om0sMHZDb1ElzA.png)
 
-### 3.2 East US 2
+-   Adjust the D**eployment name** if necessary, this should be `text-embedding-3-large`and any parameters as depicted below. Select the button **Deploy** once you’re ready.
 
--   In the Azure Portal, open the Azure OpenAI Service resource you created located in **East US 2** and select the **Go to Azure OpenAI Studio** button
+![](https://cdn-images-1.medium.com/max/800/1*rustgJWFjDCB7F2Bu0nlaw.png)
 
-![](https://cdn-images-1.medium.com/max/800/1*e8zPx-SluT7poj-BCnwVqg.png)
 
--   In Azure OpenAI Studio, select the **Deployments** tab on the left panel and select the button **Create new deployment**
-
-![](https://cdn-images-1.medium.com/max/800/1*VqQKH4kbqCayaz_sVPbJGw.png)
-
--   Let’s first create the GPT-3.5 Turbo model deployment. Define the parameters as shown in the image below and select **create**.
-
-![](https://cdn-images-1.medium.com/max/800/1*As2b42oJxAXjczVo7l9yFw.png)
-
--   Let’s continue with the deployment of the GPT-4o model.  Define the parameters as shown in the image below and select **create**.
-
-![](https://cdn-images-1.medium.com/max/800/1*nM7FzFjqDWx6iGmJs8RWeA.png)
-
--   Last but not least, we deploy the Embedding model**.** Define the parameters as shown in the image below and select **create**.
-
-![](https://cdn-images-1.medium.com/max/800/1*2QilIrhYnzSkKMsMcluA2A.png)
-
-### 3.3 API Credentials
+### 3.2 API Credentials
 
 To access the Azure OpenAI API using the Python SDK an **API Key** and an **API Endpoint URL** are required.
 
-You will need the **API Key** and **API Endpoint URL** of both Azure OpenAI Service resources. Copy these and paste them into your GitHub Codespaces environment as described in Chapter 4.4.
+You will need the **API Key** and **API Endpoint URL** of the Azure OpenAI resources. Copy these and paste them into your GitHub Codespaces environment as described in Chapter 4.4.
 
--   In the Azure Portal, open the Azure OpenAI Service and select the **Key and Endpoints** tab.
+-   In the Azure Portal, open the Azure OpenAI and select the **Key and Endpoints** tab.
 -   Copy **KEY 1** (API Key) and the **Endpoint** (API Endpoint URL).
 
-![](https://cdn-images-1.medium.com/max/800/1*rojaqdXJCSRRYZshnJpqJw.png)
-
-Repeat these steps for both of your Azure OpenAI Service resources. You should have copied 2 sets of credentials.
+![](https://cdn-images-1.medium.com/max/800/1*JAO9fSqLpmzT8-nZRufloQ.png)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -246,14 +226,12 @@ We will save these credentials in a `.env` file within our Python environment.
 
 ```sql
 # Azure Tenant: Azure Pass
-# Resource Group name: rg-sdsc2024-x
-# Azure OpenAI Resource name: oai-sdsc2024-x
+# Resource Group name: rg-xxx-x
+# Azure OpenAI Resource name: oai-xxx-x
 
 AZURE_OPENAI_KEY_P34 = ""
 AZURE_OPENAI_ENDPOINT_P34 = ""
 
-AZURE_OPENAI_KEY_P56 = ""
-AZURE_OPENAI_ENDPOINT_P56 = ""
 ```
 
 -   Paste the API credentials you copied in Chapter 3.2 as described below:
@@ -261,14 +239,9 @@ AZURE_OPENAI_ENDPOINT_P56 = ""
 1.  AZURE_OPENAI_KEY_P34 = **KEY 1** from Azure OpenAI Service located in **Sweden Central**
 2.  AZURE_OPENAI_ENDPOINT_P34 = **Endpoint** from Azure OpenAI Service located in **Sweden Central**
 
-  
-
-1.  AZURE_OPENAI_KEY_P56 = **KEY 1** from Azure OpenAI Service located in **East US 2**
-2.  AZURE_OPENAI_ENDPOINT_P56 = **Endpoint** from Azure OpenAI Service located in **East US 2**
-
 **_NOTE: Do not forget to put both KEY1 and Endpoint in quotation marks._**
 
-![](https://cdn-images-1.medium.com/max/800/1*9SNDyr7cKrt09zmsIcMNlA.png)
+![](https://cdn-images-1.medium.com/max/800/1*VhxFx3_1KGKR8loOusbjaA.png)
 
 <br/><br/>
 
@@ -294,9 +267,9 @@ We need to implement a workaround to fix this issue.
 
 ![](https://cdn-images-1.medium.com/max/800/1*VH5gkNvFyc79jx3F1wK33Q.png)
 
--   Within the **\_init\_.py** file go to line 68 and change the if statement from **if IN_COLAB:** to **if True:**
+-   Within the **_init_.py** file go to line 75 and change the if statement from **if IN_COLAB:** to **if True:**
 
-![](https://cdn-images-1.medium.com/max/800/1*fDH4MliLq4qSSA0DwrCMiw.png)
+![](https://cdn-images-1.medium.com/max/800/1*uWBUDLkfprNKGcxn4u-BEg.png)
 
 -   Once you have made the changes close the **\_init\_.py** file. All changes are automatically saved. Not to worry!
 
