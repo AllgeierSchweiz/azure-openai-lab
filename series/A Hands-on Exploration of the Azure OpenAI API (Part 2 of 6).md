@@ -94,14 +94,12 @@ Adjust the D**eployment name** if necessary, this should be `gpt-4o-mini`and any
 
 To access the Azure OpenAI API using the Python SDK an **API Key** and an **API Endpoint URL** are required.
 
-You will need the **API Key** and **API Endpoint URL** of both Azure OpenAI Service resources. Copy these and paste them into your GitHub Codespaces environment as described in Chapter 4.4.
+You will need the **API Key** and **API Endpoint URL** of the Azure OpenAI resources. Copy these and paste them into your GitHub Codespaces environment as described in Chapter 4.4.
 
--   In the Azure Portal, open the Azure OpenAI Service and select the **Key and Endpoints** tab.
+-   In the Azure Portal, open the Azure OpenAI and select the **Key and Endpoints** tab.
 -   Copy **KEY 1** (API Key) and the **Endpoint** (API Endpoint URL).
 
-![](https://cdn-images-1.medium.com/max/800/1*rojaqdXJCSRRYZshnJpqJw.png)
-
-Repeat these steps for both of your Azure OpenAI Service resources. You should have copied 2 sets of credentials.
+![](https://cdn-images-1.medium.com/max/800/1*JAO9fSqLpmzT8-nZRufloQ.png)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -228,25 +226,18 @@ We will save these credentials in a `.env` file within our Python environment.
 
 ```sql
 # Azure Tenant: Azure Pass
-# Resource Group name: rg-sdsc2024-x
-# Azure OpenAI Resource name: oai-sdsc2024-x
+# Resource Group name: rg-xxx-x
+# Azure OpenAI Resource name: oai-xxx-x
 
 AZURE_OPENAI_KEY_P34 = ""
 AZURE_OPENAI_ENDPOINT_P34 = ""
 
-AZURE_OPENAI_KEY_P56 = ""
-AZURE_OPENAI_ENDPOINT_P56 = ""
 ```
 
 -   Paste the API credentials you copied in Chapter 3.2 as described below:
 
 1.  AZURE_OPENAI_KEY_P34 = **KEY 1** from Azure OpenAI Service located in **Sweden Central**
 2.  AZURE_OPENAI_ENDPOINT_P34 = **Endpoint** from Azure OpenAI Service located in **Sweden Central**
-
-  
-
-1.  AZURE_OPENAI_KEY_P56 = **KEY 1** from Azure OpenAI Service located in **East US 2**
-2.  AZURE_OPENAI_ENDPOINT_P56 = **Endpoint** from Azure OpenAI Service located in **East US 2**
 
 **_NOTE: Do not forget to put both KEY1 and Endpoint in quotation marks._**
 
