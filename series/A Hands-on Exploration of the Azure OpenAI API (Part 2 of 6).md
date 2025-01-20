@@ -267,9 +267,9 @@ We need to implement a workaround to fix this issue.
 
 ![](https://cdn-images-1.medium.com/max/800/1*VH5gkNvFyc79jx3F1wK33Q.png)
 
--   Within the **\_init\_.py** file go to line 68 and change the if statement from **if IN_COLAB:** to **if True:**
+-   Within the **_init_.py** file go to line 75 and change the if statement from **if IN_COLAB:** to **if True:**
 
-![](https://cdn-images-1.medium.com/max/800/1*fDH4MliLq4qSSA0DwrCMiw.png)
+![](https://cdn-images-1.medium.com/max/800/1*uWBUDLkfprNKGcxn4u-BEg.png)
 
 -   Once you have made the changes close the **\_init\_.py** file. All changes are automatically saved. Not to worry!
 
