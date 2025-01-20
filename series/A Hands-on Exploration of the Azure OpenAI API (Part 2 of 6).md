@@ -241,7 +241,7 @@ AZURE_OPENAI_ENDPOINT_P34 = ""
 
 **_NOTE: Do not forget to put both KEY1 and Endpoint in quotation marks._**
 
-![](https://cdn-images-1.medium.com/max/800/1*9SNDyr7cKrt09zmsIcMNlA.png)
+![](https://cdn-images-1.medium.com/max/800/1*VhxFx3_1KGKR8loOusbjaA.png)
 
 <br/><br/>
 
