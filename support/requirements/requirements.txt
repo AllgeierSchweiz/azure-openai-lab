@@ -17,6 +17,8 @@ tiktoken
 chromadb
 langchain
 langchain-openai
+langchain-community
+langchain-chroma
 python-dotenv
 pysqlite3-binary
 
@@ -24,7 +26,7 @@ pysqlite3-binary
 ###### Requirements with Version Specifiers ######
 #   See https://www.python.org/dev/peps/pep-0440/#version-specifiers
 
-openai==1.12
+openai
 
 
 ###### Refer to other requirements files ######
