@@ -65,28 +65,32 @@ We will now create the model deployments. It’s important to set the **deployme
 
 ### 3.1 Sweden Central
 
--   In the Azure Portal, open the Azure OpenAI Service resource you created located in **Sweden Central** and select the **Go to Azure OpenAI Studio** button
+-   In the Azure Portal, open the Azure OpenAI resource you created located in **Sweden Central** and select the **Explore Azure AI Foundry portal** button
 
-![](https://cdn-images-1.medium.com/max/800/1*e8zPx-SluT7poj-BCnwVqg.png)
+![](https://cdn-images-1.medium.com/max/800/1*PLejFC9jozUzVhWlzLYjUA.png)
 
--   In Azure OpenAI Studio, select the **Deployments** tab on the left panel and select the button **Create new deployment**
+-   In Azure AI Foundry, select the **Deployments** tab on the left panel and select the button **Deploy model,** followed by **Deploy base model.**
 
-![](https://cdn-images-1.medium.com/max/800/1*VqQKH4kbqCayaz_sVPbJGw.png)
+![](https://cdn-images-1.medium.com/max/800/1*H-qJS2beIWixWD28Uii5MA.png)
 
--   Let’s first create the GPT-3.5 Turbo model deployment. Define the parameters as shown in the image below and select **create**.
+-   Let’s first create the GPT-4o-mini Turbo model named `gpt-4o-mini`. Search for and select **gpt-4o-mini**, followed by the button **Confirm**
 
-![](https://cdn-images-1.medium.com/max/800/1*As2b42oJxAXjczVo7l9yFw.png)
+![](https://cdn-images-1.medium.com/max/800/1*VCiOPHNb-qwUvPAAr9BnDg.png)
 
--   Let’s continue with the deployment of the GPT-4 model version **1106-preview.** Define the parameters as shown in the image below and select **create**.
+Adjust the D**eployment name** if necessary, this should be `gpt-4o-mini`and any parameters as depicted below. Select the button **Deploy** once you’re ready.
 
-![](https://cdn-images-1.medium.com/max/800/1*zK1Qub6jBQow1vjwQy2Ndw.png)
+![](https://cdn-images-1.medium.com/max/800/1*jgcEia5gwOfHCVLucazNpA.png)
 
--   Last but not least, we deploy the Embedding model**.** Define the parameters as shown in the image below and select **create**.
+-   Let’s continue with the deployment of the Embedding model version named  `text-embedding-3-large`**.**
 
-![](https://cdn-images-1.medium.com/max/800/1*2QilIrhYnzSkKMsMcluA2A.png)
+![](https://cdn-images-1.medium.com/max/800/1*A-eNYvt_om0sMHZDb1ElzA.png)
+
+-   Adjust the D**eployment name** if necessary, this should be `text-embedding-3-large`and any parameters as depicted below. Select the button **Deploy** once you’re ready.
+
+![](https://cdn-images-1.medium.com/max/800/1*rustgJWFjDCB7F2Bu0nlaw.png)
 
 
-### 3.3 API Credentials
+### 3.2 API Credentials
 
 To access the Azure OpenAI API using the Python SDK an **API Key** and an **API Endpoint URL** are required.
 
