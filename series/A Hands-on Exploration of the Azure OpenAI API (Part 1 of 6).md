@@ -13,12 +13,12 @@ You can also find the series in the Allgeier Schweiz [GitHub repository](https:/
 
 The following series showcases how to use the Azure OpenAI Service in Python by calling the Azure OpenAI REST API.
 
--   **Part 1** provides the readers with an overview of the workshop use case, what Azure OpenAI Service is, the language models used, the different techniques to enhance these models and the differences between Azure OpenAI and OpenAI.
--   **Part 2** will show the readers the preparations required to start using the Azure OpenAI API in Python using GitHub Codespaces.
--   **Part 3** will show the readers how to start using the Azure OpenAI API. Model enhancement techniques such as prompt engineering, zero-shot, one-shot, and few-shot learning will be implemented.
--   **Part 4** will show the readers how to implement a retrieval strategy such as Retrieval-Augmented Generation (RAG) using the Azure OpenAI API together with LangChain and ChromaDB as the vector database. Additionally, the implementation of the Azure OpenAI Assistant API for data pre-processing of the data for RAG will also be showcased.
--   **Part 5** will show the readers how to use fine-tuned model using the Azure OpenAI API and explore the implementation of RAG together with a fine-tuned model. Additionally, the implementation of the Azure OpenAI Assistant API for data pre-processing of the data for fine-tuning will also be showcased.
--   **Part 6** will show the reader how to translate images into text using the new GPT-4o model through the Azure OpenAI API.
+-   **Part 1** provides readers with an overview of the workshop use case, what Azure OpenAI Service is, the language models used, the different techniques to enhance these models and the differences between Azure OpenAI and OpenAI.
+-   **Part 2** will show readers the preparations required to start using the Azure OpenAI API in Python using GitHub Codespaces.
+-   **Part 3** will show readers how to start using the Azure OpenAI API. Model enhancement techniques will be implemented, such as prompt engineering, zero-shot, one-shot, and few-shot learning.
+-   **Part 4** will show readers how to implement a retrieval strategy such as Retrieval-Augmented Generation (RAG) using the Azure OpenAI API together with LangChain and ChromaDB as the vector database. Additionally, the implementation of the Azure OpenAI Assistant API for data pre-processing of the data for RAG will also be showcased.
+-   **Part 5** will show readers how to use fine-tuned model using the Azure OpenAI API and explore the implementation of RAG together with a fine-tuned model. Additionally, the implementation of the Azure OpenAI Assistant API for data pre-processing of the data for fine-tuning will also be showcased.
+-   **Part 6** will show readers how to translate images into text using the new GPT-4o model through the Azure OpenAI API.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -51,26 +51,26 @@ Unfortunately, we don't have time to build the entire architecture of this solut
 
 ## 3. What is the Azure OpenAI Service?
 
-The Azure OpenAI Service offers access to various large language models (LLMs), including GPT-4, GPT-4 Turbo with Vision, GPT-3.5-Turbo, and Embeddings model series. These are the same language models made available by [OpenAI](https://platform.openai.com/docs/models).
+The Azure OpenAI Service offers access to various large language models (LLMs), including GPT-4o, GPT-4, GPT-4 Turbo with Vision, GPT-3.5-Turbo, and Embeddings model series. These are the same language models made available by [OpenAI](https://platform.openai.com/docs/models).
 
-These models allow us to create written and image-based content, summarize information, do semantic searches, and natural language to code translations.
+These models allow us to create written, image, and audio-based content, summarize information, perform semantic searches, and use natural language to code translations.
 
 Users can utilize the Azure OpenAI Service through REST APIs, Python SDK, or the web-based interface provided in the Azure OpenAI Studio.
 
-In our case, we will use the language models **GPT-4, GPT-3.5-Turbo,** and **Embeddings**. Each one will be called using the Azure OpenAI API. Additionally, we will use the **Azure OpenAI Assistants API** to perform data pre-processing operations using the code interpreter functionality.
+In our case, we will use the language models **GPT-4o, GPT-4, GPT-3.5-Turbo,** and **Embeddings**. Each one will be called using the Azure OpenAI API. Additionally, we will use the **Azure OpenAI Assistants API** to perform data pre-processing operations using the code interpreter functionality.
 
 ### 3.1 Azure OpenAI Assistants
 
 An assistant is an AI agent that is designed for a specific purpose. It augments the functionality of the Azure OpenAI models. The assistant facilitates the integration of third-party tools through custom functions and provides access to a coding environment through the Code Interpreter functionality. The exceptional performance of these AI agents is achieved through the utilisation of Threads, which facilitates the management and storage of message history.
 
-In our case, we will use this agent to perform data pre-processing steps using the code interpreter functionality, which grants the model a Python environment to perform data transformation using `pandas` .
+In our case, we will use this agent to perform data pre-processing steps using the code interpreter functionality. This functionality grants the model a Python environment to run the Python code it generates to perform data transformation steps.
 
 **_NOTE: It is important to note that Azure OpenAI Assistants are not the only agents that offer these functionalities. LangChain presented their own approach with the introduction of LangChain Agents._**
 
 ### 3.2 Azure OpenAI models being used
 
--   **GPT-4o (_Version_** _2024–05–13_): This model is used to translate food product images into text i.e. a list of ingredients. GPT-4o models are multimodal, meaning that they integrate text and image processing in a single model, enabling the handling of multiple data types simultaneously. This is also the latest model and offers superior AI capabilities compared to the GPT-4 Turbo model.
--   **GPT-4 (**_Version 0125-preview, Version 1106-preview)_: This model is used to create our assistant for code interpretation. The GPT-4 series is a set of models that improve on the GPT-3.5 and can understand and generate natural language and code. The latest version, **0125-preview**, supersedes its predecessor, version **1106-preview**,  offering enhanced performance in code generation, a reduction in instances of incomplete model tasks and [additional enhancements](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#gpt-4-and-gpt-4-turbo-models).
+-   **GPT-4o** _(Version 2024–05–13):_ This model is used to translate food product images into text i.e. a list of ingredients. GPT-4o models are multimodal, meaning that they integrate text and image processing in a single model, enabling the handling of multiple data types simultaneously. This is also the latest model and offers superior AI capabilities compared to the GPT-4 Turbo model.
+-   **GPT-4** _(Version 0125-preview, Version 1106-preview):_ This model is used to create our assistant for code interpretation. The GPT-4 series is a set of models that improve on the GPT-3.5 and can understand and generate natural language and code. The latest version, **0125-preview**, supersedes its predecessor, version **1106-preview**,  offering enhanced performance in code generation, a reduction in instances of incomplete model tasks and [additional enhancements](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#gpt-4-and-gpt-4-turbo-models).
 -   **GPT-3.5-Turbo** _(Version 0125, Version 1106 and Version 0613):_ This model is used to create recipes based on a list of ingredients as our input prompt. GPT-3.5 models can understand and generate natural language or code. The most capable and cost-effective model in the GPT-3.5 family is the GPT-3.5 Turbo. The latest _0125_ version replaces the _1106_ and offers higher accuracy at responding in requested formats and general bug fixes. For Fine-Tuning, we will use version _0613_.
 -   **Embeddings** _(text-embedding-3-large):_ This model is used to create an embedding of our recipe data which will be used to enhance our model output using Retrieval-Augmented Generation (RAG). An embedding is a compact, organized way to represent text information in numerical format using vectors. They are particularly useful in Artificial Intelligence applications, as it enables the essential meaning of text to be captured and transformed into a format that can be understood by an algorithm.
 
@@ -80,7 +80,7 @@ In our case, we will use this agent to perform data pre-processing steps using t
 
 ## 4. Enhancement Techniques
 
-In this workshop we will showcase three key techniques for improving the language model’s output: prompt engineering, retrieval-augmented generation (RAG), and Fine-tuning.
+This workshop will showcase three key techniques for improving the language model's output: prompt engineering, retrieval-augmented generation (RAG), and Fine-tuning.
 
 ![](https://cdn-images-1.medium.com/max/800/0*Q4tzzQAbnp249jQX.jpg)
 
@@ -94,7 +94,7 @@ The model’s used in this workshop are prompt-based. With prompt-based models, 
 
 Prompt engineering involves crafting a structurally optimized text prompt to guide and influence the model’s output. It aims to achieve the desired contextual and formatted response that aligns with the user’s model output expectations while minimizing the inherent biases of the underlying language model.
 
-Depending on the objective, prompt engineering can serve as an alternative approach to more complex techniques like **Retrieval Augmented Generation (RAG)**  or  **Fine-Tuning**  by  providing the model with an example of the desired model output. This is where concepts like **one-shot** and  **few-shot learning** become relevant. We will learn more about these concepts in Part 3.
+Depending on the objective, prompt engineering can serve as an alternative approach to more complex techniques like **Retrieval Augmented Generation (RAG)**  or  **Fine-Tuning**  by  providing the model with an example of the desired model output. This is where concepts like **one-shot** and  **few-shot learning** become relevant. We will learn more about these concepts in [Part 3][A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-3].
 
 <br/><br/>
 
@@ -108,9 +108,9 @@ In this workshop, we’ll work with a new dataset, a CSV file filled with exampl
 
 ### 4.3 Fine-Tuning
 
-Fine-tuning is a technique used to re-train a pre-trained model using a new foundation of information i.e. training data, to suit a specific task.
+Fine-tuning is a technique used to train a pre-trained base model using a new foundation of information i.e. training data, to suit a specific task.
 
-Azure OpenAI models possess extensive knowledge of diverse topics drawn from different data sources up until April 2023. This enables the model to address a wide array of problems, however, not every business requires a model capable of addressing an extensive range of topics simultaneously. Fine-tuning allows us to counteract this state, allowing the language model to become sharper in a specific knowledge domain.
+Azure OpenAI models possess extensive knowledge of diverse topics drawn from different data sources. This enables the model to address a wide array of problems; however, not every business requires a model capable of simultaneously addressing an extensive range of topics. Fine-tuning allows us to counteract this state, making the language model sharper in a specific knowledge domain.
 
 The fine-tuning process requires a careful investment of time and effort. You should first try to get good results with prompt engineering or RAG. As fine-tuning is more time and resource-intensive, requiring us to create datasets and run training jobs, implementing these alternative enhancement techniques should always be pursued first. In cases where fine-tuning is implemented, prompt engineering work is not wasted. The best results are usually obtained by combining good prompt engineering with a fine-tuned model.
 
@@ -166,3 +166,10 @@ Reach out to us! We are happy to answer any questions you might have or use your
 
 <!-- MARKDOWN LINKS & IMAGES -->
 [Food-Fighter]: https://github.com/AllgeierSchweiz/azure-openai-lab/blob/main/images/Food_Fighter.jpg
+
+[A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-1]: https://github.com/AllgeierSchweiz/azure-openai-lab/blob/main/series/A%20Hands-on%20Exploration%20of%20the%20Azure%20OpenAI%20API%20(Part%201%20of%C2%A06).md
+[A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-2]: https://github.com/AllgeierSchweiz/azure-openai-lab/blob/main/series/A%20Hands-on%20Exploration%20of%20the%20Azure%20OpenAI%20API%20(Part%202%20of%C2%A06).md
+[A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-3]: https://github.com/AllgeierSchweiz/azure-openai-lab/blob/main/series/A%20Hands-on%20Exploration%20of%20the%20Azure%20OpenAI%20API%20(Part%203%20of%C2%A06).md
+[A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-4]: https://github.com/AllgeierSchweiz/azure-openai-lab/blob/main/series/A%20Hands-on%20Exploration%20of%20the%20Azure%20OpenAI%20API%20(Part%204%20of%C2%A06).md
+[A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-5]: https://github.com/AllgeierSchweiz/azure-openai-lab/blob/main/series/A%20Hands-on%20Exploration%20of%20the%20Azure%20OpenAI%20API%20(Part%205%20of%C2%A06).md
+[A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-6]: https://github.com/AllgeierSchweiz/azure-openai-lab/blob/main/series/A%20Hands-on%20Exploration%20of%20the%20Azure%20OpenAI%20API%20(Part%206%20of%C2%A06).md
