@@ -59,8 +59,7 @@ If you are eligible for Azure OpenAI Service, fantastic! Once you have requested
 
 The Azure OpenAI Service [region](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#standard-deployment-model-availability) must be selected carefully since only a handful of regions grant access to specific language model versions and functionalities. In our case we will use the following regions:
 
--   **Sweden Central** gives us access to **GPT-4** (version **1106-preview** for the **Azure OpenAI** **Assistant API**), **GPT-3.5 Turbo**, and **Embedding models** (text-embedding-3-large). These will be used in Parts 3 and Part 4.
--   **East US 2** gives us access to **GPT-4o**, **GPT-3.5 Turbo**, and **Embedding models** (text-embedding-3-large). Additionally, we can also deploy **fine-tuned** models in this region. These will be used in Parts 5 and Parts 6.
+-   **Sweden Central** gives us access to **GPT-4o-mini** (version **2024-07-18** for **Chat Completion**, the **Azure OpenAI Assistant API** and **Fine-Tuning**), and **Embedding models** (text-embedding-3-large).
 
 We will now create the model deployments. It’s important to set the **deployment name** exactly as described below, since this name will be used in the Notebooks later.
 
@@ -86,27 +85,6 @@ We will now create the model deployments. It’s important to set the **deployme
 
 ![](https://cdn-images-1.medium.com/max/800/1*2QilIrhYnzSkKMsMcluA2A.png)
 
-### 3.2 East US 2
-
--   In the Azure Portal, open the Azure OpenAI Service resource you created located in **East US 2** and select the **Go to Azure OpenAI Studio** button
-
-![](https://cdn-images-1.medium.com/max/800/1*e8zPx-SluT7poj-BCnwVqg.png)
-
--   In Azure OpenAI Studio, select the **Deployments** tab on the left panel and select the button **Create new deployment**
-
-![](https://cdn-images-1.medium.com/max/800/1*VqQKH4kbqCayaz_sVPbJGw.png)
-
--   Let’s first create the GPT-3.5 Turbo model deployment. Define the parameters as shown in the image below and select **create**.
-
-![](https://cdn-images-1.medium.com/max/800/1*As2b42oJxAXjczVo7l9yFw.png)
-
--   Let’s continue with the deployment of the GPT-4o model.  Define the parameters as shown in the image below and select **create**.
-
-![](https://cdn-images-1.medium.com/max/800/1*nM7FzFjqDWx6iGmJs8RWeA.png)
-
--   Last but not least, we deploy the Embedding model**.** Define the parameters as shown in the image below and select **create**.
-
-![](https://cdn-images-1.medium.com/max/800/1*2QilIrhYnzSkKMsMcluA2A.png)
 
 ### 3.3 API Credentials
 
