@@ -726,28 +726,29 @@ We will start by importing the necessary Python packages to run our code.
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Import Python packages  
-import os  
-import io  
-import time  
-from io import StringIO  
-import json  
-from dotenv import load_dotenv  
-from pathlib import Path  
-import pandas as pd  
-from openai import AzureOpenAI  
-import chromadb  
-import chromadb.utils.embedding_functions as embedding_functions  
-from langchain.vectorstores import Chroma  
-from langchain_openai import AzureOpenAIEmbeddings  
-from langchain.document_loaders import DataFrameLoader  
-from langchain.text_splitter import CharacterTextSplitter  
-from langchain_openai import AzureChatOpenAI  
-from langchain.chains import RetrievalQA  
-from langchain import PromptTemplate  
-from langchain_core.prompts import (  
-    ChatPromptTemplate,  
-    FewShotChatMessagePromptTemplate,  
+# Import Python packages
+import os
+import io
+import time
+from io import StringIO
+import json
+from dotenv import load_dotenv
+from pathlib import Path
+import pandas as pd
+from openai import AzureOpenAI
+import chromadb
+import chromadb.utils.embedding_functions as embedding_functions
+#from langchain.vectorstores import Chroma
+from langchain_chroma import Chroma
+from langchain_openai import AzureOpenAIEmbeddings
+from langchain.document_loaders import DataFrameLoader
+from langchain.text_splitter import CharacterTextSplitter
+from langchain_openai import AzureChatOpenAI
+from langchain.chains import RetrievalQA
+from langchain import PromptTemplate
+from langchain_core.prompts import (
+    ChatPromptTemplate,
+    FewShotChatMessagePromptTemplate,
 )
 ```
 
