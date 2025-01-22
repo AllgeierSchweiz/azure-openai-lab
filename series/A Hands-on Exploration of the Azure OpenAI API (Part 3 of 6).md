@@ -130,7 +130,7 @@ ingredients = """'veal roast', 'butter', 'oil', 'carrots', 'onions', 'parsley sp
 
 # Send request to Azure OpenAI model
 response = client.chat.completions.create(
-   model= "gpt-4o-mini", #"gpt-35-turbo",
+   model= "gpt-4o-mini",
    temperature=0.7,
    #max_tokens=120,
    messages=[
