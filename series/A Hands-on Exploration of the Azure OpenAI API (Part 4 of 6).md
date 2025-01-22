@@ -15,9 +15,9 @@ The two Jupyter Notebooks we are going to work with are:
 1.  _P4-azure-openai-assistant-rag-data-preprocessing.ipynb_
 2.  _P4-azure-openai-rag.ipynb_
 
-In Notebook **P4-azure-openai-assistant-rag-data-preprocessing.ipynb,** we will conduct data pre-processing steps using the Azure OpenAI Assistant API using the GPT-4 model version **1106 Preview**. We will input data-wrangling instructions in text format and have the code interpreter of the Azure OpenAI Assistant execute our requirements.
+In Notebook **P4-azure-openai-assistant-rag-data-preprocessing.ipynb,** we will conduct data pre-processing steps using the Azure OpenAI Assistant API using the GPT-4o-mini model version **2024–07–18**. We will input data-wrangling instructions in text format and have the code interpreter of the Azure OpenAI Assistant execute our requirements.
 
-In Notebook **P4-azure-openai-rag.ipynb,** we will implement RAG using **ChromaDB** as our Vector Database together with **LangChain** and the Azure OpenAI embedding model **Text-Embedding-3-Large**. Subsequently, we will use the **GPT-3.5-Turbo** model with the aid of RAG to create well-thought-out and flavourful vegan recipes for special occasions.
+In Notebook **P4-azure-openai-rag.ipynb,** we will implement RAG using **ChromaDB** as our Vector Database together with **LangChain** and the Azure OpenAI embedding model `text-embedding-3-large`. Subsequently, we will use the GPT-4o-mini model with the aid of RAG to create well-thought-out and flavourful vegan recipes for special occasions.
 
 <br/><br/>
 
@@ -32,7 +32,7 @@ In Notebook **P4-azure-openai-rag.ipynb,** we will implement RAG using **ChromaD
 5.  Convert the user input into a vector using the embedding model `text-embedding-3-large` .
 6.  Index the user input vector in the vector database.
 7.  Use a vector search function to find the most semantically similar information to the user input vector from the vector database.
-8.  Inject the information of the most similar vector from the embedding space into the original prompt, augmenting the prompt input, using the conversational model `gpt-35-turbo` .
+8.  Inject the information of the most similar vector from the embedding space into the original prompt, augmenting the prompt input, using the conversational model `gpt-4o-mini` .
 9.  The model creates the desired answer i.e. vegan recipe.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -123,11 +123,11 @@ Once the credentials are available as variables, we can initialize the Azure Ope
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Initialize the Azure OpenAI client  
-client = AzureOpenAI(  
-    api_key = azure_oai_key,    
-    api_version = "2024-02-15-preview",  
-    azure_endpoint = azure_oai_endpoint  
+# Initialize the Azure OpenAI client
+client = AzureOpenAI(
+    api_key = azure_oai_key,  
+    api_version = "2024-05-01-preview",
+    azure_endpoint = azure_oai_endpoint
     )
 ```
 
@@ -196,19 +196,18 @@ The Azure OpenAI Assistant requires C**ode Interpreter** enabled to perform our 
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Create an Azure OpenAI Assistant  
-assistant = client.beta.assistants.create(  
-    name = "data analyst assistant",  
-    instructions = instructions,  
-    tools = [{"type": "code_interpreter"}],  
-    model = "gpt-4-1106-preview", #You must replace this value with the deployment name for your model.  
-    file_ids=[file__id]  
-)  
-  
-# Get the file id  
-fileId = assistant.file_ids[0]  
-  
-# Create a thread  
+# Create an Azure OpenAI Assistant
+assistant = client.beta.assistants.create(
+    name="data analyst assistant",
+    instructions=instructions,
+    tools=[{"type": "code_interpreter"}],
+    model="gpt-4o-mini",  # Replace this value with the deployment name for your model.
+    tool_resources={
+        "code_interpreter": {"file_ids": [file__id]}
+    }
+)
+
+# Create a thread
 thread = client.beta.threads.create()
 ```
 **_NOTE: A thread is a conversation session between an assistant and a user. Threads simplify application development by storing message history and truncating it when the conversation gets too long for the model’s context length._**
@@ -219,7 +218,7 @@ We can now initialize the thread and send our instructions to the Azure OpenAI A
 
 ```sql
 # Initalize thread and start data transformation using the Azure OpenAI Assistant Code Interpreter
-prompt = "Please execute the INSTRUCTIONS and ACTIONS on the data stored in the csv file " + fileId
+prompt = "Please execute the INSTRUCTIONS and ACTIONS on the data stored in the csv file"
 
 message = client.beta.threads.messages.create(
     thread_id = thread.id,
@@ -316,11 +315,11 @@ def files_from_messages():
             thread_id=thread.id
         )
     first_thread_message = messages.data[0]  # Accessing the first ThreadMessage
-    message_ids = first_thread_message.file_ids
+    message_ids = first_thread_message.attachments
     # Loop through each file ID and save the file with a sequential name
     for i, file_id in enumerate(message_ids):
         file_name = f"recipes-preprocessed.csv"  # Generate a sequential file name
-        read_and_save_file(file_id, file_name)
+        read_and_save_file(file_id.file_id, file_name)
         print(f'saved {file_name}')  
 
 # Extract the file names from the response, retrieve the content and save the data as a csv file 
@@ -340,10 +339,10 @@ It’s important to make sure there aren’t any unnecessary artifacts lying aro
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-#Clean up Azure OpenAI environment  
-client.beta.assistants.delete(assistant.id)  
-client.beta.threads.delete(thread.id)  
-client.files.delete(messages.data[0].file_ids[0])
+#Clean up Azure OpenAI environment
+client.beta.assistants.delete(assistant.id)
+client.beta.threads.delete(thread.id)
+client.files.delete(messages.data[0].attachments[0].file_id)
 ```
 
 **_NOTE: Since the data transformation steps use a random sample on the original data, we will use a standardized version of the generated file named recipes-preprocessed.csv to ascertain everyone has the same copy of the data._**
@@ -417,11 +416,11 @@ Once the credentials are available as variables, we can initialize the Azure Ope
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Initialize the Azure OpenAI client  
-client = AzureOpenAI(  
-        azure_endpoint = azure_oai_endpoint,   
-        api_key=azure_oai_key,    
-        api_version="2024-02-01"  
+# Initialize the Azure OpenAI client
+client = AzureOpenAI(
+        azure_endpoint = azure_oai_endpoint, 
+        api_key=azure_oai_key,  
+        api_version="2024-10-21"
         )
 ```
 
@@ -484,7 +483,7 @@ openai_ef = AzureOpenAIEmbeddings(
                 deployment = "text-embedding-3-large",
                 openai_api_key = azure_oai_key,
                 azure_endpoint = azure_oai_endpoint,
-                openai_api_version = "2024-02-01",
+                openai_api_version ="2024-10-21"
             )
 ```
 
@@ -516,13 +515,13 @@ First, we need to initialize the Azure OpenAI client. We will use the LangChain 
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Initalize Azure Openai through Langchain  
-client = AzureChatOpenAI(  
-                deployment_name = "gpt-35-turbo",  
-                openai_api_key = azure_oai_key,  
-                azure_endpoint = azure_oai_endpoint,  
-                openai_api_version = "2024-02-01"  
-        ) 
+# Initalize Azure Openai using LangChain
+client = AzureChatOpenAI(
+                deployment_name ="gpt-4o-mini",
+                openai_api_key = azure_oai_key,
+                azure_endpoint = azure_oai_endpoint,
+                openai_api_version ="2024-10-21"
+        )
 ```
 
 We will create a prompt template for our LangChain function using the same advanced prompt input as Part 3.
@@ -543,7 +542,17 @@ Target Audience: The recipients of these vegan recipes are couples who want to c
 
 ### OUTPUT FORMAT
 Output only one vegan recipe and return it as a JSON object with the following format:
-{{"name":"","minutes":,"tags":"[]","nutrition":"[]","n_steps":"","steps":"[]","description":"","ingredients":"[]", "n_ingredients":}}
+{{
+  "name": "",
+  "minutes": 0,
+  "tags": [],
+  "nutrition": [],
+  "n_steps": 0,
+  "steps": [],
+  "description": "",
+  "ingredients": [],
+  "n_ingredients": 0
+}}
 
 The variables should contain the following information:
 - name: the name of the recipe.
@@ -568,26 +577,263 @@ We can now generate our recipes.
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Run chain to call Azure OpenAI using ChromaDB vector database data to enrich the prompt (RAG).  
-ingredients = """'Capsicum', 'flour', 'Soy Sauce', 'Chili', 'Coconut', 'Broccoli'"""  
-  
-chain = RetrievalQA.from_chain_type(  
-       llm=client,  
-       retriever = vectordb.as_retriever(),  
-       chain_type="stuff",  
-       chain_type_kwargs={"prompt": simple_prompt}  
-)  
-result = chain.invoke({"query": ingredients})  
-  
-# View Azure OpenAI output  
-display(result)
+# Run chain to call Azure OpenAI using ChromaDB vector database data to enrich the prompt (RAG).
+ingredients = """'Tofu', 'Avocado', 'Soy Sauce', 'Chili', 'Coconut Milk', 'Broccoli'"""
+
+chain = RetrievalQA.from_chain_type(
+       llm=client,
+       retriever = vectordb.as_retriever(),
+       chain_type="stuff",
+       chain_type_kwargs={"prompt": simple_prompt}
+)
+
+# View Azure OpenAI output
+result = chain.invoke({"query": ingredients})
+print(result)
 ```
 
 The generated vegan recipe looks great! The recipe variables look plausible with vegan as one of the recipe tag and the format is JSON as specified.
 
 <br/><br/>
 
-### 5.6 Create Dataframe from generated Recipes
+#### 5.6 Few-Shot learning
+
+As we saw in [Part 3](https://medium.com/@nicolas-rehder/a-hands-on-exploration-of-the-azure-openai-api-part-3-of-6-df970773319f), adding examples of the optimal vegan recipe output to our prompt might help.
+
+Let’s try that out together with RAG and create some examples!
+
+-   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
+
+```
+# Few-Shot learning examples
+examples = [
+    {
+        "input": "canola oil, onion, garlic cloves, fresh ginger, jalapeno, curry powder, diced tomatoes with juice, low sodium vegetable broth, natural-style peanut butter, tamari soy sauce, pepper, sweet potato, carrots, chickpeas, fresh okra, frozen green beans, kale, lime, juice of, fresh cilantro, lime wedge, salted peanuts",
+        "output": """{
+  "name": "african peanut stew",
+  "minutes": 90,
+  "tags": [
+    "time-to-make",
+    "course",
+    "main-ingredient",
+    "cuisine",
+    "preparation",
+    "main-dish",
+    "beans",
+    "vegetables",
+    "african",
+    "easy",
+    "vegan",
+    "vegetarian",
+    "stews",
+    "dietary",
+    "chick-peas-garbanzos",
+    "3-steps-or-less",
+    "4-hours-or-less"
+  ],
+  "nutrition": [307.8, 20.0, 27.0, 21.0, 22.0, 10.0, 13.0],
+  "n_steps": 11,
+  "steps": [
+    "heat the oil in a large, heavy stockpot",
+    "add the onion, garlic, jalapeno, and ginger, and cook over moderate heat, stirring frequently, until the onion is lightly browned, about 6 minutes",
+    "add the curry powder and cook, stirring, until fragrant and lightly toasted, about 2 minutes",
+    "add the tomatoes, scraping up any bits stuck to the bottom of the pan",
+    "whisk in the broth and peanut butter, season with pepper and tamari to taste, and bring to a boil",
+    "cook over moderately high heat for 15 minutes, stirring frequently",
+    "add the sweet potatoes, carrots, and chickpeas, cover partially and cook over moderately low heat until the vegetables are just tender, about 20 minutes",
+    "add the okra and green beans, cover partially and cook until all the vegetables are tender, about 10 minutes longer",
+    "add the kale and juice of 1 lime, and cook for 10 more minutes",
+    "transfer to deep bowls and serve hot",
+    "garnish with the cilantro, lime wedges, and chopped peanuts at the table"
+  ],
+  "description": "i first had this stew at a restaurant in rochester, ny, and when i moved away, spent years recreating it! delicious with a lovely hearty bread, or with rice cooked in the stew (about 3/4 cup brown rice added with the sweet potatoes and carrots).",
+  "ingredients": [
+    "canola oil",
+    "onion",
+    "garlic cloves",
+    "fresh ginger",
+    "jalapeno",
+    "curry powder",
+    "diced tomatoes with juice",
+    "low sodium vegetable broth",
+    "natural-style peanut butter",
+    "tamari soy sauce",
+    "pepper",
+    "sweet potato",
+    "carrots",
+    "chickpeas",
+    "fresh okra",
+    "frozen green beans",
+    "kale",
+    "lime, juice of",
+    "fresh cilantro",
+    "lime wedge",
+    "salted peanuts"
+  ],
+  "n_ingredients": 21
+}
+""",
+    },
+    {
+        "input": "balsamic vinegar, lemon juice, fresh garlic, french dijon mustard, sugar, canola oil, extra virgin olive oil, fresh basil, salt, pepper, orzo pasta, cooked wild rice, red onion, currants, canned corn niblet, toasted almond, parsley, red peppers, yellow peppers, green onion, garlic granules",
+        "output": """{
+  "name": "alexanders orzo and wild rice salad",
+  "minutes": 20,
+  "tags": [
+    "30-minutes-or-less",
+    "time-to-make",
+    "course",
+    "main-ingredient",
+    "preparation",
+    "occasion",
+    "salads",
+    "side-dishes",
+    "pasta",
+    "rice",
+    "easy",
+    "beginner-cook",
+    "dinner-party",
+    "holiday-event",
+    "vegan",
+    "vegetarian",
+    "dietary",
+    "pasta-rice-and-grains",
+    "taste-mood",
+    "savory",
+    "sweet"
+  ],
+  "nutrition": [815.5, 72.0, 45.0, 7.0, 31.0, 24.0, 28.0],
+  "n_steps": 7,
+  "steps": [
+    "for dressing: dissolve vinegar, lemon juice, garlic, and sugar with a hand whip",
+    "fold in the mustard, basil, salt, and pepper",
+    "slowly add oils, while whisking vigorously",
+    "refrigerate",
+    "use only 1/2 cup of dressing for salad",
+    "place all other ingredients in a mixing bowl and mix well",
+    "serve ice cold, 38-40°F. Shelf life mixed is two hours"
+  ],
+  "description": "Wonderful blend of flavors makes for a delightful side dish or lunch salad.",
+  "ingredients": [
+    "balsamic vinegar",
+    "lemon juice",
+    "fresh garlic",
+    "french dijon mustard",
+    "sugar",
+    "canola oil",
+    "extra virgin olive oil",
+    "fresh basil",
+    "salt",
+    "pepper",
+    "orzo pasta",
+    "cooked wild rice",
+    "red onion",
+    "currants",
+    "canned corn niblets",
+    "toasted almonds",
+    "parsley",
+    "red peppers",
+    "yellow peppers",
+    "green onion",
+    "garlic granules"
+  ],
+  "n_ingredients": 21
+}
+""",
+    },
+]
+```
+We need to generate a prompt template to differentiate between the user input and the model output. In LangChain, this can be achieved using the`ChatPromptTemplate` . Instead of the traditional **user** and **assistant** roles we saw in Chapter 3, we use the **human** and **ai** roles. Nevertheless, the objective is the same.
+
+-   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
+
+```
+# Prompt template used to format each individual example.
+example_prompt = ChatPromptTemplate.from_messages(
+    [
+        ("human", "{input}"),
+        ("ai", "{output}"),
+    ]
+)
+
+few_shot_prompt = FewShotChatMessagePromptTemplate(
+    example_prompt=example_prompt,
+    examples=examples,
+)
+```
+
+Let’s combine the examples with the original system prompt and the user input, which consists of the list of ingredients.
+
+-   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
+
+```
+# Bring together the examples with the system and user (human) inputs.
+systemcontent = \
+"""
+### Instructions
+Persona: Act as a head chef such as Joël Robuchon who specializes in simple contemporary cuisine.
+Action: Create well-thought-out and flavourful vegan recipes from a list of ingredients {question}, implementing classic culinary techniques.
+Target Audience: The recipients of these vegan recipes are couples who want to cook a special meal at least once a week.
+
+### Example
+{context}
+
+### Output format
+Output only one vegan recipe and return it as a JSON object with the following format:
+{{
+  "name": "",
+  "minutes": 0,
+  "tags": [],
+  "nutrition": [],
+  "n_steps": 0,
+  "steps": [],
+  "description": "",
+  "ingredients": [],
+  "n_ingredients": 0
+}}
+
+The variables should contain the following information:
+- name: the name of the recipe.
+- minutes: the time in minutes to prepare the recipe.
+- tags: a list of words that characterize the recipe.
+- nutrition: a list of numeric values representing calories, total fat, sugar, sodium, protein, saturated fat, and carbohydrates.
+- n_steps: the number of steps to prepare the recipe.
+- steps: a list of steps to prepare the recipe.
+- description: a summary of the recipe.
+- ingredients: a list of the ingredient names in the recipe.
+- n_ingredients: the total number of ingredients used in the recipe.
+"""
+
+final_prompt = ChatPromptTemplate.from_messages(
+    [
+        ("system", systemcontent),
+        few_shot_prompt,
+        ("human", "{question}"),
+    ]
+)
+```
+
+We can now generate our recipes.
+
+-   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
+
+```
+# Run chain to call Azure OpenAI using ChromaDB vector database data to enrich the prompt (RAG).
+chain = RetrievalQA.from_chain_type(
+       llm=client,
+       retriever = vectordb.as_retriever(),
+       chain_type="stuff",
+       chain_type_kwargs={"prompt": final_prompt}
+)
+
+# View Azure OpenAI output
+result = chain.invoke({"query": ingredients})
+print(result)
+```
+
+<br/><br/>
+
+### 5.7 Create Dataframe from generated Recipes
 
 We can now transform our generated output into a data frame to check the overall structure. Alternatively, we could save the generated output directly to a CSV file.
 
