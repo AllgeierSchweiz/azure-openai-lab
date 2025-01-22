@@ -883,7 +883,7 @@ print(result)
 ```
 The generated vegan recipe looks great! The recipe variables look plausible with vegan as one of the recipe tag and the format is JSON as specified.
 
-Congratulations! You have completed Part 5 of this workshop. We have learned how to use the Azure OpenAI Assistant API for data pre-processing, and have used fine-tuned models to generate better recipe outputs. We will continue with Part 6 of the workshop and learn how we can use the new GPT-4o model to generate a list of ingredients from images.
+Congratulations! You have completed Part 5 of this workshop. We have learned how to use the Azure OpenAI Assistant API for data pre-processing, and have used fine-tuned models to generate better recipe outputs. We will continue with [Part 6][A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-6] of the workshop and learn how we can use the new GPT-4o model to generate a list of ingredients from images.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -904,3 +904,5 @@ Reach out to us! We are happy to answer any questions you might have or use your
 <!-- MARKDOWN LINKS & IMAGES -->
 [A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-6]: https://github.com/AllgeierSchweiz/azure-openai-lab/blob/main/series/A%20Hands-on%20Exploration%20of%20the%20Azure%20OpenAI%20API%20(Part%206%20of%C2%A06).md
 [Fine-Tuned]: https://github.com/AllgeierSchweiz/azure-openai-lab/blob/main/images/Fine_Tuning.jpg
+
+[A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-6]: https://github.com/AllgeierSchweiz/azure-openai-lab/blob/main/series/A%20Hands-on%20Exploration%20of%20the%20Azure%20OpenAI%20API%20(Part%206%20of%C2%A06).md
