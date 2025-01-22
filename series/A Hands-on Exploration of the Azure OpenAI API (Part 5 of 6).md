@@ -17,7 +17,7 @@ The four Jupyter Notebooks we are going to work with are:
 3.  _P5-azure-openai-fine-tuning.ipynb_
 4.  _P5-azure-openai-rag-with-fine-tuning.ipynb_
 
-In this Notebook, we will implement Fine-Tuning using the GPT-3.5 Turbo model version **0613** to create  well-thought-out and flavourful vegan recipes for special occasions. This model is optimized for conversational interfaces and expects an input formatted in a [specific chat-like transcript](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/chatgpt) stored inside an array of dictionaries, just like in Part 3. Additionally, we need training and a validation dataset to generate a fine-tuned model. We create these datasets from our vegan recipes CSV file you pre-processed in Part 4.
+In this Notebook, we will implement Fine-Tuning using the GPT-4o-mini model version **2024–07–18** to create  well-thought-out and flavourful vegan recipes for special occasions. This model is optimized for conversational interfaces and expects an input formatted in a [specific chat-like transcript](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/chatgpt) stored inside an array of dictionaries, just like in Part 3. Additionally, we need training and a validation dataset to generate a fine-tuned model. We create these datasets from our vegan recipes CSV file you pre-processed in Part 4.
 
 Unfortunately, creating a fine-tuned model is very resource-intensive and costly. It may take several minutes, if not hours, to finalize. For this reason, you should only create one if you need it. In this workshop, we want to showcase all possibilities and will make one for educational purposes.
 
@@ -42,7 +42,7 @@ Unfortunately, creating a fine-tuned model is very resource-intensive and costly
 
 Before creating a fine-tuned model, we must certify the data is correctly formatted.
 
-Since we will be using the `gpt-35-turbo-0613`model, the training and validation datasets must be structured in the conversational format used by the [Chat completions](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/chatgpt) API. Once formatted, both datasets must be saved as a JSON Lines (JSONL) file.
+Since we will be using the `gpt-4o-mini` model, the training and validation datasets must be structured in the conversational format used by the [Chat completions](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/chatgpt) API. Once formatted, both datasets must be saved as a JSON Lines (JSONL) file.
 
 ```sql
 {"messages": [{"role": "system", "content": "This is a vegan recipe generator. The vegan recipe generated should be output as a JSON object in the format:{\"name\":\"\",\"minutes\":,\"tags\":\"[]\",\"nutrition\":\"[]\",\"n_steps\":\"\",\"steps\":\"[]\",\"description\":\"\",\"ingredients\":\"[]\", \"n_ingredients\":}"}, {"role": "user", "content": "Create well-thought-out and flavourful recipes from a list of ingredients implementing classic culinary techniques."}, {"role": "user", "content": "fresh snow peas, sesame oil, minced garlic cloves, salt & pepper"}, {"role": "assistant", "content": "{\"name\":\"garlic snow peas\",\"minutes\":5,\"tags\":\"['15-minutes-or-less', 'time-to-make', 'course', 'main-ingredient', 'cuisine', 'preparation', 'occasion', 'low-protein', 'healthy', '5-ingredients-or-less', 'appetizers', 'side-dishes', 'vegetables', 'asian', 'chinese', 'easy', 'dinner-party', 'romantic', 'vegan', 'vegetarian', 'dietary', 'low-sodium', 'low-cholesterol', 'stir-fry', 'comfort-food', 'low-carb', 'inexpensive', 'healthy-2', 'low-in-something', 'taste-mood', 'presentation', 'served-hot', 'technique']\",\"nutrition\":\"[46.6, 5.0, 5.0, 0.0, 2.0, 2.0, 1.0]\",\"n_steps\":6,\"steps\":\"['heat wok on medium-hi heat', 'add oil get it hot , dump in peas', 'about 1 minute after stir frying add garlic and seasoning', 'quick fry just till bright green and still crisp', 'cooking time is an estimate -- do not over cook or they will turn a dull green and go limp', 'remove and serve while still hot']\",\"description\":\"i love the ones at p f changs..so this is my version\",\"ingredients\":\"['fresh snow peas', 'sesame oil', 'minced garlic cloves', 'salt & pepper']\",\"n_ingredients\":4}\n"}]}  
@@ -105,11 +105,12 @@ Once the credentials are available as variables, we can initialize the Azure Ope
 
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
-# Initialize the Azure OpenAI client  
-client = AzureOpenAI(  
-    api_key = azure_oai_key,    
-    api_version = "2024-02-15-preview",  
-    azure_endpoint = azure_oai_endpoint  
+```
+# Initialize the Azure OpenAI client
+client = AzureOpenAI(
+    api_key = azure_oai_key,  
+    api_version = "2024-05-01-preview",
+    azure_endpoint = azure_oai_endpoint
     )
 ```
 
@@ -145,47 +146,67 @@ To perform our data pre-processing steps using the Azure OpenAI Assistant, we ne
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Create data transformation instructions  
-instructions = '''  
-### INSTRUCTIONS  
-You are a senior data analyst who will work with data in an csv file.  
-You have access to a sandboxed environment for writing python code.  
-The objective is to create a datset for fine-tuning. The dataset must be formatted in the conversational format that is used by the Chat completions API.  
-An example of the conversational format is available in the EXAMPLES section.  
-When the user asks you to perform your actions, you will use the provided csv file and examples in the EXAMPLE section.  
-Execute each of the steps listed below in your ACTIONS section.  
-  
----  
-  
-### EXAMPLES:  
-  
-{"messages": [{"role": "system", "content": "This is a vegan recipe generator. The vegan recipe generated should be output as a JSON object in the format:{\"name\":\"\",\"minutes\":,\"tags\":\"[]\",\"nutrition\":\"[]\",\"n_steps\":\"\",\"steps\":\"[]\",\"description\":\"\",\"ingredients\":\"[]\", \"n_ingredients\":}"}, {"role": "user", "content": "Create well-thought-out and flavourful recipes from a list of ingredients implementing classic culinary techniques."}, {"role": "user", "content": "fresh snow peas, sesame oil, minced garlic cloves, salt & pepper"}, {"role": "assistant", "content": "{\"name\":\"garlic snow peas\",\"minutes\":5,\"tags\":\"['15-minutes-or-less', 'time-to-make', 'course', 'main-ingredient', 'cuisine', 'preparation', 'occasion', 'low-protein', 'healthy', '5-ingredients-or-less', 'appetizers', 'side-dishes', 'vegetables', 'asian', 'chinese', 'easy', 'dinner-party', 'romantic', 'vegan', 'vegetarian', 'dietary', 'low-sodium', 'low-cholesterol', 'stir-fry', 'comfort-food', 'low-carb', 'inexpensive', 'healthy-2', 'low-in-something', 'taste-mood', 'presentation', 'served-hot', 'technique']\",\"nutrition\":\"[46.6, 5.0, 5.0, 0.0, 2.0, 2.0, 1.0]\",\"n_steps\":6,\"steps\":\"['heat wok on medium-hi heat', 'add oil get it hot , dump in peas', 'about 1 minute after stir frying add garlic and seasoning', 'quick fry just till bright green and still crisp', 'cooking time is an estimate -- do not over cook or they will turn a dull green and go limp', 'remove and serve while still hot']\",\"description\":\"i love the ones at p f changs..so this is my version\",\"ingredients\":\"['fresh snow peas', 'sesame oil', 'minced garlic cloves', 'salt & pepper']\",\"n_ingredients\":4}\n"}]}  
-{"messages": [{"role": "system", "content": "This is a vegan recipe generator. The vegan recipe generated should be output as a JSON object in the format:{\"name\":\"\",\"minutes\":,\"tags\":\"[]\",\"nutrition\":\"[]\",\"n_steps\":\"\",\"steps\":\"[]\",\"description\":\"\",\"ingredients\":\"[]\", \"n_ingredients\":}"}, {"role": "user", "content": "Create well-thought-out and flavourful recipes from a list of ingredients implementing classic culinary techniques."}, {"role": "user", "content": "peaches, dates, ground cinnamon, water, almonds, coconut oil"}, {"role": "assistant", "content": "{\"name\":\"summertime peach crumble raw food\",\"minutes\":5,\"tags\":\"['15-minutes-or-less', 'time-to-make', 'course', 'main-ingredient', 'preparation', 'cobblers-and-crisps', 'desserts', 'fruit', 'easy', 'vegan', 'vegetarian', 'food-processor-blender', 'dietary', 'low-sodium', 'low-in-something', 'pitted-fruit', 'peaches', 'equipment', 'small-appliance']\",\"nutrition\":\"[330.8, 32.0, 108.0, 3.0, 15.0, 34.0, 11.0]\",\"n_steps\":5,\"steps\":\"['for the base ~ place chopped peaches in large bowl & set aside', 'in blender or food processor , blend 5 dates , cinnamon & enough water to get a syrupy consistency', 'pour this date syrup over peaches & refrigerate at least 1 hour', 'for the topping ~ when peach \\/ date mixture has chilled , in a food processor , blend almonds , 4 dates & coconut oil to desired consistency', 'top peach \\/ date mixture with this topping & enjoy']\",\"description\":\"this recipe comes the goneraw internet site.\",\"ingredients\":\"['peaches', 'dates', 'ground cinnamon', 'water', 'almonds', 'coconut oil']\",\"n_ingredients\":6}\n"}]}  
-{"messages": [{"role": "system", "content": "This is a vegan recipe generator. The vegan recipe generated should be output as a JSON object in the format:{\"name\":\"\",\"minutes\":,\"tags\":\"[]\",\"nutrition\":\"[]\",\"n_steps\":\"\",\"steps\":\"[]\",\"description\":\"\",\"ingredients\":\"[]\", \"n_ingredients\":}"}, {"role": "user", "content": "Create well-thought-out and flavourful recipes from a list of ingredients implementing classic culinary techniques."}, {"role": "user", "content": "grape-nuts cereal, apple juice concentrate"}, {"role": "assistant", "content": "{\"name\":\"fat free pie crust\",\"minutes\":13,\"tags\":\"['15-minutes-or-less', 'time-to-make', 'course', 'cuisine', 'preparation', 'north-american', 'healthy', '5-ingredients-or-less', 'pies-and-tarts', 'desserts', 'american', 'easy', 'low-fat', 'vegan', 'vegetarian', 'pies', 'dietary', 'low-cholesterol', 'low-saturated-fat', 'healthy-2', 'low-in-something']\",\"nutrition\":\"[88.9, 0.0, 27.0, 5.0, 4.0, 0.0, 6.0]\",\"n_steps\":6,\"steps\":\"['preheat the oven to 350 f \\/ 180 deg c', 'mix together the grape nuts and apple juice concentrate', 'pat into a thin layer on the bottom and sides of a 9 pie pan', \\\"don't worry if there are some gaps\\\", 'bake for 8 minutes', 'cool before filling']\",\"description\":\"from the table of the physicians committee for responsible medicine\",\"ingredients\":\"['grape-nuts cereal', 'apple juice concentrate']\",\"n_ingredients\":2}\n"}]}  
-{"messages": [{"role": "system", "content": "This is a vegan recipe generator. The vegan recipe generated should be output as a JSON object in the format:{\"name\":\"\",\"minutes\":,\"tags\":\"[]\",\"nutrition\":\"[]\",\"n_steps\":\"\",\"steps\":\"[]\",\"description\":\"\",\"ingredients\":\"[]\", \"n_ingredients\":}"}, {"role": "user", "content": "Create well-thought-out and flavourful recipes from a list of ingredients implementing classic culinary techniques."}, {"role": "user", "content": "lemon juice, granulated sugar, water, lemon slice"}, {"role": "assistant", "content": "{\"name\":\"refreshing lemonade\",\"minutes\":5,\"tags\":\"['15-minutes-or-less', 'time-to-make', 'course', 'preparation', 'occasion', 'low-protein', 'healthy', '5-ingredients-or-less', 'beverages', 'easy', 'beginner-cook', 'low-fat', 'summer', 'vegan', 'vegetarian', 'dietary', 'low-sodium', 'low-cholesterol', 'seasonal', 'low-saturated-fat', 'low-calorie', 'inexpensive', 'low-in-something', 'presentation', 'served-cold']\",\"nutrition\":\"[116.5, 0.0, 115.0, 0.0, 0.0, 0.0, 10.0]\",\"n_steps\":4,\"steps\":\"['mix the lemon juice and sugar in a 2 quart pitcher', 'fill the container up with water until it reaches 2 quarts', 'float the lemon slices on top', 'chill , then enjoy !']\",\"description\":\"this is a really easy lemonade recipe.  i use bottled lemon juice because it's cheaper, but you could definately use fresh.\",\"ingredients\":\"['lemon juice', 'granulated sugar', 'water', 'lemon slice']\",\"n_ingredients\":4}\n"}]}  
-  
----  
-  
-### ACTIONS:  
-  
-1. Read the tab separated comma file data  
-2. Transform the data and create a jsonl file formatted in the conversational format as shown in the EXAMPLES section  
-3. The conversational format has a system role, user role and assistant role, each with text content stored inside an array of dictionaries  
-4. The first system role content is always: "This is a vegan recipe generator. The vegan recipe generated should be output as a JSON object in the format: {"name":"","minutes":,"tags":"[]","nutrition":"[]","n_steps":"","steps":"[]","description":"","ingredients":"[]", "n_ingredients":}"  
-5. The first user role content is always: "Create well-thought-out and flavourful vegan recipes from a list of ingredients implementing classic culinary techniques"  
-6. The subsequent user role content takes the list of ingredients in the column "ingredients" of the CSV file  
-7. The assistant role content uses all the column values of the CSV file as a JSON object with the format: {"name":"","minutes":,"tags":"[]","nutrition":"[]","n_steps":"","steps":"[]","description":"","ingredients":"[]", "n_ingredients":}  
-8. Split the data set into training and testing data sets with a "75%" and "25%" split respectively  
-9. Make sure both data sets have the same format provided by the EXAMPLES section  
-10. Name the data set with "75%" of the data "recipes-training-set"  
-11. Name the data set with "25%" of the data "recipes-validation-set"  
-12. Prepare both data sets as a jsonl file for download by the user  
-  
----  
-  
-### DO NOT:  
-1. Do not return any images.   
-2. Do not return any other file types.  
+# Create data transformation instructions
+instructions = '''
+### INSTRUCTIONS
+You are a senior data analyst who will work with data in an csv file.
+You have access to a sandboxed environment for writing python code.
+The objective is to create a datset for fine-tuning. The dataset must be formatted in the conversational format that is used by the Chat completions API.
+An example of the conversational format is available in the EXAMPLES section.
+When the user asks you to perform your actions, you will use the provided csv file and examples in the EXAMPLE section.
+Execute each of the steps listed below in your ACTIONS section.
+
+---
+
+### EXAMPLES:
+
+{"messages": [{"role": "system", "content": "This is a vegan recipe generator. The vegan recipe generated should be output as a JSON object in the format:{\"name\":\"\",\"minutes\":,\"tags\":\"[]\",\"nutrition\":\"[]\",\"n_steps\":\"\",\"steps\":\"[]\",\"description\":\"\",\"ingredients\":\"[]\", \"n_ingredients\":}"}, {"role": "user", "content": "Create well-thought-out and flavourful recipes from a list of ingredients implementing classic culinary techniques."}, {"role": "user", "content": "fresh snow peas, sesame oil, minced garlic cloves, salt & pepper"}, {"role": "assistant", "content": "{\"name\":\"garlic snow peas\",\"minutes\":5,\"tags\":\"['15-minutes-or-less', 'time-to-make', 'course', 'main-ingredient', 'cuisine', 'preparation', 'occasion', 'low-protein', 'healthy', '5-ingredients-or-less', 'appetizers', 'side-dishes', 'vegetables', 'asian', 'chinese', 'easy', 'dinner-party', 'romantic', 'vegan', 'vegetarian', 'dietary', 'low-sodium', 'low-cholesterol', 'stir-fry', 'comfort-food', 'low-carb', 'inexpensive', 'healthy-2', 'low-in-something', 'taste-mood', 'presentation', 'served-hot', 'technique']\",\"nutrition\":\"[46.6, 5.0, 5.0, 0.0, 2.0, 2.0, 1.0]\",\"n_steps\":6,\"steps\":\"['heat wok on medium-hi heat', 'add oil get it hot , dump in peas', 'about 1 minute after stir frying add garlic and seasoning', 'quick fry just till bright green and still crisp', 'cooking time is an estimate -- do not over cook or they will turn a dull green and go limp', 'remove and serve while still hot']\",\"description\":\"i love the ones at p f changs..so this is my version\",\"ingredients\":\"['fresh snow peas', 'sesame oil', 'minced garlic cloves', 'salt & pepper']\",\"n_ingredients\":4}\n"}]}
+{"messages": [{"role": "system", "content": "This is a vegan recipe generator. The vegan recipe generated should be output as a JSON object in the format:{\"name\":\"\",\"minutes\":,\"tags\":\"[]\",\"nutrition\":\"[]\",\"n_steps\":\"\",\"steps\":\"[]\",\"description\":\"\",\"ingredients\":\"[]\", \"n_ingredients\":}"}, {"role": "user", "content": "Create well-thought-out and flavourful recipes from a list of ingredients implementing classic culinary techniques."}, {"role": "user", "content": "peaches, dates, ground cinnamon, water, almonds, coconut oil"}, {"role": "assistant", "content": "{\"name\":\"summertime peach crumble raw food\",\"minutes\":5,\"tags\":\"['15-minutes-or-less', 'time-to-make', 'course', 'main-ingredient', 'preparation', 'cobblers-and-crisps', 'desserts', 'fruit', 'easy', 'vegan', 'vegetarian', 'food-processor-blender', 'dietary', 'low-sodium', 'low-in-something', 'pitted-fruit', 'peaches', 'equipment', 'small-appliance']\",\"nutrition\":\"[330.8, 32.0, 108.0, 3.0, 15.0, 34.0, 11.0]\",\"n_steps\":5,\"steps\":\"['for the base ~ place chopped peaches in large bowl & set aside', 'in blender or food processor , blend 5 dates , cinnamon & enough water to get a syrupy consistency', 'pour this date syrup over peaches & refrigerate at least 1 hour', 'for the topping ~ when peach \\/ date mixture has chilled , in a food processor , blend almonds , 4 dates & coconut oil to desired consistency', 'top peach \\/ date mixture with this topping & enjoy']\",\"description\":\"this recipe comes the goneraw internet site.\",\"ingredients\":\"['peaches', 'dates', 'ground cinnamon', 'water', 'almonds', 'coconut oil']\",\"n_ingredients\":6}\n"}]}
+{"messages": [{"role": "system", "content": "This is a vegan recipe generator. The vegan recipe generated should be output as a JSON object in the format:{\"name\":\"\",\"minutes\":,\"tags\":\"[]\",\"nutrition\":\"[]\",\"n_steps\":\"\",\"steps\":\"[]\",\"description\":\"\",\"ingredients\":\"[]\", \"n_ingredients\":}"}, {"role": "user", "content": "Create well-thought-out and flavourful recipes from a list of ingredients implementing classic culinary techniques."}, {"role": "user", "content": "grape-nuts cereal, apple juice concentrate"}, {"role": "assistant", "content": "{\"name\":\"fat free pie crust\",\"minutes\":13,\"tags\":\"['15-minutes-or-less', 'time-to-make', 'course', 'cuisine', 'preparation', 'north-american', 'healthy', '5-ingredients-or-less', 'pies-and-tarts', 'desserts', 'american', 'easy', 'low-fat', 'vegan', 'vegetarian', 'pies', 'dietary', 'low-cholesterol', 'low-saturated-fat', 'healthy-2', 'low-in-something']\",\"nutrition\":\"[88.9, 0.0, 27.0, 5.0, 4.0, 0.0, 6.0]\",\"n_steps\":6,\"steps\":\"['preheat the oven to 350 f \\/ 180 deg c', 'mix together the grape nuts and apple juice concentrate', 'pat into a thin layer on the bottom and sides of a 9 pie pan', \\\"don't worry if there are some gaps\\\", 'bake for 8 minutes', 'cool before filling']\",\"description\":\"from the table of the physicians committee for responsible medicine\",\"ingredients\":\"['grape-nuts cereal', 'apple juice concentrate']\",\"n_ingredients\":2}\n"}]}
+{"messages": [{"role": "system", "content": "This is a vegan recipe generator. The vegan recipe generated should be output as a JSON object in the format:{\"name\":\"\",\"minutes\":,\"tags\":\"[]\",\"nutrition\":\"[]\",\"n_steps\":\"\",\"steps\":\"[]\",\"description\":\"\",\"ingredients\":\"[]\", \"n_ingredients\":}"}, {"role": "user", "content": "Create well-thought-out and flavourful recipes from a list of ingredients implementing classic culinary techniques."}, {"role": "user", "content": "lemon juice, granulated sugar, water, lemon slice"}, {"role": "assistant", "content": "{\"name\":\"refreshing lemonade\",\"minutes\":5,\"tags\":\"['15-minutes-or-less', 'time-to-make', 'course', 'preparation', 'occasion', 'low-protein', 'healthy', '5-ingredients-or-less', 'beverages', 'easy', 'beginner-cook', 'low-fat', 'summer', 'vegan', 'vegetarian', 'dietary', 'low-sodium', 'low-cholesterol', 'seasonal', 'low-saturated-fat', 'low-calorie', 'inexpensive', 'low-in-something', 'presentation', 'served-cold']\",\"nutrition\":\"[116.5, 0.0, 115.0, 0.0, 0.0, 0.0, 10.0]\",\"n_steps\":4,\"steps\":\"['mix the lemon juice and sugar in a 2 quart pitcher', 'fill the container up with water until it reaches 2 quarts', 'float the lemon slices on top', 'chill , then enjoy !']\",\"description\":\"this is a really easy lemonade recipe.  i use bottled lemon juice because it's cheaper, but you could definately use fresh.\",\"ingredients\":\"['lemon juice', 'granulated sugar', 'water', 'lemon slice']\",\"n_ingredients\":4}\n"}]}
+
+---
+
+### ACTIONS:
+
+1. Read the tab separated comma file data
+2. Transform the data and create a jsonl file formatted in the conversational format as shown in the EXAMPLES section
+3. The conversational format has a system role, user role and assistant role, each with text content stored inside an array of dictionaries
+4. The first system role content is always: "This is a vegan recipe generator. The vegan recipe generated should be output as a JSON object in the format: {
+  "name": "",
+  "minutes": 0,
+  "tags": [],
+  "nutrition": [],
+  "n_steps": 0,
+  "steps": [],
+  "description": "",
+  "ingredients": [],
+  "n_ingredients": 0
+}"
+5. The first user role content is always: "Create well-thought-out and flavourful vegan recipes from a list of ingredients implementing classic culinary techniques"
+6. The subsequent user role content takes the list of ingredients in the column "ingredients" of the CSV file
+7. The assistant role content uses all the column values of the CSV file as a JSON object with the format: {
+  "name": "",
+  "minutes": 0,
+  "tags": [],
+  "nutrition": [],
+  "n_steps": 0,
+  "steps": [],
+  "description": "",
+  "ingredients": [],
+  "n_ingredients": 0
+}
+8. Split the data set into training and testing data sets with a "75%" and "25%" split respectively
+9. Make sure both data sets have the same format provided by the EXAMPLES section
+10. Name the data set with "75%" of the data "recipes-training-set"
+11. Name the data set with "25%" of the data "recipes-validation-set"
+12. Prepare both data sets as a jsonl file for download by the user
+
+---
+
+### DO NOT:
+1. Do not return any images. 
+2. Do not return any other file types.
 '''
 ```
 
@@ -198,19 +219,18 @@ Just like in Part 4, let’s start the Azure OpenAI Assistant using C**ode Inter
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Create an Azure OpenAI Assistant  
-assistant = client.beta.assistants.create(  
-    name = "data analyst assistant",  
-    instructions = instructions,  
-    tools = [{"type": "code_interpreter"}],  
-    model = "gpt-4-1106-preview",  
-    file_ids=[file__id]  
-)  
-  
-# Get the file id  
-fileId = assistant.file_ids[0]  
-  
-# Create a thread  
+# Create an Azure OpenAI Assistant
+assistant = client.beta.assistants.create(
+    name="data analyst assistant",
+    instructions=instructions,
+    tools=[{"type": "code_interpreter"}],
+    model="gpt-4o-mini",  # Replace this value with the deployment name for your model.
+    tool_resources={
+        "code_interpreter": {"file_ids": [file__id]}
+    }
+)
+
+# Create a thread
 thread = client.beta.threads.create()
 ```
 
@@ -219,13 +239,13 @@ We can now initialize the thread and send our instructions to the Azure OpenAI A
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Initalize thread and start data transformation using the Azure OpenAI Assistant Code Interpreter  
-prompt = "Please execute the INSTRUCTIONS and ACTIONS on the data stored in the CSV file using the EXAMPLES as reference for the output format " + fileId  
-  
-message = client.beta.threads.messages.create(  
-    thread_id = thread.id,  
-    role = "user",  
-    content = prompt  
+# Initalize thread and start data transformation using the Azure OpenAI Assistant Code Interpreter
+prompt = "Please execute the INSTRUCTIONS and ACTIONS on the data stored in the CSV file using the EXAMPLES as reference for the output format"
+
+message = client.beta.threads.messages.create(
+    thread_id = thread.id,
+    role = "user",
+    content = prompt
 )
 ```
 
@@ -298,43 +318,44 @@ Let’s view the newly created file and check the transformations.
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Functions to read xlsx files from Azure Openai  
-  
-output_path = r"/workspaces/azure-openai-lab/data/generated_output/"  
-# Write to jsonl  
-def write_jsonl(data_list: list, filename: str) -> None:  
-    with open(filename, "w") as out:  
-        for ddict in data_list:  
-            jout = json.dumps(ddict) + "\n"  
-            out.write(jout)  
-  
-  
-def read_and_save_file(first_file_id, file_name, output_path):     
-    # its binary, so read it and then make it a file like object  
-    file_data = client.files.content(first_file_id)  
-    file_data_bytes = file_data.read()  
-    file_data_decoded = file_data_bytes.decode('utf8').replace("'", '"')  
-    file_data_list = file_data_decoded.splitlines()  
-    write_jsonl(file_data_list, output_path + file_name)  
-  
-      
-def files_from_messages():  
-    messages = client.beta.threads.messages.list(  
-            thread_id=thread.id  
-        )  
-    first_thread_message = messages.data[0]  # Accessing the first ThreadMessage  
-    message_ids = first_thread_message.file_ids  
-    print(message_ids)  
-    # Loop through each file ID and save the file with a sequential name  
-    for i, file_id in enumerate(message_ids):  
-        if i == 1:  
-            file_name = f"recipes-training-set.jsonl"  # Generate a sequential file name  
-            read_and_save_file(file_id, file_name, output_path)  
-        else:  
-            file_name = f"recipes-validation-set.jsonl"  # Generate a sequential file name  
-            read_and_save_file(file_id, file_name, output_path)  
-  
-# Extract the file names from the response, retrieve the content and save the data as a jsonl file  
+# Functions to read xlsx files from Azure Openai
+
+output_path = r"/workspaces/azure-openai-lab/data/generated_output/" #r"C:\\Python\\azure-openai-lab\\data\\generated_output\\"
+
+# Write to jsonl
+def write_jsonl(data_list: list, filename: str) -> None:
+    with open(filename, "w") as out:
+        for ddict in data_list:
+            jout = json.dumps(ddict) + "\n"
+            out.write(jout)
+
+
+def read_and_save_file(first_file_id, file_name, output_path):   
+    # its binary, so read it and then make it a file like object
+    file_data = client.files.content(first_file_id)
+    file_data_bytes = file_data.read()
+    file_data_decoded = file_data_bytes.decode('utf8').replace("'", '"')
+    file_data_list = file_data_decoded.splitlines()
+    write_jsonl(file_data_list, output_path + file_name)
+
+    
+def files_from_messages():
+    messages = client.beta.threads.messages.list(
+            thread_id=thread.id
+        )
+    first_thread_message = messages.data[0]  # Accessing the first ThreadMessage
+    message_ids = first_thread_message.attachments
+    print(message_ids)
+    # Loop through each file ID and save the file with a sequential name
+    for i, file_id in enumerate(message_ids):
+        if i == 1:
+            file_name = f"recipes-training-set.jsonl"  # Generate a sequential file name
+            read_and_save_file(file_id.file_id, file_name, output_path)
+        else:
+            file_name = f"recipes-validation-set.jsonl"  # Generate a sequential file name
+            read_and_save_file(file_id.file_id, file_name, output_path)
+
+# Extract the file names from the response, retrieve the content and save the data as a jsonl file
 files_from_messages()
 ```
 
@@ -347,18 +368,18 @@ You want to make sure there aren’t any unnecessary artifacts laying around in 
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-#Clean up Azure OpenAI environment  
-client.beta.assistants.delete(assistant.id)  
-client.beta.threads.delete(thread.id)  
-for i in range(0, 2):  
-    client.files.delete(messages.data[0].file_ids[i])
+#Clean up Azure OpenAI environment
+client.beta.assistants.delete(assistant.id)
+client.beta.threads.delete(thread.id)
+for i in range(0, 2):
+    client.files.delete(messages.data[0].attachments[i].file_id)
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ----------
 
-## 3. Getting started with Fine-Tuning
+## 3. Getting started with Fine-Tuning [NOT USED IN THE WORKSHOP]
 
 Now that the training and validation datasets are ready, we can start fine-tuning a base model.
 
@@ -408,12 +429,12 @@ Next, we will load the Azure OpenAI Key and Endpoint as variables.
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Load required variables from .env file.  
-load_dotenv(dotenv_path=Path("/workspaces/azure-openai-lab/.venv/.env")) #Error sometimes due to \ or \\. Try one or the other. "C:\\Python\\azure-openai-lab\\.venv\\.env"  
-  
-# Load Azure OpenAI Key and Endpoint. These values can be found within the Azure OpenAI Service resource in portal.azure.com under Keys and Endpoint  
-azure_oai_key = os.environ['AZURE_OPENAI_KEY_P56']  
-azure_oai_endpoint = os.environ['AZURE_OPENAI_ENDPOINT_P56']  
+# Load required variables from .env file.
+load_dotenv(dotenv_path=Path("/workspaces/azure-openai-lab/.venv/.env")) #Error sometimes due to \ or \\. Try one or the other. "C:\\Python\\azure-openai-lab\\.venv\\.env"
+
+# Load Azure OpenAI Key and Endpoint. These values can be found within the Azure OpenAI Service resource in portal.azure.com under Keys and Endpoint
+azure_oai_key = os.environ['AZURE_OPENAI_KEY_P34']
+azure_oai_endpoint = os.environ['AZURE_OPENAI_ENDPOINT_P34']
 ```
 
 Once the credentials are available as variables, we can initialize the Azure OpenAI client.
@@ -421,11 +442,11 @@ Once the credentials are available as variables, we can initialize the Azure Ope
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Initialize the Azure OpenAI client  
-client = AzureOpenAI(  
-    api_key = azure_oai_key,    
-    azure_endpoint = azure_oai_endpoint,  
-    api_version = "2024-02-15-preview"  
+# Initialize the Azure OpenAI client
+client = AzureOpenAI(
+    api_key = azure_oai_key,  
+    azure_endpoint = azure_oai_endpoint,
+    api_version = "2024-05-01-preview"
     )
 ```
 
@@ -472,13 +493,13 @@ We are now ready to run the fine-tuning job.
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Initalize Fine-Tuning Job  
-finetune = client.fine_tuning.jobs.create(  
-    training_file=training_file_id,  
-    validation_file=validation_file_id,  
-    model="gpt-35-turbo-0613",  
-)  
-  
+# Initalize Fine-Tuning Job
+finetune = client.fine_tuning.jobs.create(
+    training_file=training_file_id,
+    validation_file=validation_file_id,
+    model="gpt-4o-mini",
+)
+
 job_id = finetune.id
 ```
 
@@ -524,28 +545,21 @@ You can programmatically deploy the model in Python using an authentication key.
 
 **_IMPORTANT: Deploying a model can incur high costs. Only deploy a fine-tuned model if you plan on using it and always check the current_** [**_pricing_**](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) **_to ensure you understand the charges._**
 
--   In the Azure Portal, open the Azure OpenAI Service resource you created located in **East US 2** and select the **Go to Azure OpenAI Studio** button
+-   In the Azure Portal, open the Azure OpenAI Service resource you created located in **Sweden Central** and select the **Explore Azure AI Foundry Portal** button
 
-![](https://cdn-images-1.medium.com/max/800/1*e8zPx-SluT7poj-BCnwVqg.png)
+![](https://cdn-images-1.medium.com/max/800/1*PLejFC9jozUzVhWlzLYjUA.png)
 
--   In Azure OpenAI Studio, select the **Models** tab on the left panel and click the **Custom models** tab.
+-   In Azure AI Foundry, select the **Fine-Tuning** tab on the left panel, click the fine-tuned model you created and select **Deploy**.
 
-You should see the fine-tuned model you created with the status **Succeeded**. If this is the case, perfect! You can now deploy the model!
+![](https://cdn-images-1.medium.com/max/800/1*4jCTsPTzWTURBUZGTjF2Ww.png)
 
-![](https://cdn-images-1.medium.com/max/800/1*m5UAZ3tQT8sTuMqd40Bp7g.png)
+-   Once you selected the Deploy button, a new window will pop up. Adjusted the name of the model to `gpt-4o-mini-ft`and select **Deploy**.
 
--   In Azure OpenAI Studio, select the **Deployments** tab on the left panel and select the button **Create new deployment**
+![](https://cdn-images-1.medium.com/max/800/1*aEaXBfEL3pKX1imIgNAZ4Q.png)
 
-![](https://cdn-images-1.medium.com/max/800/1*VqQKH4kbqCayaz_sVPbJGw.png)
+-   Head over to the **Deployments** tab on the left panel. You should see the fine-tuned model you created. The initial status will be **Creating** and should move to status **Succeeded** after a few minutes.
 
--   Let’s create a fine-tuned GPT-4 model named `gpt-35-turbo-0613`. Under **select a model**, you should see the fine-tuned model selection under **Fine tuned**.
--   Select the first model under this category.
-
-![](https://cdn-images-1.medium.com/max/800/1*qFW01Zic4Ut5Q1l0G4uvZg.png)
-
--   Define the rest of the parameters as shown in the image below and select **create**.
-
-![](https://cdn-images-1.medium.com/max/800/1*aCkJIW8dTwEDCUYXJUVM2g.png)
+![](https://cdn-images-1.medium.com/max/800/1*2xOPRKmZUHcyZgYu_BSSSQ.png)
 
 You are now ready to start creating recipes using your fine-tuned model!
 
@@ -593,22 +607,24 @@ Next, we will load the Azure OpenAI Key and Endpoint as variables.
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Load required variables from .env file.  
-load_dotenv(dotenv_path=Path("/workspaces/azure-openai-lab/.venv/.env")) #Error sometimes due to \ or \\. Try one or the other. "C:\\Python\\azure-openai-lab\\.venv\\.env"  
-  
-# Load Azure OpenAI Key and Endpoint. These values can be found within the Azure OpenAI Service resource in portal.azure.com under Keys and Endpoint  
-azure_oai_key = os.environ['AZURE_OPENAI_KEY_P56']  
-azure_oai_endpoint = os.environ['AZURE_OPENAI_ENDPOINT_P56']
+# Load required variables from .env file.
+load_dotenv(dotenv_path=Path("/workspaces/azure-openai-lab/.venv/.env")) #Error sometimes due to \ or \\. Try one or the other. "C:\\Python\\azure-openai-lab\\.venv\\.env"
+
+# Load Azure OpenAI Key and Endpoint. These values can be found within the Azure OpenAI Service resource in portal.azure.com under Keys and Endpoint
+azure_oai_key = os.environ['AZURE_OPENAI_KEY_P34']
+azure_oai_endpoint = os.environ['AZURE_OPENAI_ENDPOINT_P34']
+```
 
 Once the credentials are available as variables, we can initialize the Azure OpenAI client.
 
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
-# Initialize the Azure OpenAI client  
-client = AzureOpenAI(  
-    api_key = azure_oai_key,    
-    azure_endpoint = azure_oai_endpoint,  
-    api_version = "2024-02-15-preview"  
+```
+# Initialize the Azure OpenAI client
+client = AzureOpenAI(
+    api_key = azure_oai_key,  
+    azure_endpoint = azure_oai_endpoint,
+    api_version ="2024-05-01-preview"
     )
 ```
 
@@ -623,43 +639,61 @@ The client has been initialized so that we can create our recipe using our fine-
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Zero-Shot learning. Model has a token limit of 4096.  
-  
-# Create advanced System prompt  
-systemcontent = \  
-"""  
-### Instructions  
-Persona: Act as a head chef such as Joël Robuchon who specializes in simple contemporary cuisine.  
-Action: Create well-thought-out and flavourful recipes from a list of ingredients implementing classic culinary techniques.  
-Target Audience: The recipients of these recipes are couples who want to cook a special meal at least once a week.  
-  
-### Output format  
-Return a JSON array with the following format:  
-{"name":"","minutes":,"tags":"[]","nutrition":"[]","n_steps":"","steps":"[]","description":"","ingredients":"[]","n_ingredients":}  
-  
-The variables should contain the following information:  
-- name: the name of the recipe.  
-- minutes: the time in minutes to prepare the recipe.  
-- tags: a list of words that characterize the recipe.  
-- nutrition: a list of numeric values representing calories, total fat, sugar, sodium, protein, saturated fat, and carbohydrates.  
-- n_steps: the number of steps to prepare the recipe.  
-- steps: a list of steps to prepare the recipe.  
-- description: a summary of the recipe.  
-- ingredients: a list of ingredients used in the recipe including the amount and the units using the metric system.  
-- n_ingredients: the number of ingredients used in the recipe.  
-  
-"""  
-  
-ingredients = """'Tofu', 'Avocado', 'Soy Sauce', 'Chili', 'Coconut Milk', 'Broccoli'"""  
-  
-completion = client.chat.completions.create(  
-  model = "gpt-35-turbo-0613-ft",  
-  #response_format={ "type": "json_object" }, # Not support for fine tuned models  
-  messages = [      
-    {"role": "system", "content": systemcontent},  
-    {"role": "user", "content": ingredients}  
-  ]  
+# Zero-Shot learning. Model has a token limit of 4096.
+
+# Create advanced System prompt
+systemcontent = \
+"""
+### INSTRUCTIONS
+Persona: Act as a head chef such as Joël Robuchon who specializes in simple contemporary cuisine.
+Action: Create well-thought-out and flavourful vegan recipes from a list of ingredients implementing classic culinary techniques.
+Target Audience: The recipients of these vegan recipes are couples who want to cook a special meal at least once a week.
+
+---
+
+### OUTPUT FORMAT
+Output only one vegan recipe and return it as a JSON object with the following format:
+{
+  "name": "",
+  "minutes": 0,
+  "tags": [],
+  "nutrition": [],
+  "n_steps": 0,
+  "steps": [],
+  "description": "",
+  "ingredients": [],
+  "n_ingredients": 0
+}
+
+The variables should contain the following information:
+- name: the name of the recipe.
+- minutes: the time in minutes to prepare the recipe.
+- tags: a list of words that characterize the recipe.
+- nutrition: a list of numeric values representing calories, total fat, sugar, sodium, protein, saturated fat, and carbohydrates.
+- n_steps: the number of steps to prepare the recipe.
+- steps: a list of steps to prepare the recipe.
+- description: a summary of the recipe.
+- ingredients: a list of the ingredient names in the recipe.
+- n_ingredients: the total number of ingredients used in the recipe.
+"""
+
+# Create a prompt of ingredients the model should create a recipe from
+ingredients = """'Tofu', 'Avocado', 'Soy Sauce', 'Chili', 'Coconut Milk', 'Broccoli'"""
+
+# Send request to Azure OpenAI model
+completion = client.chat.completions.create(
+  model = "gpt-4o-mini-ft",
+  #response_format={ "type": "json_object" }, # Not support for fine tuned models
+  messages = [    
+    {"role": "system", "content": systemcontent},
+    {"role": "user", "content": ingredients}
+  ]
 )
+
+# View generated recipe
+result = completion.choices[0].message.content
+print(result)
+
 ```
 
 The generated recipe is indeed vegan and it looks plausible! The format fits our specified JSON object too! We are all set at this point, but out of curiosity, let’s add RAG to the mix.
@@ -726,8 +760,8 @@ Next, we will load the Azure OpenAI Key and Endpoint as variables.
 load_dotenv(dotenv_path=Path("/workspaces/azure-openai-lab/.venv/.env")) #Error sometimes due to \ or \\. Try one or the other. "C:\\Python\\azure-openai-lab\\.venv\\.env"
 
 # Load Azure OpenAI Key and Endpoint. These values can be found within the Azure OpenAI Service resource in portal.azure.com under Keys and Endpoint
-azure_oai_key = os.environ['AZURE_OPENAI_KEY_P56']
-azure_oai_endpoint = os.environ['AZURE_OPENAI_ENDPOINT_P56']
+azure_oai_key = os.environ['AZURE_OPENAI_KEY_P34']
+azure_oai_endpoint = os.environ['AZURE_OPENAI_ENDPOINT_P34']
 ```
 
 Once the credentials are available as variables, we can initialize the Azure OpenAI client using our new fine-tuned model `gpt-35-turbo-0613-ft`.
@@ -735,13 +769,13 @@ Once the credentials are available as variables, we can initialize the Azure Ope
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Initalize Azure Openai using LangChain (Default gpt-35-turbo and fine-tuned gpt-35-turbo-0613-ft)  
-client = AzureChatOpenAI(  
-                deployment_name = "gpt-35-turbo-0613-ft",  
-                openai_api_key = azure_oai_key,  
-                azure_endpoint = azure_oai_endpoint,  
-                openai_api_version = "2024-02-15-preview"  
-        ) 
+# Initalize Azure Openai using LangChain
+client = AzureChatOpenAI(
+                deployment_name = "gpt-4o-mini-ft",
+                openai_api_key = azure_oai_key,
+                azure_endpoint = azure_oai_endpoint,
+                openai_api_version = "2024-02-15-preview"
+        )
 ```
 
 **_NOTE: The latest API version for the AzureOpenAI client can be found_** [**_here_**](https://learn.microsoft.com/en-us/azure/ai-services/openai/api-version-deprecation#latest-ga-api-release)**_._**
@@ -757,12 +791,12 @@ To do this, we need to re-initialize the `AzureOpenAIEmbeddings` constructor to 
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Generate the Word Embeddings for the Dataset using Azure OpenAI with model text-embedding-ada-002  
-openai_ef = AzureOpenAIEmbeddings(  
-                deployment = "text-embedding-3-large",  
-                openai_api_key = azure_oai_key,  
-                azure_endpoint = azure_oai_endpoint,  
-                openai_api_version = "2024-02-01",  
+# Generate the Word Embeddings for the Dataset using Azure OpenAI with model text-embedding-ada-002
+openai_ef = AzureOpenAIEmbeddings(
+                deployment = "text-embedding-3-large",
+                openai_api_key = azure_oai_key,
+                azure_endpoint = azure_oai_endpoint,
+                openai_api_version = "2024-10-21",
             )
 ```
 
@@ -786,60 +820,70 @@ We will use the same prompt template as in Part 4.
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Zero-shot learning Prompt  
-prompt_template = \  
-"""  
-### INSTRUCTIONS  
-Persona: Act as a head chef such as Joël Robuchon who specializes in simple contemporary cuisine.  
-Action: Create well-thought-out and flavourful vegan recipes from a list of ingredients {question}, implementing classic culinary techniques.  
-Target Audience: The recipients of these vegan recipes are couples who want to cook a special meal at least once a week.  
-  
-### EXAMPLE  
-{context}  
-  
-### OUTPUT FORMAT  
-Output only one vegan recipe and return it as a JSON object with the following format:  
-{{"name":"","minutes":,"tags":"[]","nutrition":"[]","n_steps":"","steps":"[]","description":"","ingredients":"[]", "n_ingredients":}}  
-  
-The variables should contain the following information:  
-- name: the name of the recipe.  
-- minutes: the time in minutes to prepare the recipe.  
-- tags: a list of words that characterize the recipe.  
-- nutrition: a list of numeric values representing calories, total fat, sugar, sodium, protein, saturated fat, and carbohydrates.  
-- n_steps: the number of steps to prepare the recipe.  
-- steps: a list of steps to prepare the recipe.  
-- description: a summary of the recipe.  
-- ingredients: a list of the ingredient names in the recipe.  
-- n_ingredients: the total number of ingredients used in the recipe.  
-"""  
-  
-  
-simple_prompt = PromptTemplate(  
-    template=prompt_template, input_variables=["context", "question"]  
-)
+# Zero-shot learning Prompt
+prompt_template = \
+"""
+### INSTRUCTIONS
+Persona: Act as a head chef such as Joël Robuchon who specializes in simple contemporary cuisine.
+Action: Create well-thought-out and flavourful vegan recipes from a list of ingredients {question}, implementing classic culinary techniques.
+Target Audience: The recipients of these vegan recipes are couples who want to cook a special meal at least once a week.
 
+### EXAMPLE
+{context}
+
+### OUTPUT FORMAT
+Output only one vegan recipe and return it as a JSON object with the following format:
+{{
+  "name": "",
+  "minutes": 0,
+  "tags": [],
+  "nutrition": [],
+  "n_steps": 0,
+  "steps": [],
+  "description": "",
+  "ingredients": [],
+  "n_ingredients": 0
+}}
+
+The variables should contain the following information:
+- name: the name of the recipe.
+- minutes: the time in minutes to prepare the recipe.
+- tags: a list of words that characterize the recipe.
+- nutrition: a list of numeric values representing calories, total fat, sugar, sodium, protein, saturated fat, and carbohydrates.
+- n_steps: the number of steps to prepare the recipe.
+- steps: a list of steps to prepare the recipe.
+- description: a summary of the recipe.
+- ingredients: a list of the ingredient names in the recipe.
+- n_ingredients: the total number of ingredients used in the recipe.
+"""
+
+
+simple_prompt = PromptTemplate(
+    template=prompt_template, input_variables=["context", "question"]
+)
+```
 and generate a vegan recipe.
 
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
-# Run chain to call Azure OpenAI using ChromaDB vector database data to enrich the prompt (RAG).  
-ingredients = """'Tofu', 'Avocado', 'Soy Sauce', 'Chili', 'Coconut Milk', 'Broccoli'"""  
-  
-chain = RetrievalQA.from_chain_type(  
-       llm=client,  
-       retriever = vectordb.as_retriever(),  
-       chain_type="stuff",  
-       chain_type_kwargs={"prompt": simple_prompt}  
-)  
-result = chain.invoke({"query": ingredients})  
-  
-# View Azure OpenAI output  
-display(result)
 ```
+# Run chain to call Azure OpenAI using ChromaDB vector database data to enrich the prompt (RAG).
+ingredients = """'Tofu', 'Avocado', 'Soy Sauce', 'Chili', 'Coconut Milk', 'Broccoli'"""
 
+chain = RetrievalQA.from_chain_type(
+       llm=client,
+       retriever = vectordb.as_retriever(),
+       chain_type="stuff",
+       chain_type_kwargs={"prompt": simple_prompt}
+)
+
+# View generated recipe
+result = chain.invoke({"query": ingredients})
+print(result)
+```
 The generated vegan recipe looks great! The recipe variables look plausible with vegan as one of the recipe tag and the format is JSON as specified.
 
-Congratulations! You have completed Part 5 of this workshop. We have learned how to use the Azure OpenAI Assistant API for data pre-processing, and have used fine-tuned models to generate better recipe outputs. We will continue with Part 6 of the workshop and learn how we can use the new GPT-4o model to generate a list of ingredients from images.
+Congratulations! You have completed Part 5 of this workshop. We have learned how to use the Azure OpenAI Assistant API for data pre-processing, and have used fine-tuned models to generate better recipe outputs. We will continue with [Part 6][A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-6] of the workshop and learn how we can use the new GPT-4o model to generate a list of ingredients from images.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -860,3 +904,5 @@ Reach out to us! We are happy to answer any questions you might have or use your
 <!-- MARKDOWN LINKS & IMAGES -->
 [A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-6]: https://github.com/AllgeierSchweiz/azure-openai-lab/blob/main/series/A%20Hands-on%20Exploration%20of%20the%20Azure%20OpenAI%20API%20(Part%206%20of%C2%A06).md
 [Fine-Tuned]: https://github.com/AllgeierSchweiz/azure-openai-lab/blob/main/images/Fine_Tuning.jpg
+
+[A-Hands-on-Exploration-of-the-Azure-OpenAI-APIs-part-6]: https://github.com/AllgeierSchweiz/azure-openai-lab/blob/main/series/A%20Hands-on%20Exploration%20of%20the%20Azure%20OpenAI%20API%20(Part%206%20of%C2%A06).md

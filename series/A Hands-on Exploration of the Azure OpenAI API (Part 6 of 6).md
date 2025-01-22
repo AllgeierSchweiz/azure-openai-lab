@@ -6,11 +6,11 @@
 
 ## 1. Omni Image-to-Text
 
-Let’s continue our journey and learn how we can use the new GPT-4o model to translate images of food into text, i.e. a list of ingredients, which we can use to create new recipes.
+Let’s continue our journey and learn how we can use the new GPT-4o-mini model to translate images of food into text, i.e. a list of ingredients, which we can use to create new recipes.
 
 1.  _P6-azure-openai-omni-image-to-text.ipynb_
 
-In this Notebook, we will call the Azure OpenAI API with the Chat Completion API using the GPT-4o model. This is a multimodal model which can use both text and images to generate natural language outputs.
+In this Notebook, we will call the Azure OpenAI API with the Chat Completion API using the GPT-4o-mini model. This is a multimodal model which can use both text and images to generate natural language outputs.
 
 <br/><br/>
 
@@ -53,12 +53,12 @@ Next, we will load the Azure OpenAI Key and Endpoint as variables.
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Load required variables from .env file.  
-load_dotenv(dotenv_path=Path("/workspaces/azure-openai-lab/.venv/.env")) #Error sometimes due to \ or \\. Try one or the other.  
-  
-# Load Azure OpenAI Key and Endpoint. These values can be found within the Azure OpenAI Service resource in portal.azure.com under Keys and Endpoint  
-azure_oai_key = os.environ['AZURE_OPENAI_KEY']  
-azure_oai_endpoint = os.environ['AZURE_OPENAI_ENDPOINT']
+# Load required variables from .env file.
+load_dotenv(dotenv_path=Path("/workspaces/azure-openai-lab/.venv/.env")) #Error sometimes due to \ or \\. Try one or the other. "C:\\Python\\azure-openai-lab\\.venv\\.env"
+
+# Load Azure OpenAI Key and Endpoint. These values can be found within the Azure OpenAI Service resource in portal.azure.com under Keys and Endpoint
+azure_oai_key = os.environ['AZURE_OPENAI_KEY_P34']
+azure_oai_endpoint = os.environ['AZURE_OPENAI_ENDPOINT_P34']
 ```
 
 Once the credentials are available as variables, we can initialize the Azure OpenAI client.
@@ -66,15 +66,15 @@ Once the credentials are available as variables, we can initialize the Azure Ope
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Initialize the Azure OpenAI client  
-client = AzureOpenAI(  
-        azure_endpoint = azure_oai_endpoint,   
-        api_key=azure_oai_key,    
-        api_version= "2024-04-01-preview" #"2024-05-13"  
+# Initialize the Azure OpenAI client
+client = AzureOpenAI(
+        azure_endpoint = azure_oai_endpoint, 
+        api_key=azure_oai_key,  
+        api_version= "2024-10-21"
         )
 ```
 
-**_NOTE: The latest API version for the AzureOpenAI client can be found_** [**_here_**](https://learn.microsoft.com/en-us/azure/ai-services/openai/api-version-deprecation#latest-ga-api-release)**_. Currently the designated GPT-4o API version 2024–05–13 is not working. We will fall back to version 2024–04–01-preview, which is used in GPT-4 vision models._**
+**_NOTE: The latest API version for the AzureOpenAI client can be found_** [**_here_**](https://learn.microsoft.com/en-us/azure/ai-services/openai/api-version-deprecation#latest-ga-api-release)**_.
 
 <br/><br/>
 
@@ -118,7 +118,7 @@ The client has been initialized and the images have imported and reformatted. We
   
 # Send request to Azure OpenAI model  
 response = client.chat.completions.create(  
-    model="gpt-4o",  
+    model="gpt-4o-mini",  
     temperature=0.7,  
     #max_tokens=120,  
     messages=[  
@@ -198,7 +198,12 @@ systemcontent = \
 
 ### OUTPUT FORMAT
 Return a JSON array with the following format:
-{"name":"",amount:"", units:"", expiration_days:}
+{
+  "name": "",
+  "amount": "",
+  "units": "",
+  "expiration_days": null
+}
 
 The variables should contain the following information:
 - name: the name of the product in each image.
@@ -209,7 +214,7 @@ The variables should contain the following information:
 
 # Send request to Azure OpenAI model
 response = client.chat.completions.create(
-    model="gpt-4o",
+    model="gpt-4o-mini",
     temperature=0.7,
     #max_tokens=120,
     messages=[
@@ -287,7 +292,12 @@ systemcontent = \
 
 ### OUTPUT FORMAT
 Return a JSON array with the following format:
-{"name":"",amount:"", units:"", expiration_days:}
+{
+  "name": "",
+  "amount": "",
+  "units": "",
+  "expiration_days": null
+}
 
 The variables should contain the following information:
 - name: the name of the product in each image.
@@ -298,7 +308,7 @@ The variables should contain the following information:
 
 # Send request to Azure OpenAI model
 response = client.chat.completions.create(
-    model="gpt-4o",
+    model="gpt-4o-mini",
     temperature=0.7,
     #max_tokens=120,
     messages=[
@@ -351,7 +361,16 @@ systemcontent = \
 
 ### OUTPUT FORMAT
 Return a JSON array with the following format:
-{"name":"","description":"", "ingredients":"[]", amount:"[]", units:"[]", "steps":"[]", "nutritions":"", expiration_days:}
+{
+  "name": "",
+  "description": "",
+  "ingredients": [],
+  "amount": [],
+  "units": [],
+  "steps": [],
+  "nutritions": "",
+  "expiration_days": null
+}
 
 The variables should contain the following information:
 - name: the name of the recipe.
@@ -367,7 +386,7 @@ The variables should contain the following information:
 
 # Send request to Azure OpenAI model
 response = client.chat.completions.create(
-    model="gpt-4o",
+    model="gpt-4o-mini",
     temperature=0.7,
     #max_tokens=120,
     messages=[

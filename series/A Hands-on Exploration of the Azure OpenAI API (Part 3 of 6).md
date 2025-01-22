@@ -97,10 +97,10 @@ Once the credentials are available as variables, we can initialize the Azure Ope
 
 ```sql
 # Initialize the Azure OpenAI client  
-client = AzureOpenAI(  
-        azure_endpoint = azure_oai_endpoint,   
-        api_key=azure_oai_key,    
-        api_version="2024-02-01"  
+client = AzureOpenAI(
+        azure_endpoint = azure_oai_endpoint, 
+        api_key=azure_oai_key,  
+        api_version="2024-10-21"
         )
 ```
 
@@ -123,21 +123,24 @@ We will not include any examples to aid the model, we are therefore following a 
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
 ```sql
-# Create a prompt of ingredients the model should create a recipe from  
-ingredients = """'veal roast', 'butter', 'oil', 'carrots', 'onions', 'parsley sprigs', 'bay leaf', 'thyme', 'salt', 'pepper', 'bacon'"""  
-  
-# Send request to Azure OpenAI model  
-response = client.chat.completions.create(  
-   model="gpt-35-turbo",  
-   temperature=0.7,  
-   #max_tokens=120,  
-   messages=[  
-       {"role": "system", "content": "You are a helpful cook"},  
-       {"role": "user", "content": "Create a flavourful recipe using the following ingredients:" + "\n" + "---" + "\n" + ingredients + "\n" + "---"}  
-   ]  
-)  
-  
-print("Summary: " + response.choices[0].message.content + "\n")
+# Zero-Shot learning. Model has a token limit of 4096.
+
+# Create a prompt of ingredients the model should create a recipe from
+ingredients = """'veal roast', 'butter', 'oil', 'carrots', 'onions', 'parsley sprigs', 'bay leaf', 'thyme', 'salt', 'pepper', 'bacon'"""
+
+# Send request to Azure OpenAI model
+response = client.chat.completions.create(
+   model= "gpt-4o-mini",
+   temperature=0.7,
+   #max_tokens=120,
+   messages=[
+       {"role": "system", "content": "You are a helpful cook"},
+       {"role": "user", "content": "Create a flavourful recipe using the following ingredients:" + "\n" + "---" + "\n" + ingredients}
+   ]
+)
+
+result = response.choices[0].message.content
+print(result + "\n")
 ```
 
 **_NOTE: The model name being called in the chat completion client is the name of the model you deployed in your Azure OpenAI Service cockpit. For the SDSC workshop, all model deployments have already been provisioned and nothing needs to be changed._**
@@ -172,7 +175,17 @@ Target Audience: The recipients of these recipes are couples who want to cook a 
 
 ### OUTPUT FORMAT
 Output only one recipe and return it as a JSON object with the following format:
-{"name":"","minutes":,"tags":"[]","nutrition":"[]","n_steps":"","steps":"[]","description":"","ingredients":"[]", "n_ingredients":}
+{
+  "name": "",
+  "minutes": 0,
+  "tags": [],
+  "nutrition": [],
+  "n_steps": 0,
+  "steps": [],
+  "description": "",
+  "ingredients": [],
+  "n_ingredients": 0
+}
 
 The variables should contain the following information:
 - name: the name of the recipe.
@@ -204,7 +217,17 @@ Target Audience: The recipients of these recipes are couples who want to cook a 
 
 ### OUTPUT FORMAT
 Output only one recipe and return it as a JSON object with the following format:
-{"name":"","minutes":,"tags":"[]","nutrition":"[]","n_steps":"","steps":"[]","description":"","ingredients":"[]", "n_ingredients":}
+{
+  "name": "",
+  "minutes": 0,
+  "tags": [],
+  "nutrition": [],
+  "n_steps": 0,
+  "steps": [],
+  "description": "",
+  "ingredients": [],
+  "n_ingredients": 0
+}
 
 The variables should contain the following information:
 - name: the name of the recipe.
@@ -223,7 +246,7 @@ ingredients = """'veal roast', 'butter', 'oil', 'carrots', 'onions', 'parsley sp
 
 # Send request to Azure OpenAI model
 response = client.chat.completions.create(
-   model="gpt-35-turbo",
+   model="gpt-4o-mini",
    temperature=0.7,
    #max_tokens=120,
    messages=[
@@ -275,7 +298,17 @@ Target Audience: The recipients of these recipes are couples who want to cook a 
 
 ### OUTPUT FORMAT
 Output only one recipe and return it as a JSON object with the following format:
-{"name":"","minutes":,"tags":"[]","nutrition":"[]","n_steps":"","steps":"[]","description":"","ingredients":"[]", "n_ingredients":}
+{
+  "name": "",
+  "minutes": 0,
+  "tags": [],
+  "nutrition": [],
+  "n_steps": 0,
+  "steps": [],
+  "description": "",
+  "ingredients": [],
+  "n_ingredients": 0
+}
 
 The variables should contain the following information:
 - name: the name of the recipe.
@@ -291,16 +324,46 @@ The variables should contain the following information:
 
 # One-Shot learning example
 ingredients_1 = """'pork spareribs', 'soy sauce', 'fresh garlic', 'fresh ginger', 'chili powder', 'fresh coarse ground black pepper', 'salt', 'fresh cilantro leaves', 'tomato sauce', 'brown sugar', 'yellow onion', 'white vinegar', 'honey', 'a.1. original sauce', 'liquid smoke', 'cracked black pepper', 'cumin', 'dry mustard', 'cinnamon sticks', 'orange, juice of', 'mirin', 'water'"""
-assistant_content_1 = """{"name":"backyard style  barbecued ribs","minutes":120,"tags":"['weeknight', 'time-to-make', 'course', 'main-ingredient', 'cuisine', 'preparation', 'occasion', 'north-american', 'south-west-pacific', 'main-dish', 'pork', 'oven', 'holiday-event', 'stove-top', 'hawaiian', 'spicy', 'copycat', 'independence-day', 'meat', 'pork-ribs', 'super-bowl', 'novelty', 'taste-mood', 'savory', 'sweet', 'equipment', '4-hours-or-less']","nutrition":"[1109.5, 83.0, 378.0, 275.0, 96.0, 86.0, 36.0]","n_steps":10,"steps":"['in a medium saucepan combine all the ingredients for sauce#1 , bring to a full rolling boil , reduce heat to medium low and simmer for 1 hour , stirring often', 'rub the ribs with soy sauce , garlic , ginger , chili powder , pepper , salt and chopped cilantro , both sides !', 'wrap ribs in heavy duty foil', 'let stand 1 hour', 'preheat oven to 350 degrees', 'place ribs in oven for 1 hour , turning once after 30 minutes', '3 times during cooking the ribs open foil wrap and drizzle ribs with sauce#1', 'place all the ingredients for sauce#2 in a glass or plastic bowl , whisk well and set aside', 'remove ribs from oven and place on serving platter', 'offer both sauces at table to drizzle over ribs']","description":"this recipe is posted by request and was originaly from chef sam choy's cookbook ","ingredients":"['pork spareribs', 'soy sauce', 'fresh garlic', 'fresh ginger', 'chili powder', 'fresh coarse ground black pepper', 'salt', 'fresh cilantro leaves', 'tomato sauce', 'brown sugar', 'yellow onion', 'white vinegar', 'honey', 'a.1. original sauce', 'liquid smoke', 'cracked black pepper', 'cumin', 'dry mustard', 'cinnamon sticks', 'orange, juice of', 'mirin', 'water']","n_ingredients":22}"""
+assistant_content_1 = """{
+  "name": "backyard style barbecued ribs",
+  "minutes": 120,
+  "tags": [
+    "weeknight", "time-to-make", "course", "main-ingredient", "cuisine", "preparation", "occasion", "north-american", 
+    "south-west-pacific", "main-dish", "pork", "oven", "holiday-event", "stove-top", "hawaiian", "spicy", "copycat", 
+    "independence-day", "meat", "pork-ribs", "super-bowl", "novelty", "taste-mood", "savory", "sweet", "equipment", 
+    "4-hours-or-less"
+  ],
+  "nutrition": [1109.5, 83.0, 378.0, 275.0, 96.0, 86.0, 36.0],
+  "n_steps": 10,
+  "steps": [
+    "in a medium saucepan combine all the ingredients for sauce#1, bring to a full rolling boil, reduce heat to medium low and simmer for 1 hour, stirring often",
+    "rub the ribs with soy sauce, garlic, ginger, chili powder, pepper, salt and chopped cilantro, both sides!",
+    "wrap ribs in heavy duty foil",
+    "let stand 1 hour",
+    "preheat oven to 350 degrees",
+    "place ribs in oven for 1 hour, turning once after 30 minutes",
+    "3 times during cooking the ribs open foil wrap and drizzle ribs with sauce#1",
+    "place all the ingredients for sauce#2 in a glass or plastic bowl, whisk well and set aside",
+    "remove ribs from oven and place on serving platter",
+    "offer both sauces at table to drizzle over ribs"
+  ],
+  "description": "this recipe is posted by request and was originally from chef sam choy's cookbook",
+  "ingredients": [
+    "pork spareribs", "soy sauce", "fresh garlic", "fresh ginger", "chili powder", "fresh coarse ground black pepper", "salt", 
+    "fresh cilantro leaves", "tomato sauce", "brown sugar", "yellow onion", "white vinegar", "honey", "a.1. original sauce", 
+    "liquid smoke", "cracked black pepper", "cumin", "dry mustard", "cinnamon sticks", "orange, juice of", "mirin", "water"
+  ],
+  "n_ingredients": 22
+}"""
 
 # Send request to Azure OpenAI model
 response = client.chat.completions.create(
-   model="gpt-35-turbo",
+   model="gpt-4o-mini",
    temperature=0.7,
    #max_tokens=120,
    messages=[
        {"role": "system", "content": systemcontent},
-       {"role": "user", "content": "Create a flavourful recipe using the following ingredients:" + "\n" + "---" + "\n" + ingredients + "\n" + "---"},
+       {"role": "user", "content": "Create a flavourful recipe using the following ingredients:" + "\n" + "---" + "\n" + ingredients_1 + "\n" + "---"},
        {"role": "assistant", "content": assistant_content_1},
        {"role": "user", "content": ingredients}
    ]
@@ -338,7 +401,17 @@ Target Audience: The recipients of these recipes are couples who want to cook a 
 
 ### OUTPUT FORMAT
 Output only one recipe and return it as a JSON object with the following format:
-{"name":"","minutes":,"tags":"[]","nutrition":"[]","n_steps":"","steps":"[]","description":"","ingredients":"[]", "n_ingredients":}
+{
+  "name": "",
+  "minutes": 0,
+  "tags": [],
+  "nutrition": [],
+  "n_steps": 0,
+  "steps": [],
+  "description": "",
+  "ingredients": [],
+  "n_ingredients": 0
+}
 
 The variables should contain the following information:
 - name: the name of the recipe.
@@ -355,17 +428,95 @@ The variables should contain the following information:
 # Few-Shot learning examples
 
 ingredients_1 = """'pork spareribs', 'soy sauce', 'fresh garlic', 'fresh ginger', 'chili powder', 'fresh coarse ground black pepper', 'salt', 'fresh cilantro leaves', 'tomato sauce', 'brown sugar', 'yellow onion', 'white vinegar', 'honey', 'a.1. original sauce', 'liquid smoke', 'cracked black pepper', 'cumin', 'dry mustard', 'cinnamon sticks', 'orange, juice of', 'mirin', 'water'"""
-assistant_content_1 = """{"name":"backyard style  barbecued ribs","minutes":120,"tags":"['weeknight', 'time-to-make', 'course', 'main-ingredient', 'cuisine', 'preparation', 'occasion', 'north-american', 'south-west-pacific', 'main-dish', 'pork', 'oven', 'holiday-event', 'stove-top', 'hawaiian', 'spicy', 'copycat', 'independence-day', 'meat', 'pork-ribs', 'super-bowl', 'novelty', 'taste-mood', 'savory', 'sweet', 'equipment', '4-hours-or-less']","nutrition":"[1109.5, 83.0, 378.0, 275.0, 96.0, 86.0, 36.0]","n_steps":10,"steps":"['in a medium saucepan combine all the ingredients for sauce#1 , bring to a full rolling boil , reduce heat to medium low and simmer for 1 hour , stirring often', 'rub the ribs with soy sauce , garlic , ginger , chili powder , pepper , salt and chopped cilantro , both sides !', 'wrap ribs in heavy duty foil', 'let stand 1 hour', 'preheat oven to 350 degrees', 'place ribs in oven for 1 hour , turning once after 30 minutes', '3 times during cooking the ribs open foil wrap and drizzle ribs with sauce#1', 'place all the ingredients for sauce#2 in a glass or plastic bowl , whisk well and set aside', 'remove ribs from oven and place on serving platter', 'offer both sauces at table to drizzle over ribs']","description":"this recipe is posted by request and was originaly from chef sam choy's cookbook ","ingredients":"['pork spareribs', 'soy sauce', 'fresh garlic', 'fresh ginger', 'chili powder', 'fresh coarse ground black pepper', 'salt', 'fresh cilantro leaves', 'tomato sauce', 'brown sugar', 'yellow onion', 'white vinegar', 'honey', 'a.1. original sauce', 'liquid smoke', 'cracked black pepper', 'cumin', 'dry mustard', 'cinnamon sticks', 'orange, juice of', 'mirin', 'water']","n_ingredients":22}"""
+assistant_content_1 = """{
+  "name": "backyard style barbecued ribs",
+  "minutes": 120,
+  "tags": [
+    "weeknight", "time-to-make", "course", "main-ingredient", "cuisine", "preparation", "occasion", "north-american", 
+    "south-west-pacific", "main-dish", "pork", "oven", "holiday-event", "stove-top", "hawaiian", "spicy", "copycat", 
+    "independence-day", "meat", "pork-ribs", "super-bowl", "novelty", "taste-mood", "savory", "sweet", "equipment", 
+    "4-hours-or-less"
+  ],
+  "nutrition": [1109.5, 83.0, 378.0, 275.0, 96.0, 86.0, 36.0],
+  "n_steps": 10,
+  "steps": [
+    "in a medium saucepan combine all the ingredients for sauce#1, bring to a full rolling boil, reduce heat to medium low and simmer for 1 hour, stirring often",
+    "rub the ribs with soy sauce, garlic, ginger, chili powder, pepper, salt and chopped cilantro, both sides!",
+    "wrap ribs in heavy duty foil",
+    "let stand 1 hour",
+    "preheat oven to 350 degrees",
+    "place ribs in oven for 1 hour, turning once after 30 minutes",
+    "3 times during cooking the ribs open foil wrap and drizzle ribs with sauce#1",
+    "place all the ingredients for sauce#2 in a glass or plastic bowl, whisk well and set aside",
+    "remove ribs from oven and place on serving platter",
+    "offer both sauces at table to drizzle over ribs"
+  ],
+  "description": "this recipe is posted by request and was originally from chef sam choy's cookbook",
+  "ingredients": [
+    "pork spareribs", "soy sauce", "fresh garlic", "fresh ginger", "chili powder", "fresh coarse ground black pepper", "salt", 
+    "fresh cilantro leaves", "tomato sauce", "brown sugar", "yellow onion", "white vinegar", "honey", "a.1. original sauce", 
+    "liquid smoke", "cracked black pepper", "cumin", "dry mustard", "cinnamon sticks", "orange, juice of", "mirin", "water"
+  ],
+  "n_ingredients": 22
+}
+"""
 
 ingredients_2 = """'lean pork chops', 'flour', 'salt', 'dry mustard', 'garlic powder', 'oil', 'chicken rice soup'"""
-assistant_content_2 = """{"name":"chicken lickin  good  pork chops","minutes":500,"tags":"['weeknight', 'time-to-make', 'course', 'main-ingredient', 'preparation', 'main-dish', 'pork', 'crock-pot-slow-cooker', 'dietary', 'meat', 'pork-chops', 'equipment']","nutrition":"[105.7, 8.0, 0.0, 26.0, 5.0, 4.0, 3.0]","n_steps":5,"steps":"['dredge pork chops in mixture of flour , salt , dry mustard and garlic powder', 'brown in oil in a large skillet', 'place browned pork chops in a crock pot', 'add the can of soup , undiluted', 'cover and cook on low for 6-8 hours']","description":"here's and old standby i enjoy from time to time. it's from an old newspaper clipping i cut out years ago. very tasty.","ingredients":"['lean pork chops', 'flour', 'salt', 'dry mustard', 'garlic powder', 'oil', 'chicken rice soup']","n_ingredients":7}"""
+assistant_content_2 = """{
+  "name": "chicken lickin good pork chops",
+  "minutes": 500,
+  "tags": [
+    "weeknight", "time-to-make", "course", "main-ingredient", "preparation", "main-dish", "pork", "crock-pot-slow-cooker", 
+    "dietary", "meat", "pork-chops", "equipment"
+  ],
+  "nutrition": [105.7, 8.0, 0.0, 26.0, 5.0, 4.0, 3.0],
+  "n_steps": 5,
+  "steps": [
+    "dredge pork chops in mixture of flour, salt, dry mustard, and garlic powder",
+    "brown in oil in a large skillet",
+    "place browned pork chops in a crock pot",
+    "add the can of soup, undiluted",
+    "cover and cook on low for 6-8 hours"
+  ],
+  "description": "here's an old standby I enjoy from time to time. it's from an old newspaper clipping I cut out years ago. very tasty.",
+  "ingredients": [
+    "lean pork chops", "flour", "salt", "dry mustard", "garlic powder", "oil", "chicken rice soup"
+  ],
+  "n_ingredients": 7
+}
+"""
 
 ingredients_3 = """'boneless skinless chicken breast halves', 'condensed cream of chicken soup', 'egg', 'seasoning salt', 'all-purpose flour', 'cornstarch', 'garlic powder', 'paprika', 'salt and pepper', 'oil'"""
-assistant_content_3 = """{"name":"crispy crunchy  chicken","minutes":35,"tags":"['60-minutes-or-less', 'time-to-make', 'course', 'preparation', 'healthy', 'main-dish', 'dietary', 'low-saturated-fat', 'low-in-something']","nutrition":"[335.8, 11.0, 2.0, 24.0, 64.0, 10.0, 10.0]","n_steps":8,"steps":"['combine soup , egg and seasoned salt in a bowl and set aside', 'mix together flour , cornstarch , garlic powder , paprika , salt and pepper in a resealable plastic bag', 'dip chicken pieces into soup mixture and turn so as to coat all over', 'place chicken pieces in bag with flour mixture , seal bag and shake to coat chicken', 'place coated pieces of chicken on a platter and allow to set until the coating becomes doughy', 'heat oil in a deep fryer or in a skillet over medium heat , using enough oil to cover chicken pieces when fried', 'once chicken is doughy , fry pieces in oil for approx 5-8 minutes or until cooked through and juices run clear', 'drain pieces on paper towel and serve']","description":"delicious, crunchy fried chicken. this recipe came from the ","ingredients":"['boneless skinless chicken breast halves', 'condensed cream of chicken soup', 'egg', 'seasoning salt', 'all-purpose flour', 'cornstarch', 'garlic powder', 'paprika', 'salt and pepper', 'oil']","n_ingredients":10}"""
+assistant_content_3 = """{
+  "name": "crispy crunchy chicken",
+  "minutes": 35,
+  "tags": [
+    "60-minutes-or-less", "time-to-make", "course", "preparation", "healthy", "main-dish", "dietary", "low-saturated-fat", "low-in-something"
+  ],
+  "nutrition": [335.8, 11.0, 2.0, 24.0, 64.0, 10.0, 10.0],
+  "n_steps": 8,
+  "steps": [
+    "combine soup, egg and seasoned salt in a bowl and set aside",
+    "mix together flour, cornstarch, garlic powder, paprika, salt and pepper in a resealable plastic bag",
+    "dip chicken pieces into soup mixture and turn so as to coat all over",
+    "place chicken pieces in bag with flour mixture, seal bag and shake to coat chicken",
+    "place coated pieces of chicken on a platter and allow to set until the coating becomes doughy",
+    "heat oil in a deep fryer or in a skillet over medium heat, using enough oil to cover chicken pieces when fried",
+    "once chicken is doughy, fry pieces in oil for approx 5-8 minutes or until cooked through and juices run clear",
+    "drain pieces on paper towel and serve"
+  ],
+  "description": "delicious, crunchy fried chicken. this recipe came from the",
+  "ingredients": [
+    "boneless skinless chicken breast halves", "condensed cream of chicken soup", "egg", "seasoning salt", 
+    "all-purpose flour", "cornstarch", "garlic powder", "paprika", "salt and pepper", "oil"
+  ],
+  "n_ingredients": 10
+}
+"""
 
 # Send request to Azure OpenAI model
 response = client.chat.completions.create(
-   model="gpt-35-turbo",
+   model="gpt-4o-mini",
    temperature=0.7,
    #max_tokens=120,
    messages=[
