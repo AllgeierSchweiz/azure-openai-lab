@@ -625,7 +625,7 @@ Once the credentials are available as variables, we can initialize the Azure Ope
 client = AzureOpenAI(
     api_key = azure_oai_key,  
     azure_endpoint = azure_oai_endpoint,
-    api_version ="2024-05-01-preview"
+    api_version = "2024-12-01-preview"
     )
 ```
 
@@ -776,7 +776,7 @@ client = AzureChatOpenAI(
                 deployment_name = "gpt-4o-mini-ft",
                 openai_api_key = azure_oai_key,
                 azure_endpoint = azure_oai_endpoint,
-                openai_api_version = "2024-02-15-preview"
+                openai_api_version = "2024-12-01-preview"
         )
 ```
 
