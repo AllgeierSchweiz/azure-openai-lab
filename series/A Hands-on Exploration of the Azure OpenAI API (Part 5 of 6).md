@@ -105,7 +105,7 @@ Once the credentials are available as variables, we can initialize the Azure Ope
 
 -   In your codespace environment, click on the code block and select the **Execute Cell** button to run the code.
 
-```
+```sql
 # Initialize the Azure OpenAI client
 client = AzureOpenAI(
     api_key = azure_oai_key,  
