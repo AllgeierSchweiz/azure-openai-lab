@@ -100,6 +100,7 @@ load_dotenv(dotenv_path=Path("/workspaces/azure-openai-lab/.venv/.env")) #Error 
 # Load Azure OpenAI Key and Endpoint. These values can be found within the Azure OpenAI Service resource in portal.azure.com under Keys and Endpoint  
 azure_oai_key = os.environ['AZURE_OPENAI_KEY_P34']  
 azure_oai_endpoint = os.environ['AZURE_OPENAI_ENDPOINT_P34']
+```
 
 Once the credentials are available as variables, we can initialize the Azure OpenAI client.
 
